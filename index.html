@@ -378,6 +378,62 @@
             z-index: 1001;
             top: -10px;
         }
+
+        /* Challenge Section */
+        @keyframes pulseSection {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(187, 134, 252, 0.4); }
+            50% { transform: scale(1.02); box-shadow: 0 0 20px 10px rgba(187, 134, 252, 0.2); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(187, 134, 252, 0); }
+        }
+
+        .challenge-section {
+            margin: 50px 0;
+            padding: 40px;
+            background: rgba(187, 134, 252, 0.1);
+            border-radius: 30px;
+            border: 2px solid var(--accent-color);
+            animation: pulseSection 3s infinite ease-in-out;
+        }
+
+        .challenge-section h2 { color: var(--accent-color); font-size: 2rem; margin-bottom: 10px; }
+        .challenge-section p { color: var(--text-dim); margin-bottom: 30px; }
+
+        .challenge-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto 30px;
+        }
+
+        .challenge-input-group input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            outline: none;
+        }
+
+        .challenge-btn {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            border-radius: 15px;
+            border: none;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .challenge-btn.whatsapp-challenge { background: #25D366; }
+        .challenge-btn.twitter-challenge { background: #000000; border: 1px solid var(--glass-border); }
+        .challenge-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
     </style>
 </head>
 <body>
@@ -483,6 +539,18 @@
                     <button class="share-btn facebook" onclick="share('facebook')">Facebook</button>
                     <button class="share-btn copy" id="copy-btn" onclick="copyToClipboard()">Copy All Stats</button>
                 </div>
+            </div>
+
+            <!-- Challenge a Friend Section -->
+            <div class="challenge-section animate-up">
+                <h2>Challenge a Friend 🏆</h2>
+                <p>See if their stats can beat yours</p>
+                <div class="challenge-input-group">
+                    <input type="text" id="friend-name" placeholder="Friend's Name">
+                    <input type="text" id="friend-phone" placeholder="Friend's Phone (e.g. 447123456789)">
+                </div>
+                <button class="challenge-btn whatsapp-challenge" onclick="sendChallenge('whatsapp')">Send Challenge 🚀</button>
+                <button class="challenge-btn twitter-challenge" onclick="sendChallenge('twitter')">Challenge on Twitter/X 🐦</button>
             </div>
 
             <div class="reset-container">
@@ -812,6 +880,25 @@ Check yours at you-in-numbers.vercel.app`;
             const old = btn.textContent;
             btn.textContent = "Copied!";
             setTimeout(() => btn.textContent = old, 2000);
+        };
+
+        window.sendChallenge = (platform) => {
+            const friendName = document.getElementById('friend-name').value || "friend";
+            const friendPhone = document.getElementById('friend-phone').value.replace(/\D/g, '');
+            const days = currentStats.days.toLocaleString();
+            const heartbeats = currentStats.heartbeats.toLocaleString();
+            
+            if (platform === 'whatsapp') {
+                if (!friendPhone) {
+                    alert("Please enter your friend's phone number for WhatsApp!");
+                    return;
+                }
+                const message = `Hey ${friendName}! I just found out I have been alive for ${days} days and my heart has beaten ${heartbeats} times 🤯 I challenge you to beat my stats! Find out yours here: you-in-numbers.vercel.app — do you have more heartbeats than me? 👊`;
+                window.open(`https://wa.me/${friendPhone}?text=${encodeURIComponent(message)}`);
+            } else if (platform === 'twitter') {
+                const message = `I have been alive for ${days} days and my heart has beaten ${heartbeats} times 🤯 Can you beat my stats? Find out at you-in-numbers.vercel.app #YouInNumbers #LifeStats`;
+                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`);
+            }
         };
     </script>
 </body>
