@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You In Numbers — Discover The Incredible Story Of Your Life</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0a0a2e 0%, #2e0a2e 100%);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent-color: #bb86fc;
+            --text-main: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .ad-container {
+            margin: 20px 0;
+            min-height: 90px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        header {
+            margin: 40px 0;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .tagline {
+            font-size: clamp(1rem, 4vw, 1.5rem);
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        .input-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            padding: 40px;
+            border-radius: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        label {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+        }
+
+        input[type="date"] {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        input[type="date"]:focus {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--accent-color);
+        }
+
+        button {
+            background: var(--accent-color);
+            color: #0a0a2e;
+            border: none;
+            padding: 18px 35px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background: #d1b1ff;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        #results-section {
+            display: none;
+            width: 100%;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 25px;
+            text-align: left;
+            transition: transform 0.3s;
+            animation: cardPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) backwards;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .emoji { font-size: 2.5rem; margin-bottom: 15px; display: block; }
+        .stat-value { font-size: 2.2rem; font-weight: 800; margin-bottom: 5px; color: var(--text-main); }
+        .stat-label { font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-color); margin-bottom: 10px; }
+        .stat-quote { font-size: 0.95rem; color: var(--text-dim); font-style: italic; line-height: 1.4; }
+
+        .share-prompt {
+            margin: 40px 0;
+            font-size: 1.4rem;
+            color: var(--text-main);
+        }
+
+        #reset-btn {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            margin-bottom: 60px;
+        }
+
+        #reset-btn:hover {
+            background: var(--accent-color);
+            color: #0a0a2e;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes cardPop {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @media (max-width: 600px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .input-section { padding: 30px 20px; }
+            h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Top Ad Placement -->
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXX"
+                 data-ad-slot="XXXXXXXXXX"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <header>
+            <h1>You In Numbers</h1>
+            <p class="tagline">The internet's most eye-opening 10 seconds</p>
+        </header>
+
+        <section id="input-section" class="input-section">
+            <div class="input-group">
+                <label for="dob">Enter your date of birth to reveal your story:</label>
+                <input type="date" id="dob" required>
+                <button id="reveal-btn">Reveal My Life Stats</button>
+            </div>
+        </section>
+
+        <!-- Middle Ad Placement -->
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXX"
+                 data-ad-slot="XXXXXXXXXX"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <section id="results-section">
+            <div class="stats-grid" id="stats-grid">
+                <!-- Cards will be injected here by JS -->
+            </div>
+
+            <p class="share-prompt">Share your numbers and see how your friends compare 👇</p>
+            <button id="reset-btn">Calculate Again</button>
+
+            <!-- Bottom Ad Placement -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-XXXXXXXX"
+                     data-ad-slot="XXXXXXXXXX"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const revealBtn = document.getElementById('reveal-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const inputSection = document.getElementById('input-section');
+        const resultsSection = document.getElementById('results-section');
+        const statsGrid = document.getElementById('stats-grid');
+        const dobInput = document.getElementById('dob');
+
+        const statsConfig = [
+            { id: 'days', emoji: '📅', label: 'Days Alive', quote: 'Every single day a unique chapter in your story' },
+            { id: 'hours', emoji: '⏳', label: 'Hours Alive', quote: 'Time you\'ve spent writing your legacy' },
+            { id: 'minutes', emoji: '⏱️', label: 'Minutes Alive', quote: 'Countless moments that made you who you are' },
+            { id: 'weeks', emoji: '🗓️', label: 'Weeks Alive', quote: 'Saturdays spent chasing your dreams' },
+            { id: 'months', emoji: '🌙', label: 'Months Alive', quote: 'Witnessing the world change around you' },
+            { id: 'dogYears', emoji: '🐶', label: 'Age In Dog Years', quote: 'Your loyal companion would be proud' },
+            { id: 'heartbeats', emoji: '❤️', label: 'Heartbeats', quote: 'Your heart has never once taken a day off' },
+            { id: 'breaths', emoji: '🌬️', label: 'Breaths Taken', quote: 'Life-giving air fueling your every move' },
+            { id: 'meals', emoji: '🍽️', label: 'Meals Eaten', quote: 'Nourishment for the journey of a lifetime' },
+            { id: 'sleep', emoji: '😴', label: 'Hours Slept', quote: 'Recharging for the adventures that await' },
+            { id: 'blinks', emoji: '👁️', label: 'Times Blinked', quote: 'Protecting the way you see the beauty in life' },
+            { id: 'sunrises', emoji: '🌅', label: 'Sunrises Witnessed', quote: 'Every single one was a fresh start' },
+            { id: 'steps', emoji: '👣', label: 'Steps Taken', quote: 'A path walked only by you' },
+            { id: 'words', emoji: '🗣️', label: 'Words Spoken', quote: 'The echoes of your unique voice' }
+        ];
+
+        function calculateStats(dob) {
+            const birthDate = new Date(dob);
+            const now = new Date();
+            const diffMs = now - birthDate;
+            
+            const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            const hours = Math.floor(diffMs / (1000 * 60 * 60));
+            const minutes = Math.floor(diffMs / (1000 * 60));
+            const weeks = Math.floor(days / 7);
+            const months = Math.floor(days / 30.437);
+            const years = days / 365.25;
+            
+            return {
+                days: days,
+                hours: hours,
+                minutes: minutes,
+                weeks: weeks,
+                months: months,
+                dogYears: Math.floor(years * 7),
+                heartbeats: days * 100000,
+                breaths: days * 23000,
+                meals: days * 3,
+                sleep: days * 8,
+                blinks: days * 15000,
+                sunrises: days,
+                steps: days * 8000,
+                words: days * 16000
+            };
+        }
+
+        function animateNumber(element, finalValue, duration = 2000) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const current = Math.floor(progress * finalValue);
+                element.textContent = new Intl.NumberFormat('en-US').format(current);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        revealBtn.addEventListener('click', () => {
+            const dob = dobInput.value;
+            if (!dob) {
+                alert("Please select your date of birth first!");
+                return;
+            }
+
+            const stats = calculateStats(dob);
+            statsGrid.innerHTML = '';
+            inputSection.style.display = 'none';
+            resultsSection.style.display = 'block';
+
+            statsConfig.forEach((config, index) => {
+                const card = document.createElement('div');
+                card.className = 'stat-card';
+                card.style.animationDelay = `${index * 0.1}s`;
+                
+                card.innerHTML = `
+                    <span class="emoji">${config.emoji}</span>
+                    <div class="stat-value" id="stat-${config.id}">0</div>
+                    <div class="stat-label">${config.label}</div>
+                    <div class="stat-quote">"${config.quote}"</div>
+                `;
+                
+                statsGrid.appendChild(card);
+                
+                setTimeout(() => {
+                    const el = document.getElementById(`stat-${config.id}`);
+                    animateNumber(el, stats[config.id]);
+                }, 100 + (index * 100));
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        resetBtn.addEventListener('click', () => {
+            resultsSection.style.display = 'none';
+            inputSection.style.display = 'block';
+            dobInput.value = '';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
