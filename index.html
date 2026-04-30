@@ -10,12 +10,15 @@
             --bg-navy: #0a0a2e;
             --bg-purple: #2e0a2e;
             --bg-midnight: #050517;
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-bg: rgba(255, 255, 255, 0.07);
+            --glass-border: rgba(255, 255, 255, 0.25);
             --accent-color: #bb86fc;
             --text-main: #ffffff;
             --text-dim: rgba(255, 255, 255, 0.7);
             --success: #03dac6;
+            --vivid-pink: #ff007f;
+            --vivid-blue: #00e5ff;
+            --vivid-yellow: #f9ff00;
         }
 
         @keyframes bgAnimation {
@@ -202,7 +205,7 @@
             border-radius: 20px;
             margin-bottom: 40px;
             padding: 20px;
-            border: 1px solid var(--glass-border);
+            border: 2px solid var(--glass-border);
         }
         .progress-bar {
             width: 100%;
@@ -228,6 +231,7 @@
             background: var(--glass-bg);
             display: inline-block;
             border-radius: 15px;
+            border: 1px solid var(--glass-border);
         }
 
         .stats-grid {
@@ -235,65 +239,81 @@
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
             margin-bottom: 50px;
-            perspective: 1000px;
+            perspective: 1200px;
         }
 
         /* Flipping Cards */
+        .stat-card {
+            height: 240px;
+            width: 100%;
+        }
         .stat-card-inner {
             position: relative;
             width: 100%;
-            height: 220px;
-            transition: transform 0.6s;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             transform-style: preserve-3d;
             cursor: pointer;
         }
-        .stat-card:hover .stat-card-inner { transform: rotateY(180deg); }
+        .stat-card:hover .stat-card-inner,
+        .stat-card-inner.flipped { 
+            transform: rotateY(180deg); 
+        }
         .stat-card-front, .stat-card-back {
             position: absolute;
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
             background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(12px);
+            border: 2px solid var(--glass-border);
             padding: 25px;
             border-radius: 25px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
         .stat-card-back {
             transform: rotateY(180deg);
-            background: rgba(187, 134, 252, 0.1);
+            background: rgba(187, 134, 252, 0.15);
             color: var(--text-main);
             text-align: center;
+            border-color: var(--accent-color);
         }
 
-        .emoji { font-size: 2.5rem; margin-bottom: 10px; }
-        .stat-value { font-size: 2rem; font-weight: 800; margin-bottom: 5px; }
-        .stat-label { font-size: 0.9rem; font-weight: 600; text-transform: uppercase; color: var(--accent-color); }
-        .stat-quote { font-size: 0.85rem; color: var(--text-dim); font-style: italic; }
+        .emoji { font-size: 2.8rem; margin-bottom: 12px; }
+        .stat-value { font-size: 2.2rem; font-weight: 800; margin-bottom: 6px; color: var(--vivid-blue); }
+        .stat-label { font-size: 1rem; font-weight: 700; text-transform: uppercase; color: var(--accent-color); }
+        .stat-quote { font-size: 0.9rem; color: var(--text-dim); font-style: italic; }
 
         /* Comparison Section */
         .fun-section {
             background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            padding: 30px;
-            border-radius: 25px;
-            margin-bottom: 40px;
+            border: 2px solid var(--glass-border);
+            padding: 35px;
+            border-radius: 30px;
+            margin-bottom: 45px;
             text-align: left;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
-        .fun-section h2 { color: var(--accent-color); margin-bottom: 20px; }
-        .comparison-item { margin-bottom: 15px; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; }
+        .fun-section h2 { color: var(--vivid-pink); font-size: 2.2rem; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
+        .fun-section.perspective h2 { color: var(--vivid-blue); }
+        .fun-section.bday h2 { color: var(--vivid-yellow); text-align: center; }
+        .fun-section.rotating h2 { color: var(--success); text-align: center; }
+
+        .comparison-item { margin-bottom: 18px; font-size: 1.2rem; display: flex; align-items: center; gap: 12px; line-height: 1.5; }
+        .comparison-item b { color: var(--accent-color); }
 
         /* Share Section */
         .share-section {
             margin: 50px 0;
-            padding: 30px;
+            padding: 35px;
             background: var(--glass-bg);
-            border-radius: 25px;
-            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            border: 2px solid var(--glass-border);
         }
+        .share-section h3 { font-size: 1.8rem; color: var(--accent-color); margin-bottom: 20px; }
         .share-buttons {
             display: flex;
             justify-content: center;
@@ -302,38 +322,43 @@
             margin-top: 20px;
         }
         .share-btn {
-            padding: 15px 25px;
-            border-radius: 12px;
+            padding: 15px 30px;
+            border-radius: 15px;
             border: none;
             color: white;
             font-weight: bold;
+            font-size: 1.1rem;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
-            transition: 0.3s;
+            gap: 10px;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .share-btn.whatsapp { background: #25D366; }
         .share-btn.twitter { background: #1DA1F2; }
         .share-btn.facebook { background: #1877F2; }
         .share-btn.copy { background: #607d8b; }
-        .share-btn:hover { opacity: 0.9; transform: translateY(-3px); }
+        .share-btn:hover { opacity: 0.9; transform: translateY(-5px) scale(1.05); }
 
         /* Tell us your stat */
         .user-stat-input {
             margin-top: 40px;
-            padding: 25px;
+            padding: 30px;
             background: rgba(255,255,255,0.03);
-            border-radius: 20px;
+            border-radius: 25px;
+            border: 1px dashed var(--glass-border);
         }
+        .user-stat-input h3 { color: var(--vivid-blue); margin-bottom: 15px; }
         .user-stat-input input {
             background: rgba(255,255,255,0.1);
-            border: 1px solid var(--glass-border);
+            border: 2px solid var(--glass-border);
             color: white;
-            padding: 10px;
-            border-radius: 10px;
+            padding: 12px 20px;
+            border-radius: 15px;
             width: 80%;
             margin-bottom: 15px;
+            font-size: 1.1rem;
+            outline: none;
         }
 
         /* Large Reset Button */
@@ -342,31 +367,64 @@
         }
         #big-reset-btn {
             background: var(--accent-color);
-            padding: 25px 50px;
-            font-size: 1.8rem;
-            border-radius: 50px;
-            box-shadow: 0 0 30px rgba(187, 134, 252, 0.4);
+            padding: 25px 60px;
+            font-size: 2rem;
+            font-weight: 800;
+            border-radius: 60px;
+            border: none;
+            color: #0a0a2e;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 40px rgba(187, 134, 252, 0.5);
         }
-        .reset-subtext { color: var(--text-dim); margin-top: 15px; display: block; }
+        #big-reset-btn:hover { transform: scale(1.1); filter: brightness(1.1); }
+        .reset-subtext { color: var(--text-dim); margin-top: 20px; display: block; font-size: 1.2rem; }
 
         footer {
             margin-top: 100px;
-            padding: 40px;
+            padding: 60px 40px;
             color: var(--text-dim);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            background: rgba(0,0,0,0.3);
+            width: 100%;
+        }
+
+        /* Birthday Countdown */
+        #bday-countdown {
+            font-size: clamp(2rem, 10vw, 4.5rem);
+            font-weight: 900;
+            color: var(--vivid-yellow);
+            text-shadow: 0 0 20px rgba(249, 255, 0, 0.4);
+            letter-spacing: -2px;
+            margin: 20px 0;
+        }
+
+        /* Rotating Fact Fade */
+        #rotating-fact {
+            font-size: 1.5rem;
+            font-weight: 500;
+            min-height: 4em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease-in-out;
+            line-height: 1.4;
+            color: var(--text-main);
         }
 
         /* Animations */
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .animate-up { animation: fadeUp 0.8s ease forwards; }
+        .animate-up { animation: fadeUp 1s cubic-bezier(0.19, 1, 0.22, 1) forwards; }
 
         @media (max-width: 600px) {
             .stats-grid { grid-template-columns: 1fr; }
             .share-buttons { flex-direction: column; }
             .visitor-counter { display: none; }
+            .user-stat-input input { width: 100%; }
+            h1 { font-size: 2.8rem; }
         }
 
         /* Confetti CSS */
@@ -382,57 +440,60 @@
         /* Challenge Section */
         @keyframes pulseSection {
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(187, 134, 252, 0.4); }
-            50% { transform: scale(1.02); box-shadow: 0 0 20px 10px rgba(187, 134, 252, 0.2); }
+            50% { transform: scale(1.02); box-shadow: 0 0 30px 15px rgba(187, 134, 252, 0.3); }
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(187, 134, 252, 0); }
         }
 
         .challenge-section {
-            margin: 50px 0;
-            padding: 40px;
-            background: rgba(187, 134, 252, 0.1);
-            border-radius: 30px;
-            border: 2px solid var(--accent-color);
-            animation: pulseSection 3s infinite ease-in-out;
+            margin: 60px 0;
+            padding: 45px;
+            background: rgba(187, 134, 252, 0.12);
+            border-radius: 35px;
+            border: 3px solid var(--accent-color);
+            animation: pulseSection 4s infinite ease-in-out;
         }
 
-        .challenge-section h2 { color: var(--accent-color); font-size: 2rem; margin-bottom: 10px; }
-        .challenge-section p { color: var(--text-dim); margin-bottom: 30px; }
+        .challenge-section h2 { color: var(--vivid-pink); font-size: 2.5rem; margin-bottom: 12px; }
+        .challenge-section p { color: var(--text-main); font-size: 1.2rem; font-weight: 500; margin-bottom: 35px; }
 
         .challenge-input-group {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 18px;
             max-width: 500px;
-            margin: 0 auto 30px;
+            margin: 0 auto 35px;
         }
 
         .challenge-input-group input {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid var(--glass-border);
             color: white;
-            padding: 15px;
-            border-radius: 12px;
-            font-size: 1.1rem;
+            padding: 18px;
+            border-radius: 15px;
+            font-size: 1.2rem;
             outline: none;
+            transition: 0.3s;
         }
+        .challenge-input-group input:focus { border-color: var(--accent-color); background: rgba(255, 255, 255, 0.2); }
 
         .challenge-btn {
             width: 100%;
             max-width: 500px;
-            padding: 20px;
-            border-radius: 15px;
+            padding: 22px;
+            border-radius: 18px;
             border: none;
             color: white;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 800;
             cursor: pointer;
             transition: 0.3s;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .challenge-btn.whatsapp-challenge { background: #25D366; }
-        .challenge-btn.twitter-challenge { background: #000000; border: 1px solid var(--glass-border); }
+        .challenge-btn.whatsapp-challenge { background: #25D366; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4); }
+        .challenge-btn.twitter-challenge { background: #000000; border: 2px solid var(--glass-border); box-shadow: 0 5px 20px rgba(0,0,0,0.4); }
         .challenge-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
     </style>
 </head>
@@ -468,14 +529,14 @@
         <!-- Loading Screen -->
         <div id="loading-screen">
             <div class="loader"></div>
-            <p id="loading-text" style="font-size: 1.5rem; font-weight: 500;">Calculating your life...</p>
+            <p id="loading-text" style="font-size: 1.8rem; font-weight: 600;">Calculating your life...</p>
         </div>
 
         <!-- Results Area -->
         <div id="results-area">
             
             <div class="progress-container animate-up">
-                <span id="progress-text">You have lived 0% of an average life</span>
+                <span id="progress-text" style="font-size: 1.3rem; font-weight: 600;">You have lived 0% of an average life</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progress-fill"></div>
                 </div>
@@ -505,29 +566,29 @@
             </div>
 
             <!-- Perspectives -->
-            <div class="fun-section animate-up">
+            <div class="fun-section perspective animate-up">
                 <h2>Your Life In Perspective</h2>
                 <div id="perspectives-list"></div>
             </div>
 
             <!-- Birthday Countdown -->
-            <div class="fun-section animate-up">
+            <div class="fun-section bday animate-up">
                 <h2>Countdown to your next Birthday 🎂</h2>
-                <div id="bday-countdown" style="font-size: 1.8rem; font-weight: bold; color: var(--success);"></div>
+                <div id="bday-countdown"></div>
             </div>
 
             <!-- Fun Facts Rotating -->
-            <div class="fun-section animate-up" style="text-align: center;">
+            <div class="fun-section rotating animate-up">
                 <h2>Did You Know?</h2>
-                <p id="rotating-fact" style="font-size: 1.3rem; min-height: 3em;"></p>
+                <p id="rotating-fact"></p>
             </div>
 
             <!-- User Stat Box -->
             <div class="user-stat-input animate-up">
                 <h3>What's your most mind-blowing number?</h3>
                 <input type="text" id="user-stat-text" placeholder="e.g. I have visited 12 countries!">
-                <button id="add-user-stat" style="background: var(--success); color: black; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer;">Show Me!</button>
-                <div id="user-stat-card" style="margin-top: 20px; display: none;"></div>
+                <button id="add-user-stat" style="background: var(--vivid-blue); color: black; border: none; padding: 12px 25px; border-radius: 12px; cursor: pointer; font-weight: 800; font-size: 1.1rem;">Show Me!</button>
+                <div id="user-stat-card" style="margin-top: 30px; display: none;"></div>
             </div>
 
             <!-- Share Section -->
@@ -571,7 +632,7 @@
         </div>
 
         <footer>
-            Share you-in-numbers.vercel.app with someone you love ❤️
+            Share <b>you-in-numbers.vercel.app</b> with someone you love ❤️
         </footer>
     </div>
 
@@ -718,7 +779,7 @@
                 const card = document.createElement('div');
                 card.className = 'stat-card';
                 card.innerHTML = `
-                    <div class="stat-card-inner">
+                    <div class="stat-card-inner" onclick="this.classList.toggle('flipped')">
                         <div class="stat-card-front">
                             <span class="emoji">${c.emoji}</span>
                             <div class="stat-value" id="val-${c.id}">0</div>
@@ -726,9 +787,9 @@
                             <div class="stat-quote">"${c.quote}"</div>
                         </div>
                         <div class="stat-card-back">
-                            <h3>Fun Fact!</h3>
-                            <p>${c.fact}</p>
-                            <p style="margin-top:10px; font-size:0.8rem; opacity:0.7;">(Tap to flip back)</p>
+                            <h3 style="color:var(--vivid-yellow); margin-bottom:15px;">Fun Fact!</h3>
+                            <p style="font-size:1.1rem; line-height:1.4;">${c.fact}</p>
+                            <p style="margin-top:20px; font-size:0.85rem; opacity:0.7;">(Tap to flip back)</p>
                         </div>
                     </div>
                 `;
@@ -736,24 +797,50 @@
                 animateNumber(document.getElementById(`val-${c.id}`), currentStats[c.id], 2000);
             });
 
-            // Comparisons
+            // Comparisons (10+ facts)
             const comps = document.getElementById('comparisons-list');
-            const cityHours = (currentStats.heartbeats * 2 / 3600000).toFixed(1); // 2J per beat
-            const earthWalks = (currentStats.steps * 0.76 / 40075000).toFixed(2);
+            const balloonCount = (currentStats.breaths * 0.0005).toFixed(1); // 0.5L per breath, 1000L per m3, balloon is ~3000m3
+            const lightSwitches = (currentStats.blinks).toLocaleString();
+            const novels = (currentStats.words / 60000).toFixed(1);
+            const walkToCairo = (currentStats.steps * 0.76 / 10000000).toFixed(1); // Cape to Cairo is ~10,000km
+            const feedVillage = (currentStats.meals / 100).toFixed(0); // 100 meals/day for village
+            const bathtubFill = (currentStats.breaths * 0.0005 / 0.15).toFixed(0); // 150L per tub
+            const mountainHeight = (currentStats.steps * 0.2 / 8848).toFixed(1); // 20cm height per step
+            const energyPower = (currentStats.heartbeats * 1.5 / 3600).toFixed(1); // 1.5 Joules per beat
+            const carTrips = (currentStats.steps * 0.76 / 40075).toFixed(2); // Earth circum
+            const oceanWater = (currentStats.breaths * 0.0005).toFixed(1);
+
             comps.innerHTML = `
-                <div class="comparison-item">🏙️ Your heartbeats could power a single household for <b>${cityHours} hours</b>.</div>
-                <div class="comparison-item">🌍 You have taken enough steps to walk around the Earth <b>${earthWalks} times</b>.</div>
+                <div class="comparison-item">🌬️ Your breaths taken could fill <b>${balloonCount} hot air balloons</b>.</div>
+                <div class="comparison-item">💡 You have blinked enough times to turn the lights on and off <b>${lightSwitches} times</b>.</div>
+                <div class="comparison-item">📚 The words you have spoken could fill <b>${novels} novels</b>.</div>
+                <div class="comparison-item">🗺️ Your steps equal walking from Cape Town to Cairo <b>${walkToCairo} times</b>.</div>
+                <div class="comparison-item">🍲 You have eaten enough meals to feed a village for <b>${feedVillage} days</b>.</div>
+                <div class="comparison-item">🛁 Your total breath volume would fill <b>${bathtubFill} standard bathtubs</b>.</div>
+                <div class="comparison-item">🏔️ If your steps were vertical, you've climbed Mt. Everest <b>${mountainHeight} times</b>.</div>
+                <div class="comparison-item">⚡ Your heart energy could keep a 60W bulb lit for <b>${energyPower} hours</b>.</div>
+                <div class="comparison-item">🚗 You've walked the equivalent of <b>${carTrips} trips</b> around the entire planet.</div>
+                <div class="comparison-item">💧 You've processed enough water to fill a <b>backyard swimming pool</b>.</div>
             `;
 
-            // Perspectives
+            // Perspectives (More items)
             const pList = document.getElementById('perspectives-list');
             const birthYear = birthDate.getFullYear();
             let pHtml = "";
+            if (birthYear < 1977) pHtml += `<div class="comparison-item">🎬 You were born before <b>Star Wars: A New Hope</b>.</div>`;
+            if (birthYear < 1985) pHtml += `<div class="comparison-item">🎮 You are older than the <b>Nintendo Entertainment System (NES)</b>.</div>`;
+            if (birthYear < 1991) pHtml += `<div class="comparison-item">🌐 You were born before the <b>World Wide Web</b> was public.</div>`;
+            if (birthYear < 1994) pHtml += `<div class="comparison-item">🦁 You were born before Disney's <b>The Lion King</b>.</div>`;
             if (birthYear < 1998) pHtml += `<div class="comparison-item">🔍 You are older than <b>Google</b>.</div>`;
-            if (birthYear < 2004) pHtml += `<div class="comparison-item">👥 You were born before <b>Facebook</b> existed.</div>`;
+            if (birthYear < 2001) pHtml += `<div class="comparison-item">📚 You were born before <b>Wikipedia</b>.</div>`;
+            if (birthYear < 2004) pHtml += `<div class="comparison-item">👥 You were born before <b>Facebook</b>.</div>`;
+            if (birthYear < 2005) pHtml += `<div class="comparison-item">📺 You are older than <b>YouTube</b>.</div>`;
             if (birthYear < 2007) pHtml += `<div class="comparison-item">📱 You are older than the <b>iPhone</b>.</div>`;
+            if (birthYear < 2009) pHtml += `<div class="comparison-item">₿ You were born before <b>Bitcoin</b>.</div>`;
             if (birthYear < 2010) pHtml += `<div class="comparison-item">📸 You were born before <b>Instagram</b>.</div>`;
-            pList.innerHTML = pHtml || "You were born in a truly digital age!";
+            if (birthYear < 2016) pHtml += `<div class="comparison-item">💃 You were born before <b>TikTok</b> launched.</div>`;
+            
+            pList.innerHTML = pHtml || "You were born in a truly modern era!";
 
             // Countdown
             startBdayCountdown(birthDate);
@@ -813,15 +900,27 @@
             }, 1000);
         }
 
-        // Rotating Facts
+        // Rotating Facts (15+ items, 8s interval, smooth fade)
         function startRotatingFacts(years) {
             const facts = [
-                `By age 70, you will have spent about 23 years asleep.`,
-                `Your heart beats more times in a year than there are seconds in a year (~31.5M).`,
-                `You have already shed and replaced your entire skin hundreds of times.`,
-                `Your brain generates enough electricity to power a small lightbulb.`,
-                `The atoms in your body are billions of years old, literally stardust.`,
-                `You will eat roughly 35 tons of food in your lifetime.`
+                `Your heart is roughly the size of your fist and has never stopped once since before you were born.`,
+                `You share your birthday with at least 20 million other people on Earth.`,
+                `By age 70, you will have walked the equivalent of 5 trips around the entire Earth.`,
+                `Your brain is more active at night than during the day.`,
+                `Human teeth are the only part of the body that cannot heal themselves.`,
+                `Your nose can remember 50,000 different scents.`,
+                `You are taller in the morning than you are at night.`,
+                `Every 10 years, your skeleton completely replaces itself with new bone.`,
+                `Your heart beats more times in a single year than there are seconds in a year.`,
+                `The atoms in your body are billions of years old—you are literally made of stardust.`,
+                `Your eyes can distinguish approximately 10 million different colors.`,
+                `An average person will spend about 6 months of their life waiting at red lights.`,
+                `You spend about one-third of your entire life asleep—making it about 25 years for most.`,
+                `Your fingerprints are completely unique, and so is your tongue print!`,
+                `Humans are the only species known to blush.`,
+                `Your heart pumps about 2,000 gallons of blood through your body every single day.`,
+                `A human sneeze can travel up to 100 miles per hour.`,
+                `You will produce enough saliva in your lifetime to fill two swimming pools.`
             ];
             let fIdx = 0;
             const el = document.getElementById('rotating-fact');
@@ -831,10 +930,10 @@
                     el.textContent = facts[fIdx];
                     el.style.opacity = 1;
                     fIdx = (fIdx + 1) % facts.length;
-                }, 500);
+                }, 1000); // Wait for fade out
             }
             nextFact();
-            setInterval(nextFact, 4000);
+            setInterval(nextFact, 8000);
         }
 
         // User Stat
@@ -844,11 +943,11 @@
             const card = document.getElementById('user-stat-card');
             card.style.display = 'block';
             card.innerHTML = `
-                <div class="stat-card" style="max-width:400px; margin: 0 auto;">
-                    <div class="stat-card-front" style="background:var(--success); color:black;">
+                <div class="stat-card" style="max-width:450px; margin: 0 auto; height:auto;">
+                    <div class="stat-card-front" style="background:var(--success); color:black; position:relative; transform:none; backface-visibility:visible; padding:40px;">
                         <span class="emoji">🌟</span>
-                        <p style="font-size:1.2rem; font-weight:bold;">"${val}"</p>
-                        <p style="margin-top:10px; font-size:0.8rem; font-weight:bold;">YOUR MIND-BLOWING STAT</p>
+                        <p style="font-size:1.5rem; font-weight:bold; line-height:1.2;">"${val}"</p>
+                        <p style="margin-top:20px; font-size:1rem; font-weight:800; text-transform:uppercase;">YOUR MIND-BLOWING STAT</p>
                     </div>
                 </div>
             `;
