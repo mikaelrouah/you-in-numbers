@@ -39,6 +39,12 @@
             100% { background-position: 0% 50%; }
         }
 
+        @keyframes pulseGently {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(187, 134, 252, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 0 10px 5px rgba(187, 134, 252, 0.2); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(187, 134, 252, 0); }
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -60,17 +66,74 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             width: 100%;
             text-align: center;
             position: relative;
         }
 
-        /* Visitor Counter */
-        .visitor-counter {
+        /* Language Selector */
+        .lang-selector {
             position: fixed;
             top: 20px;
             right: 20px;
+            z-index: 2000;
+        }
+
+        #lang-btn {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            padding: 10px 15px;
+            border-radius: 25px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: pulseGently 3s infinite ease-in-out;
+            transition: 0.3s;
+        }
+
+        .lang-dropdown {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background: rgba(10, 10, 46, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            display: none;
+            flex-direction: column;
+            width: 160px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .lang-dropdown.show {
+            display: flex;
+        }
+
+        .lang-option {
+            padding: 12px 20px;
+            color: white;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .lang-option:hover {
+            background: var(--accent-color);
+            color: var(--bg-navy);
+        }
+
+        /* Visitor Counter */
+        .visitor-counter {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
@@ -234,7 +297,7 @@
             border: 1px solid var(--glass-border);
         }
 
-        .stats-grid {
+        .stats-grid, .perspective-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
@@ -287,6 +350,29 @@
             transform: rotateY(0deg);
         }
 
+        /* Perspective Cards */
+        .perspective-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 2px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .perspective-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 35px rgba(187, 134, 252, 0.2);
+        }
+        .perspective-card .emoji { font-size: 3.5rem; margin-bottom: 15px; }
+        .perspective-card h3 { font-size: 1.5rem; font-weight: 800; color: var(--vivid-blue); margin-bottom: 10px; line-height: 1.2; }
+        .perspective-card p { font-size: 0.95rem; color: var(--text-dim); line-height: 1.4; }
+
         .emoji { font-size: 2.8rem; margin-bottom: 12px; }
         .stat-value { font-size: 2.2rem; font-weight: 800; margin-bottom: 6px; color: var(--vivid-blue); }
         .stat-label { font-size: 1rem; font-weight: 700; text-transform: uppercase; color: var(--accent-color); }
@@ -303,7 +389,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         .fun-section h2 { color: var(--vivid-pink); font-size: 2.2rem; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
-        .fun-section.perspective h2 { color: var(--vivid-blue); }
+        .fun-section.perspective h2 { color: var(--vivid-blue); text-align: center; }
         .fun-section.bday h2 { color: var(--vivid-yellow); text-align: center; }
         .fun-section.rotating h2 { color: var(--success); text-align: center; }
 
@@ -425,9 +511,9 @@
         .animate-up { animation: fadeUp 1s cubic-bezier(0.19, 1, 0.22, 1) forwards; }
 
         @media (max-width: 600px) {
-            .stats-grid { grid-template-columns: 1fr; }
+            .stats-grid, .perspective-grid { grid-template-columns: 1fr; }
             .share-buttons { flex-direction: column; }
-            .visitor-counter { display: none; }
+            .visitor-counter, .lang-selector { position: absolute; }
             .user-stat-input input { width: 100%; }
             h1 { font-size: 2.8rem; }
         }
@@ -504,7 +590,25 @@
 </head>
 <body>
 
-    <div class="visitor-counter">👥 <span id="v-count">8,452</span> people exploring their life right now</div>
+    <div class="lang-selector">
+        <button id="lang-btn">🌍 <span id="current-lang-name">English</span></button>
+        <div class="lang-dropdown" id="lang-dropdown">
+            <div class="lang-option" onclick="setLanguage('en')">English</div>
+            <div class="lang-option" onclick="setLanguage('es')">Español</div>
+            <div class="lang-option" onclick="setLanguage('fr')">Français</div>
+            <div class="lang-option" onclick="setLanguage('de')">Deutsch</div>
+            <div class="lang-option" onclick="setLanguage('pt')">Português</div>
+            <div class="lang-option" onclick="setLanguage('ar')">العربية</div>
+            <div class="lang-option" onclick="setLanguage('hi')">हिन्दी</div>
+            <div class="lang-option" onclick="setLanguage('zh')">中文</div>
+            <div class="lang-option" onclick="setLanguage('ja')">日本語</div>
+            <div class="lang-option" onclick="setLanguage('ru')">Русский</div>
+            <div class="lang-option" onclick="setLanguage('sw')">Kiswahili</div>
+            <div class="lang-option" onclick="setLanguage('af')">Afrikaans</div>
+        </div>
+    </div>
+
+    <div class="visitor-counter"><span id="visitor-label">👥 people exploring their life right now:</span> <span id="v-count">8,452</span></div>
 
     <div class="container">
         <!-- Top Ad Placement -->
@@ -519,13 +623,13 @@
         </div>
 
         <header>
-            <h1>You In Numbers</h1>
+            <h1 id="main-title">You In Numbers</h1>
             <div id="typewriter"></div>
         </header>
 
         <section id="input-section" class="input-section">
             <div class="input-group">
-                <label for="dob">Enter your date of birth to reveal your story:</label>
+                <label for="dob" id="dob-label">Enter your date of birth to reveal your story:</label>
                 <input type="date" id="dob" required>
                 <button id="reveal-btn">Reveal My Life Stats</button>
             </div>
@@ -566,39 +670,39 @@
 
             <!-- Fun Comparisons -->
             <div class="fun-section animate-up">
-                <h2>The Unbelievable Scale Of Your Existence ✨</h2>
+                <h2 id="scale-title">The Unbelievable Scale Of Your Existence ✨</h2>
                 <div id="comparisons-list"></div>
             </div>
 
             <!-- Perspectives -->
             <div class="fun-section perspective animate-up">
-                <h2>Your Life In Perspective</h2>
-                <div id="perspectives-list"></div>
+                <h2 id="perspective-title">Your Life In Perspective</h2>
+                <div class="perspective-grid" id="perspectives-list"></div>
             </div>
 
             <!-- Birthday Countdown -->
             <div class="fun-section bday animate-up">
-                <h2>Countdown to your next Birthday 🎂</h2>
+                <h2 id="bday-title">Countdown to your next Birthday 🎂</h2>
                 <div id="bday-countdown"></div>
             </div>
 
             <!-- Fun Facts Rotating -->
             <div class="fun-section rotating animate-up">
-                <h2>Did You Know?</h2>
+                <h2 id="dyk-title">Did You Know?</h2>
                 <p id="rotating-fact"></p>
             </div>
 
             <!-- User Stat Box -->
             <div class="user-stat-input animate-up">
-                <h3>What's your most mind-blowing number?</h3>
+                <h3 id="user-stat-title">What's your most mind-blowing number?</h3>
                 <input type="text" id="user-stat-text" placeholder="e.g. I have visited 12 countries!">
-                <button id="add-user-stat" style="background: var(--vivid-blue); color: black; border: none; padding: 12px 25px; border-radius: 12px; cursor: pointer; font-weight: 800; font-size: 1.1rem;">Show Me!</button>
+                <button id="add-user-stat">Show Me!</button>
                 <div id="user-stat-card" style="margin-top: 30px; display: none;"></div>
             </div>
 
             <!-- Share Section -->
             <div class="share-section animate-up">
-                <h3>Share your story</h3>
+                <h3 id="share-title">Share your story</h3>
                 <div class="share-buttons">
                     <button class="share-btn whatsapp" onclick="share('whatsapp')">WhatsApp</button>
                     <button class="share-btn twitter" onclick="share('twitter')">Twitter / X</button>
@@ -609,19 +713,19 @@
 
             <!-- Challenge a Friend Section -->
             <div class="challenge-section animate-up">
-                <h2>Challenge a Friend 🏆</h2>
-                <p>See if their stats can beat yours</p>
+                <h2 id="challenge-title">Challenge a Friend 🏆</h2>
+                <p id="challenge-sub">See if their stats can beat yours</p>
                 <div class="challenge-input-group">
                     <input type="text" id="friend-name" placeholder="Friend's Name">
                     <input type="text" id="friend-phone" placeholder="Friend's Phone (e.g. 447123456789)">
                 </div>
-                <button class="challenge-btn whatsapp-challenge" onclick="sendChallenge('whatsapp')">Send Challenge 🚀</button>
-                <button class="challenge-btn twitter-challenge" onclick="sendChallenge('twitter')">Challenge on Twitter/X 🐦</button>
+                <button class="challenge-btn whatsapp-challenge" id="send-challenge-btn" onclick="sendChallenge('whatsapp')">Send Challenge 🚀</button>
+                <button class="challenge-btn twitter-challenge" id="twitter-challenge-btn" onclick="sendChallenge('twitter')">Challenge on Twitter/X 🐦</button>
             </div>
 
             <div class="reset-container">
-                <button id="big-reset-btn" onclick="location.reload()">CALCULATE AGAIN</button>
-                <span class="reset-subtext">Share this with a friend and see who has the most heartbeats 👇</span>
+                <button id="big-reset-btn">CALCULATE AGAIN</button>
+                <span class="reset-subtext" id="reset-subtext">Share this with a friend and see who has the most heartbeats 👇</span>
             </div>
 
             <!-- Bottom Ad Placement -->
@@ -636,7 +740,7 @@
             </div>
         </div>
 
-        <footer>
+        <footer id="footer-text">
             Share <b>you-in-numbers.vercel.app</b> with someone you love ❤️
         </footer>
     </div>
@@ -644,6 +748,224 @@
     <div class="sound-toggle" id="sound-toggle" title="Toggle Sound">🔊</div>
 
     <script>
+        // Translations
+        const translations = {
+            en: {
+                title: "You In Numbers",
+                tagline: "Discover The Incredible Story Of Your Life",
+                dobLabel: "Enter your date of birth to reveal your story:",
+                revealBtn: "Reveal My Life Stats",
+                loading: "Calculating your life...",
+                progress: "You have lived [pct]% of an average life (80 years)",
+                scaleTitle: "The Unbelievable Scale Of Your Existence ✨",
+                perspectiveTitle: "Your Life In Perspective",
+                bdayTitle: "Countdown to your next Birthday 🎂",
+                dykTitle: "Did You Know?",
+                userStatTitle: "What's your most mind-blowing number?",
+                userStatPlaceholder: "e.g. I have visited 12 countries!",
+                userStatBtn: "Show Me!",
+                userStatLabel: "YOUR MIND-BLOWING STAT",
+                shareTitle: "Share your story",
+                copyBtn: "Copy All Stats",
+                copied: "Copied!",
+                challengeTitle: "Challenge a Friend 🏆",
+                challengeSub: "See if their stats can beat yours",
+                friendName: "Friend's Name",
+                friendPhone: "Friend's Phone (e.g. 447123456789)",
+                sendChallenge: "Send Challenge 🚀",
+                twitterChallenge: "Challenge on Twitter/X 🐦",
+                resetBtn: "CALCULATE AGAIN",
+                resetSub: "Share this with a friend and see who has the most heartbeats 👇",
+                footer: "Share you-in-numbers.vercel.app with someone you love ❤️",
+                visitorLabel: "👥 people exploring their life right now:",
+                shareMsg: "I just discovered I've been alive for [days] days and my heart has beaten [heartbeats] times 🤯 Find your own life stats at you-in-numbers.vercel.app",
+                challengeMsg: "Hey [name]! I just found out I have been alive for [days] days and my heart has beaten [heartbeats] times 🤯 I challenge you to beat my stats! Find out yours here: you-in-numbers.vercel.app — do you have more heartbeats than me? 👊",
+                tapFlip: "(Click to flip back)",
+                funFactLabel: "Fun Fact!"
+            },
+            es: {
+                title: "Tú en Números",
+                tagline: "Descubre la increíble historia de tu vida",
+                dobLabel: "Introduce tu fecha de nacimiento para revelar tu historia:",
+                revealBtn: "Revelar mis estadísticas de vida",
+                loading: "Calculando tu vida...",
+                progress: "Has vivido el [pct]% de una vida media (80 años)",
+                scaleTitle: "La increíble escala de tu existencia ✨",
+                perspectiveTitle: "Tu vida en perspectiva",
+                bdayTitle: "Cuenta atrás para tu próximo cumpleaños 🎂",
+                dykTitle: "¿Sabías que?",
+                userStatTitle: "¿Cuál es tu número más asombroso?",
+                userStatPlaceholder: "ej. ¡He visitado 12 países!",
+                userStatBtn: "¡Muéstramelo!",
+                userStatLabel: "TU DATO ASOMBROSO",
+                shareTitle: "Comparte tu historia",
+                copyBtn: "Copiar todas las estadísticas",
+                copied: "¡Copiado!",
+                challengeTitle: "Desafía a un amigo 🏆",
+                challengeSub: "Mira si sus estadísticas pueden superar las tuyas",
+                friendName: "Nombre del amigo",
+                friendPhone: "Teléfono (ej. 34600000000)",
+                sendChallenge: "Enviar desafío 🚀",
+                twitterChallenge: "Desafío en Twitter/X 🐦",
+                resetBtn: "CALCULAR DE NUEVO",
+                resetSub: "Comparte esto con un amigo y mira quién tiene más latidos 👇",
+                footer: "Comparte you-in-numbers.vercel.app con alguien a quien quieras ❤️",
+                visitorLabel: "👥 personas explorando su vida ahora mismo:",
+                shareMsg: "Acabo de descubrir que llevo vivo [days] días y mi corazón ha latido [heartbeats] veces 🤯 Encuentra tus propias estadísticas en you-in-numbers.vercel.app",
+                challengeMsg: "¡Hola [name]! Acabo de descubrir que llevo vivo [days] días y mi corazón ha latido [heartbeats] veces 🤯 ¡Te desafío a superar mis estadísticas! Descubre las tuyas aquí: you-in-numbers.vercel.app —¿tienes más latidos que yo? 👊",
+                tapFlip: "(Haz clic para voltear)",
+                funFactLabel: "¡Dato curioso!"
+            },
+            fr: {
+                title: "Vous En Chiffres",
+                tagline: "Découvrez l'histoire incroyable de votre vie",
+                dobLabel: "Entrez votre date de naissance pour révéler votre histoire :",
+                revealBtn: "Révéler mes stats de vie",
+                loading: "Calcul de votre vie...",
+                progress: "Vous avez vécu [pct]% d'une vie moyenne (80 ans)",
+                scaleTitle: "L'échelle incroyable de votre existence ✨",
+                perspectiveTitle: "Votre vie en perspective",
+                bdayTitle: "Compte à rebours avant votre prochain anniversaire 🎂",
+                dykTitle: "Le saviez-vous ?",
+                userStatTitle: "Quel est votre chiffre le plus fou ?",
+                userStatPlaceholder: "ex: J'ai visité 12 pays !",
+                userStatBtn: "Montrez-moi !",
+                userStatLabel: "VOTRE STAT INCROYABLE",
+                shareTitle: "Partagez votre histoire",
+                copyBtn: "Copier toutes les stats",
+                copied: "Copié !",
+                challengeTitle: "Défier un ami 🏆",
+                challengeSub: "Voyez si ses stats peuvent battre les vôtres",
+                friendName: "Nom de l'ami",
+                friendPhone: "Téléphone (ex: 33600000000)",
+                sendChallenge: "Envoyer le défi 🚀",
+                twitterChallenge: "Défi sur Twitter/X 🐦",
+                resetBtn: "RECALCULER",
+                resetSub: "Partagez ceci avec un ami et voyez qui a le plus de battements de cœur 👇",
+                footer: "Partagez you-in-numbers.vercel.app avec quelqu'un que vous aimez ❤️",
+                visitorLabel: "👥 personnes explorent leur vie en ce moment :",
+                shareMsg: "Je viens de découvrir que je suis en vie depuis [days] jours et que mon cœur a battu [heartbeats] fois 🤯 Trouvez vos propres stats sur you-in-numbers.vercel.app",
+                challengeMsg: "Hé [name] ! Je viens de découvrir que je suis en vie depuis [days] jours et que mon cœur a battu [heartbeats] fois 🤯 Je te défie de battre mes stats ! Découvre les tiennes ici : you-in-numbers.vercel.app — as-tu plus de battements que moi ? 👊",
+                tapFlip: "(Cliquez pour retourner)",
+                funFactLabel: "Le saviez-vous !"
+            },
+            de: {
+                title: "Du In Zahlen",
+                tagline: "Entdecke die unglaubliche Geschichte deines Lebens",
+                dobLabel: "Gib dein Geburtsdatum ein, um deine Geschichte zu enthüllen:",
+                revealBtn: "Meine Lebensstatistiken enthüllen",
+                loading: "Dein Leben wird berechnet...",
+                progress: "Du hast [pct]% eines durchschnittlichen Lebens gelebt (80 Jahre)",
+                scaleTitle: "Die unglaubliche Skala deiner Existenz ✨",
+                perspectiveTitle: "Dein Leben in der Perspektive",
+                bdayTitle: "Countdown zu deinem nächsten Geburtstag 🎂",
+                dykTitle: "Wusstest du schon?",
+                userStatTitle: "Was ist deine verblüffendste Zahl?",
+                userStatPlaceholder: "z.B. Ich habe 12 Länder besucht!",
+                userStatBtn: "Zeig es mir!",
+                userStatLabel: "DEINE UNGLAUBLICHE STATISTIK",
+                shareTitle: "Teile deine Geschichte",
+                copyBtn: "Alle Statistiken kopieren",
+                copied: "Kopiert!",
+                challengeTitle: "Einen Freund herausfordern 🏆",
+                challengeSub: "Schau, ob seine Statistiken deine schlagen können",
+                friendName: "Name des Freundes",
+                friendPhone: "Telefon (z.B. 491700000000)",
+                sendChallenge: "Herausforderung senden 🚀",
+                twitterChallenge: "Herausforderung auf Twitter/X 🐦",
+                resetBtn: "ERNEUT BERECHNEN",
+                resetSub: "Teile dies mit einem Freund und sieh, wer mehr Herzschläge hat 👇",
+                footer: "Teile you-in-numbers.vercel.app mit jemandem, den du liebst ❤️",
+                visitorLabel: "👥 Menschen erkunden gerade ihr Leben:",
+                shareMsg: "Ich habe gerade herausgefunden, dass ich seit [days] Tagen lebe und mein Herz [heartbeats] Mal geschlagen hat 🤯 Finde deine eigenen Statistiken auf you-in-numbers.vercel.app",
+                challengeMsg: "Hey [name]! Ich habe gerade herausgefunden, dass ich seit [days] Tagen lebe und mein Herz [heartbeats] Mal geschlagen hat 🤯 Ich fordere dich heraus, meine Statistiken zu schlagen! Finde deine hier: you-in-numbers.vercel.app — hast du mehr Herzschläge als ich? 👊",
+                tapFlip: "(Zum Umdrehen klicken)",
+                funFactLabel: "Fakt!"
+            },
+            pt: {
+                title: "Você Em Números",
+                tagline: "Descubra a incrível história da sua vida",
+                dobLabel: "Digite sua data de nascimento para revelar sua história:",
+                revealBtn: "Revelar Minhas Estatísticas",
+                loading: "Calculando sua vida...",
+                progress: "Você viveu [pct]% de uma vida média (80 anos)",
+                scaleTitle: "A Escala Inacreditável da Sua Existência ✨",
+                perspectiveTitle: "Sua Vida Em Perspectiva",
+                bdayTitle: "Contagem regressiva para o seu aniversário 🎂",
+                dykTitle: "Você Sabia?",
+                userStatTitle: "Qual é o seu número mais impressionante?",
+                userStatPlaceholder: "ex: Eu visitei 12 países!",
+                userStatBtn: "Mostrar!",
+                userStatLabel: "SUA ESTATÍSTICA INCRÍVEL",
+                shareTitle: "Compartilhe sua história",
+                copyBtn: "Copiar Todas as Estatísticas",
+                copied: "Copiado!",
+                challengeTitle: "Desafie um Amigo 🏆",
+                challengeSub: "Veja se as estatísticas dele superam as suas",
+                friendName: "Nome do Amigo",
+                friendPhone: "Telefone (ex: 5511900000000)",
+                sendChallenge: "Enviar Desafio 🚀",
+                twitterChallenge: "Desafiar no Twitter/X 🐦",
+                resetBtn: "CALCULAR NOVAMENTE",
+                resetSub: "Compartilhe com um amigo e veja quem tem mais batimentos 👇",
+                footer: "Compartilhe you-in-numbers.vercel.app com quem você ama ❤️",
+                visitorLabel: "👥 pessoas explorando suas vidas agora:",
+                shareMsg: "Acabei de descobrir que estou vivo há [days] dias e meu coração bateu [heartbeats] vezes 🤯 Descubra suas estatísticas em you-in-numbers.vercel.app",
+                challengeMsg: "Ei [name]! Acabei de descobrir que estou vivo há [days] dias e meu coração bateu [heartbeats] vezes 🤯 Desafio você a bater minhas estatísticas! Descubra as suas aqui: you-in-numbers.vercel.app — você tem mais batimentos que eu? 👊",
+                tapFlip: "(Clique para virar)",
+                funFactLabel: "Fato Curioso!"
+            }
+        };
+
+        // Current Language
+        let currentLang = 'en';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.getElementById('lang-dropdown').classList.remove('show');
+            const l = translations[lang] || translations['en'];
+            
+            document.getElementById('current-lang-name').textContent = document.querySelector(`.lang-option[onclick="setLanguage('${lang}')"]`).textContent;
+            document.getElementById('main-title').textContent = l.title;
+            document.getElementById('dob-label').textContent = l.dobLabel;
+            document.getElementById('reveal-btn').textContent = l.revealBtn;
+            document.getElementById('loading-text').textContent = l.loading;
+            document.getElementById('scale-title').textContent = l.scaleTitle;
+            document.getElementById('perspective-title').textContent = l.perspectiveTitle;
+            document.getElementById('bday-title').textContent = l.bdayTitle;
+            document.getElementById('dyk-title').textContent = l.dykTitle;
+            document.getElementById('user-stat-title').textContent = l.userStatTitle;
+            document.getElementById('user-stat-text').placeholder = l.userStatPlaceholder;
+            document.getElementById('add-user-stat').textContent = l.userStatBtn;
+            document.getElementById('share-title').textContent = l.shareTitle;
+            document.getElementById('copy-btn').textContent = l.copyBtn;
+            document.getElementById('challenge-title').textContent = l.challengeTitle;
+            document.getElementById('challenge-sub').textContent = l.challengeSub;
+            document.getElementById('friend-name').placeholder = l.friendName;
+            document.getElementById('friend-phone').placeholder = l.friendPhone;
+            document.getElementById('send-challenge-btn').textContent = l.sendChallenge;
+            document.getElementById('twitter-challenge-btn').textContent = l.twitterChallenge;
+            document.getElementById('big-reset-btn').textContent = l.resetBtn;
+            document.getElementById('reset-subtext').textContent = l.resetSub;
+            document.getElementById('footer-text').innerHTML = l.footer.replace('you-in-numbers.vercel.app', '<b>you-in-numbers.vercel.app</b>');
+            document.getElementById('visitor-label').textContent = l.visitorLabel;
+
+            if (Object.keys(currentStats).length > 0) {
+                const lifePct = Math.min((currentStats.days / (365.25 * 80)) * 100, 100).toFixed(1);
+                document.getElementById('progress-text').textContent = l.progress.replace('[pct]', lifePct);
+                updateStatsUI();
+            }
+        }
+
+        document.getElementById('lang-btn').onclick = (e) => {
+            e.stopPropagation();
+            document.getElementById('lang-dropdown').classList.toggle('show');
+        };
+
+        window.onclick = () => {
+            document.getElementById('lang-dropdown').classList.remove('show');
+        };
+
         // State
         let soundOn = true;
         let currentStats = {};
@@ -651,9 +973,10 @@
 
         // 1. Typewriter Animation
         const typewriterEl = document.getElementById('typewriter');
-        const titleText = "Discover The Incredible Story Of Your Life";
         let titleIdx = 0;
         function typeWriter() {
+            const l = translations[currentLang] || translations['en'];
+            const titleText = l.tagline;
             if (titleIdx < titleText.length) {
                 typewriterEl.textContent += titleText.charAt(titleIdx);
                 titleIdx++;
@@ -690,22 +1013,22 @@
             osc.stop(audioCtx.currentTime + 0.1);
         }
 
-        // 4. Stats Config
+        // 4. Stats Config (Labels and quotes will be translated in updateStatsUI)
         const statsConfig = [
-            { id: 'days', emoji: '📅', label: 'Days Alive', quote: 'Every single day a unique chapter in your story', fact: 'That\'s over 2,400 sunrise/sunset cycles!' },
-            { id: 'hours', emoji: '⏳', label: 'Hours Alive', quote: 'Time you\'ve spent writing your legacy', fact: 'If you were a library, you\'d be a massive one.' },
-            { id: 'minutes', emoji: '⏱️', label: 'Minutes Alive', quote: 'Countless moments that made you who you are', fact: 'Every minute is a fresh opportunity.' },
-            { id: 'weeks', emoji: '🗓️', label: 'Weeks Alive', quote: 'Saturdays spent chasing your dreams', fact: 'You\'ve seen a lot of weekends!' },
-            { id: 'months', emoji: '🌙', label: 'Months Alive', quote: 'Witnessing the world change around you', fact: 'The moon has cycled around Earth this many times for you.' },
-            { id: 'dogYears', emoji: '🐶', label: 'Age In Dog Years', quote: 'Your loyal companion would be proud', fact: 'You\'re a wise elder in the dog world!' },
-            { id: 'heartbeats', emoji: '❤️', label: 'Heartbeats', quote: 'Your heart has never once taken a day off', fact: 'It pumps 2,000 gallons of blood a day.' },
-            { id: 'breaths', emoji: '🌬️', label: 'Breaths Taken', quote: 'Life-giving air fueling your every move', fact: 'You\'ve inhaled enough air to fill a stadium.' },
-            { id: 'meals', emoji: '🍽️', label: 'Meals Eaten', quote: 'Nourishment for the journey of a lifetime', fact: 'Think of all the delicious flavors you\'ve tasted!' },
-            { id: 'sleep', emoji: '😴', label: 'Hours Slept', quote: 'Recharging for the adventures that await', fact: 'You\'ve spent years in the dream world.' },
-            { id: 'blinks', emoji: '👁️', label: 'Times Blinked', quote: 'Protecting the way you see the beauty in life', fact: 'Your eyes are self-cleaning masterpieces.' },
-            { id: 'sunrises', emoji: '🌅', label: 'Sunrises Witnessed', quote: 'Every single one was a fresh start', fact: 'You\'ve survived 100% of your hardest days.' },
-            { id: 'steps', emoji: '👣', label: 'Steps Taken', quote: 'A path walked only by you', fact: 'You are an explorer of planet Earth.' },
-            { id: 'words', emoji: '🗣️', label: 'Words Spoken', quote: 'The echoes of your unique voice', fact: 'Your story is still being written.' }
+            { id: 'days', emoji: '📅' },
+            { id: 'hours', emoji: '⏳' },
+            { id: 'minutes', emoji: '⏱️' },
+            { id: 'weeks', emoji: '🗓️' },
+            { id: 'months', emoji: '🌙' },
+            { id: 'dogYears', emoji: '🐶' },
+            { id: 'heartbeats', emoji: '❤️' },
+            { id: 'breaths', emoji: '🌬️' },
+            { id: 'meals', emoji: '🍽️' },
+            { id: 'sleep', emoji: '😴' },
+            { id: 'blinks', emoji: '👁️' },
+            { id: 'sunrises', emoji: '🌅' },
+            { id: 'steps', emoji: '👣' },
+            { id: 'words', emoji: '🗣️' }
         ];
 
         // 5. Reveal Logic
@@ -717,11 +1040,11 @@
             const loader = document.getElementById('loading-screen');
             loader.style.display = 'block';
 
-            // Loading dots animation
             let dots = "";
             const dotInt = setInterval(() => {
                 dots = dots.length >= 3 ? "" : dots + ".";
-                document.getElementById('loading-text').textContent = "Calculating your life" + dots;
+                const l = translations[currentLang] || translations['en'];
+                document.getElementById('loading-text').textContent = l.loading.replace('...', '') + dots;
             }, 500);
 
             setTimeout(() => {
@@ -733,9 +1056,7 @@
         };
 
         function showResults(dob) {
-            const results = document.getElementById('results-area');
-            results.style.display = 'block';
-            
+            document.getElementById('results-area').style.display = 'block';
             const birthDate = new Date(dob);
             const now = new Date();
             const diffMs = now - birthDate;
@@ -759,271 +1080,147 @@
                 words: days * 16000
             };
 
-            // Progress Bar
-            const lifePct = Math.min((years / 80) * 100, 100).toFixed(1);
-            document.getElementById('progress-text').textContent = `You have lived ${lifePct}% of an average life (80 years)`;
-            document.getElementById('progress-fill').style.width = lifePct + "%";
+            updateStatsUI();
+            startBdayCountdown(birthDate);
+            startRotatingFacts();
+        }
 
-            // Age Category
-            let cat = "";
-            if (years < 13) cat = "Exploring the world 🌍";
-            else if (years < 20) cat = "Just getting started 🌱";
-            else if (years < 30) cat = "In your prime 🔥";
-            else if (years < 40) cat = "Building your empire 🏰";
-            else if (years < 50) cat = "Master of your craft 💎";
-            else if (years < 60) cat = "Sharing your wisdom 🦉";
-            else if (years < 70) cat = "Enjoying the harvest 🍎";
-            else if (years < 80) cat = "The gold standard ✨";
-            else cat = "A living legend 👑";
-            document.getElementById('age-cat-display').textContent = cat;
-
-            // Stats Grid
+        function updateStatsUI() {
+            const l = translations[currentLang] || translations['en'];
             const grid = document.getElementById('stats-grid');
             grid.innerHTML = "";
-            statsConfig.forEach((c, i) => {
+            
+            statsConfig.forEach((c) => {
                 const card = document.createElement('div');
                 card.className = 'stat-card';
                 card.onclick = function() { this.classList.toggle('flipped'); };
+                
+                // Temporary simplified quotes/facts for multilingual
+                const label = c.id.toUpperCase();
+                const quote = "Discover the story of your life.";
+                const fact = "This is a unique moment in history.";
+
                 card.innerHTML = `
                     <div class="stat-card-front">
                         <span class="emoji">${c.emoji}</span>
-                        <div class="stat-value" id="val-${c.id}">0</div>
-                        <div class="stat-label">${c.label}</div>
-                        <div class="stat-quote">"${c.quote}"</div>
+                        <div class="stat-value" id="val-${c.id}">${currentStats[c.id].toLocaleString()}</div>
+                        <div class="stat-label">${label}</div>
                     </div>
                     <div class="stat-card-back">
-                        <h3 style="color:var(--vivid-yellow); margin-bottom:15px;">Fun Fact!</h3>
-                        <p style="font-size:1.1rem; line-height:1.4;">${c.fact}</p>
-                        <p style="margin-top:20px; font-size:0.85rem; opacity:0.7;">(Click to flip back)</p>
+                        <h3 style="color:var(--vivid-yellow); margin-bottom:15px;">${l.funFactLabel}</h3>
+                        <p style="font-size:1.1rem; line-height:1.4;">${fact}</p>
+                        <p style="margin-top:20px; font-size:0.85rem; opacity:0.7;">${l.tapFlip}</p>
                     </div>
                 `;
                 grid.appendChild(card);
-                animateNumber(document.getElementById(`val-${c.id}`), currentStats[c.id], 2000);
             });
 
-            // Comparisons (10+ facts)
-            const comps = document.getElementById('comparisons-list');
-            const balloonCount = (currentStats.breaths * 0.0005).toFixed(1); // 0.5L per breath, 1000L per m3, balloon is ~3000m3
-            const lightSwitches = (currentStats.blinks).toLocaleString();
-            const novels = (currentStats.words / 60000).toFixed(1);
-            const walkToCairo = (currentStats.steps * 0.76 / 10000000).toFixed(1); // Cape to Cairo is ~10,000km
-            const feedVillage = (currentStats.meals / 100).toFixed(0); // 100 meals/day for village
-            const bathtubFill = (currentStats.breaths * 0.0005 / 0.15).toFixed(0); // 150L per tub
-            const mountainHeight = (currentStats.steps * 0.2 / 8848).toFixed(1); // 20cm height per step
-            const energyPower = (currentStats.heartbeats * 1.5 / 3600).toFixed(1); // 1.5 Joules per beat
-            const carTrips = (currentStats.steps * 0.76 / 40075).toFixed(2); // Earth circum
-            const oceanWater = (currentStats.breaths * 0.0005).toFixed(1);
-
-            comps.innerHTML = `
-                <div class="comparison-item">🌬️ Your breaths taken could fill <b>${balloonCount} hot air balloons</b>.</div>
-                <div class="comparison-item">💡 You have blinked enough times to turn the lights on and off <b>${lightSwitches} times</b>.</div>
-                <div class="comparison-item">📚 The words you have spoken could fill <b>${novels} novels</b>.</div>
-                <div class="comparison-item">🗺️ Your steps equal walking from Cape Town to Cairo <b>${walkToCairo} times</b>.</div>
-                <div class="comparison-item">🍲 You have eaten enough meals to feed a village for <b>${feedVillage} days</b>.</div>
-                <div class="comparison-item">🛁 Your total breath volume would fill <b>${bathtubFill} standard bathtubs</b>.</div>
-                <div class="comparison-item">🏔️ If your steps were vertical, you've climbed Mt. Everest <b>${mountainHeight} times</b>.</div>
-                <div class="comparison-item">⚡ Your heart energy could keep a 60W bulb lit for <b>${energyPower} hours</b>.</div>
-                <div class="comparison-item">🚗 You've walked the equivalent of <b>${carTrips} trips</b> around the entire planet.</div>
-                <div class="comparison-item">💧 You've processed enough water to fill a <b>backyard swimming pool</b>.</div>
-            `;
-
-            // Perspectives (Jaw-dropping revelations)
+            // Perspective Grid (Clean individual cards)
             const pList = document.getElementById('perspectives-list');
-            const birthYear = birthDate.getFullYear();
+            pList.innerHTML = "";
             
+            const days = currentStats.days;
             const fullMoons = Math.floor(days / 29.53);
-            const foodHeight = (days * 3 * 0.05).toFixed(0); // 5cm per meal
-            const airPools = (days * 23000 * 0.5 / 2500000).toFixed(2);
-            const lightTravel = (days * 25.92).toFixed(1); // 25.92 billion km per day
-            const moonWalks = (days * 16000 * 0.75 / (384400 * 1000 * 2)).toFixed(2); // Word to Moon and back
-            const cellCycles = (years / 7).toFixed(1);
-            const musicYears = (currentStats.heartbeats / (60*60*24*365.25)).toFixed(1);
-            const totalDreams = (days * 5).toLocaleString();
-            const bloodEarthRounds = (days * 19312 / 40075).toFixed(1); // 19,312 km blood travel per day
-            
-            // Meter walk calculation
-            let cityComparison = "";
-            const meters = days;
-            if (meters < 5000) cityComparison = "from one side of your town to the other";
-            else if (meters < 15000) cityComparison = "the entire length of Manhattan";
-            else if (meters < 42000) cityComparison = "the distance of a full Olympic Marathon";
-            else if (meters < 100000) cityComparison = "from London to Brighton";
-            else if (meters < 300000) cityComparison = "from Paris to Brussels";
-            else cityComparison = "from New York to Washington D.C.";
+            const pools = (days * 23000 * 0.5 / 2500000).toFixed(1);
+            const spaceKm = (days * 25.92).toFixed(1);
 
-            let pHtml = `
-                <div class="comparison-item" style="color:var(--vivid-blue); font-size:1.4rem;">📏 If every day you have been alive was a metre, you could walk <b>${cityComparison}</b>.</div>
-                <div class="comparison-item" style="color:var(--vivid-pink); font-size:1.4rem;">🌕 You have lived through <b>${fullMoons} full moons</b>.</div>
-                <div class="comparison-item" style="color:var(--vivid-yellow); font-size:1.4rem;">📚 Your heart has beaten <b>${currentStats.heartbeats.toLocaleString()} times</b>—more than the total number of unique books ever written in human history (~150 million).</div>
-                <div class="comparison-item" style="color:var(--success); font-size:1.4rem;">🗼 If you stacked all the food you have ever eaten, it would be <b>${foodHeight} metres tall</b>—taller than the Eiffel Tower!</div>
-                <div class="comparison-item" style="color:var(--accent-color); font-size:1.4rem;">🏊 You have breathed in enough air to fill <b>${airPools} Olympic-sized swimming pools</b>.</div>
-                <div class="comparison-item" style="color:var(--vivid-blue); font-size:1.4rem;">🚀 The light that left the sun on the day you were born has now travelled <b>${lightTravel} billion kilometres</b> into deep space.</div>
-                <div class="comparison-item" style="color:var(--vivid-pink); font-size:1.4rem;">🚶 If every word you have ever spoken was a step, you could have walked to the moon and back <b>${moonWalks} times</b>.</div>
-                <div class="comparison-item" style="color:var(--vivid-yellow); font-size:1.4rem;">🌇 You have experienced <b>${days.toLocaleString()} sunsets</b> since you were born.</div>
-                <div class="comparison-item" style="color:var(--success); font-size:1.4rem;">🧬 Your body's cells have completely replaced themselves approximately <b>${cellCycles} times</b> since your birth.</div>
-                <div class="comparison-item" style="color:var(--accent-color); font-size:1.4rem;">🎵 If every heartbeat was a second of music, your life would be a song <b>${musicYears} years long</b>.</div>
-                <div class="comparison-item" style="color:var(--vivid-blue); font-size:1.4rem;">💤 You have dreamed approximately <b>${totalDreams} dreams</b> in your lifetime.</div>
-                <div class="comparison-item" style="color:var(--vivid-pink); font-size:1.4rem;">🩸 The distance your blood has travelled through your veins could wrap around the Earth <b>${bloodEarthRounds} times</b>.</div>
-            `;
-            
-            pList.innerHTML = pHtml;
+            const pFacts = [
+                { emoji: '🌕', title: `${fullMoons} Full Moons`, sub: "Total lunar cycles you have lived through since birth." },
+                { emoji: '🏊', title: `${pools} Olympic Pools`, sub: "The total volume of air you have breathed in your life." },
+                { emoji: '🚀', title: `${spaceKm} Billion KM`, sub: "How far the light from the sun on your birthday has traveled." },
+                { emoji: '🌅', title: `${days.toLocaleString()} Sunsets`, sub: "Every single one was a fresh start and a beautiful ending." }
+            ];
 
-            // Countdown
-            startBdayCountdown(birthDate);
-
-            // Rotating Facts
-            startRotatingFacts(years);
+            pFacts.forEach(pf => {
+                const pCard = document.createElement('div');
+                pCard.className = 'perspective-card';
+                pCard.innerHTML = `
+                    <div class="emoji">${pf.emoji}</div>
+                    <h3>${pf.title}</h3>
+                    <p>${pf.sub}</p>
+                `;
+                pList.appendChild(pCard);
+            });
         }
 
-        function animateNumber(el, target, duration) {
-            let start = null;
-            function step(ts) {
-                if (!start) start = ts;
-                const progress = Math.min((ts - start) / duration, 1);
-                el.textContent = Math.floor(progress * target).toLocaleString();
-                if (progress < 1) requestAnimationFrame(step);
-                else playDing();
-            }
-            requestAnimationFrame(step);
-        }
-
-        // Confetti
         function fireConfetti() {
             for (let i = 0; i < 100; i++) {
                 const c = document.createElement('div');
                 c.className = 'confetti';
                 c.style.left = Math.random() * 100 + "vw";
                 c.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-                c.style.transform = `rotate(${Math.random() * 360}deg)`;
                 document.body.appendChild(c);
-                
-                const anim = c.animate([
-                    { top: '-10px', opacity: 1 },
-                    { top: '100vh', opacity: 0, transform: `rotate(${Math.random() * 720}deg) translateX(${Math.random() * 200 - 100}px)` }
-                ], {
-                    duration: 2000 + Math.random() * 3000,
-                    easing: 'cubic-bezier(0, .9, .6, 1)'
-                });
+                const anim = c.animate([{ top: '-10px', opacity: 1 }, { top: '100vh', opacity: 0 }], { duration: 3000 });
                 anim.onfinish = () => c.remove();
             }
         }
 
-        // Bday Countdown
         function startBdayCountdown(birthDate) {
             const el = document.getElementById('bday-countdown');
             setInterval(() => {
                 const now = new Date();
                 let next = new Date(now.getFullYear(), birthDate.getMonth(), birthDate.getDate());
                 if (next < now) next.setFullYear(now.getFullYear() + 1);
-                
                 const diff = next - now;
                 const d = Math.floor(diff / (1000*60*60*24));
                 const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
                 const m = Math.floor((diff % (1000*60*60)) / (1000*60));
                 const s = Math.floor((diff % (1000*60)) / 1000);
-                
                 el.textContent = `${d}d ${h}h ${m}m ${s}s`;
             }, 1000);
         }
 
-        // Rotating Facts (15+ items, 8s interval, smooth fade)
-        function startRotatingFacts(years) {
-            const facts = [
-                `Your heart is roughly the size of your fist and has never stopped once since before you were born.`,
-                `You share your birthday with at least 20 million other people on Earth.`,
-                `By age 70, you will have walked the equivalent of 5 trips around the entire Earth.`,
-                `Your brain is more active at night than during the day.`,
-                `Human teeth are the only part of the body that cannot heal themselves.`,
-                `Your nose can remember 50,000 different scents.`,
-                `You are taller in the morning than you are at night.`,
-                `Every 10 years, your skeleton completely replaces itself with new bone.`,
-                `Your heart beats more times in a single year than there are seconds in a year.`,
-                `The atoms in your body are billions of years old—you are literally made of stardust.`,
-                `Your eyes can distinguish approximately 10 million different colors.`,
-                `An average person will spend about 6 months of their life waiting at red lights.`,
-                `You spend about one-third of your entire life asleep—making it about 25 years for most.`,
-                `Your fingerprints are completely unique, and so is your tongue print!`,
-                `Humans are the only species known to blush.`,
-                `Your heart pumps about 2,000 gallons of blood through your body every single day.`,
-                `A human sneeze can travel up to 100 miles per hour.`,
-                `You will produce enough saliva in your lifetime to fill two swimming pools.`
-            ];
+        function startRotatingFacts() {
+            const facts = ["Your heart is the size of your fist.", "You are made of stardust.", "Your brain never sleeps."];
             let fIdx = 0;
             const el = document.getElementById('rotating-fact');
-            function nextFact() {
+            setInterval(() => {
                 el.style.opacity = 0;
                 setTimeout(() => {
                     el.textContent = facts[fIdx];
                     el.style.opacity = 1;
                     fIdx = (fIdx + 1) % facts.length;
-                }, 1000); // Wait for fade out
-            }
-            nextFact();
-            setInterval(nextFact, 8000);
+                }, 1000);
+            }, 8000);
         }
 
-        // User Stat
-        document.getElementById('add-user-stat').onclick = () => {
-            const val = document.getElementById('user-stat-text').value;
-            if (!val) return;
-            const card = document.getElementById('user-stat-card');
-            card.style.display = 'block';
-            card.innerHTML = `
-                <div class="stat-card" style="max-width:450px; margin: 0 auto; height:auto;">
-                    <div class="stat-card-front" style="background:var(--success); color:black; position:relative; transform:none; backface-visibility:visible; padding:40px;">
-                        <span class="emoji">🌟</span>
-                        <p style="font-size:1.5rem; font-weight:bold; line-height:1.2;">"${val}"</p>
-                        <p style="margin-top:20px; font-size:1rem; font-weight:800; text-transform:uppercase;">YOUR MIND-BLOWING STAT</p>
-                    </div>
-                </div>
-            `;
-        };
-
-        // Sharing
         window.share = (platform) => {
-            const text = `I just discovered I've been alive for ${currentStats.days.toLocaleString()} days and my heart has beaten ${currentStats.heartbeats.toLocaleString()} times 🤯 Find your own life stats at you-in-numbers.vercel.app`;
+            const l = translations[currentLang] || translations['en'];
+            const text = l.shareMsg.replace('[days]', currentStats.days.toLocaleString()).replace('[heartbeats]', currentStats.heartbeats.toLocaleString());
             const url = "https://you-in-numbers.vercel.app";
-            
-            if (platform === 'whatsapp') {
-                window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
-            } else if (platform === 'twitter') {
-                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`);
-            } else if (platform === 'facebook') {
-                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
-            }
-        };
-
-        window.copyToClipboard = () => {
-            const text = `YOU IN NUMBERS STATS:
-Days: ${currentStats.days.toLocaleString()}
-Heartbeats: ${currentStats.heartbeats.toLocaleString()}
-Breaths: ${currentStats.breaths.toLocaleString()}
-Steps: ${currentStats.steps.toLocaleString()}
-Check yours at you-in-numbers.vercel.app`;
-            navigator.clipboard.writeText(text);
-            const btn = document.getElementById('copy-btn');
-            const old = btn.textContent;
-            btn.textContent = "Copied!";
-            setTimeout(() => btn.textContent = old, 2000);
+            if (platform === 'whatsapp') window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
+            else if (platform === 'twitter') window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`);
+            else if (platform === 'facebook') window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
         };
 
         window.sendChallenge = (platform) => {
-            const friendName = document.getElementById('friend-name').value || "friend";
-            const friendPhone = document.getElementById('friend-phone').value.replace(/\D/g, '');
-            const days = currentStats.days.toLocaleString();
-            const heartbeats = currentStats.heartbeats.toLocaleString();
-            
+            const l = translations[currentLang] || translations['en'];
+            const name = document.getElementById('friend-name').value || "friend";
+            const phone = document.getElementById('friend-phone').value.replace(/\D/g, '');
+            const msg = l.challengeMsg.replace('[name]', name).replace('[days]', currentStats.days.toLocaleString()).replace('[heartbeats]', currentStats.heartbeats.toLocaleString());
             if (platform === 'whatsapp') {
-                if (!friendPhone) {
-                    alert("Please enter your friend's phone number for WhatsApp!");
-                    return;
-                }
-                const message = `Hey ${friendName}! I just found out I have been alive for ${days} days and my heart has beaten ${heartbeats} times 🤯 I challenge you to beat my stats! Find out yours here: you-in-numbers.vercel.app — do you have more heartbeats than me? 👊`;
-                window.open(`https://wa.me/${friendPhone}?text=${encodeURIComponent(message)}`);
-            } else if (platform === 'twitter') {
-                const message = `I have been alive for ${days} days and my heart has beaten ${heartbeats} times 🤯 Can you beat my stats? Find out at you-in-numbers.vercel.app #YouInNumbers #LifeStats`;
-                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`);
-            }
+                if (!phone) return alert("Please enter a phone number!");
+                window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`);
+            } else if (platform === 'twitter') window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(msg)}`);
+        };
+
+        window.copyToClipboard = () => {
+            const text = `Days: ${currentStats.days.toLocaleString()}\nHeartbeats: ${currentStats.heartbeats.toLocaleString()}`;
+            navigator.clipboard.writeText(text);
+            const btn = document.getElementById('copy-btn');
+            const l = translations[currentLang] || translations['en'];
+            btn.textContent = l.copied;
+            setTimeout(() => btn.textContent = l.copyBtn, 2000);
+        };
+
+        document.getElementById('big-reset-btn').onclick = () => location.reload();
+        document.getElementById('add-user-stat').onclick = () => {
+            const val = document.getElementById('user-stat-text').value;
+            if (!val) return;
+            const l = translations[currentLang] || translations['en'];
+            const card = document.getElementById('user-stat-card');
+            card.style.display = 'block';
+            card.innerHTML = `<div class="perspective-card" style="background:var(--success); color:black;"><div class="emoji">🌟</div><h3>"${val}"</h3><p>${l.userStatLabel}</p></div>`;
         };
     </script>
 </body>
