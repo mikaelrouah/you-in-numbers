@@ -827,24 +827,46 @@
                 <div class="comparison-item">💧 You've processed enough water to fill a <b>backyard swimming pool</b>.</div>
             `;
 
-            // Perspectives (More items)
+            // Perspectives (Jaw-dropping revelations)
             const pList = document.getElementById('perspectives-list');
             const birthYear = birthDate.getFullYear();
-            let pHtml = "";
-            if (birthYear < 1977) pHtml += `<div class="comparison-item">🎬 You were born before <b>Star Wars: A New Hope</b>.</div>`;
-            if (birthYear < 1985) pHtml += `<div class="comparison-item">🎮 You are older than the <b>Nintendo Entertainment System (NES)</b>.</div>`;
-            if (birthYear < 1991) pHtml += `<div class="comparison-item">🌐 You were born before the <b>World Wide Web</b> was public.</div>`;
-            if (birthYear < 1994) pHtml += `<div class="comparison-item">🦁 You were born before Disney's <b>The Lion King</b>.</div>`;
-            if (birthYear < 1998) pHtml += `<div class="comparison-item">🔍 You are older than <b>Google</b>.</div>`;
-            if (birthYear < 2001) pHtml += `<div class="comparison-item">📚 You were born before <b>Wikipedia</b>.</div>`;
-            if (birthYear < 2004) pHtml += `<div class="comparison-item">👥 You were born before <b>Facebook</b>.</div>`;
-            if (birthYear < 2005) pHtml += `<div class="comparison-item">📺 You are older than <b>YouTube</b>.</div>`;
-            if (birthYear < 2007) pHtml += `<div class="comparison-item">📱 You are older than the <b>iPhone</b>.</div>`;
-            if (birthYear < 2009) pHtml += `<div class="comparison-item">₿ You were born before <b>Bitcoin</b>.</div>`;
-            if (birthYear < 2010) pHtml += `<div class="comparison-item">📸 You were born before <b>Instagram</b>.</div>`;
-            if (birthYear < 2016) pHtml += `<div class="comparison-item">💃 You were born before <b>TikTok</b> launched.</div>`;
             
-            pList.innerHTML = pHtml || "You were born in a truly modern era!";
+            const fullMoons = Math.floor(days / 29.53);
+            const foodHeight = (days * 3 * 0.05).toFixed(0); // 5cm per meal
+            const airPools = (days * 23000 * 0.5 / 2500000).toFixed(2);
+            const lightTravel = (days * 25.92).toFixed(1); // 25.92 billion km per day
+            const moonWalks = (days * 16000 * 0.75 / (384400 * 1000 * 2)).toFixed(2); // Word to Moon and back
+            const cellCycles = (years / 7).toFixed(1);
+            const musicYears = (currentStats.heartbeats / (60*60*24*365.25)).toFixed(1);
+            const totalDreams = (days * 5).toLocaleString();
+            const bloodEarthRounds = (days * 19312 / 40075).toFixed(1); // 19,312 km blood travel per day
+            
+            // Meter walk calculation
+            let cityComparison = "";
+            const meters = days;
+            if (meters < 5000) cityComparison = "from one side of your town to the other";
+            else if (meters < 15000) cityComparison = "the entire length of Manhattan";
+            else if (meters < 42000) cityComparison = "the distance of a full Olympic Marathon";
+            else if (meters < 100000) cityComparison = "from London to Brighton";
+            else if (meters < 300000) cityComparison = "from Paris to Brussels";
+            else cityComparison = "from New York to Washington D.C.";
+
+            let pHtml = `
+                <div class="comparison-item" style="color:var(--vivid-blue); font-size:1.4rem;">📏 If every day you have been alive was a metre, you could walk <b>${cityComparison}</b>.</div>
+                <div class="comparison-item" style="color:var(--vivid-pink); font-size:1.4rem;">🌕 You have lived through <b>${fullMoons} full moons</b>.</div>
+                <div class="comparison-item" style="color:var(--vivid-yellow); font-size:1.4rem;">📚 Your heart has beaten <b>${currentStats.heartbeats.toLocaleString()} times</b>—more than the total number of unique books ever written in human history (~150 million).</div>
+                <div class="comparison-item" style="color:var(--success); font-size:1.4rem;">🗼 If you stacked all the food you have ever eaten, it would be <b>${foodHeight} metres tall</b>—taller than the Eiffel Tower!</div>
+                <div class="comparison-item" style="color:var(--accent-color); font-size:1.4rem;">🏊 You have breathed in enough air to fill <b>${airPools} Olympic-sized swimming pools</b>.</div>
+                <div class="comparison-item" style="color:var(--vivid-blue); font-size:1.4rem;">🚀 The light that left the sun on the day you were born has now travelled <b>${lightTravel} billion kilometres</b> into deep space.</div>
+                <div class="comparison-item" style="color:var(--vivid-pink); font-size:1.4rem;">🚶 If every word you have ever spoken was a step, you could have walked to the moon and back <b>${moonWalks} times</b>.</div>
+                <div class="comparison-item" style="color:var(--vivid-yellow); font-size:1.4rem;">🌇 You have experienced <b>${days.toLocaleString()} sunsets</b> since you were born.</div>
+                <div class="comparison-item" style="color:var(--success); font-size:1.4rem;">🧬 Your body's cells have completely replaced themselves approximately <b>${cellCycles} times</b> since your birth.</div>
+                <div class="comparison-item" style="color:var(--accent-color); font-size:1.4rem;">🎵 If every heartbeat was a second of music, your life would be a song <b>${musicYears} years long</b>.</div>
+                <div class="comparison-item" style="color:var(--vivid-blue); font-size:1.4rem;">💤 You have dreamed approximately <b>${totalDreams} dreams</b> in your lifetime.</div>
+                <div class="comparison-item" style="color:var(--vivid-pink); font-size:1.4rem;">🩸 The distance your blood has travelled through your veins could wrap around the Earth <b>${bloodEarthRounds} times</b>.</div>
+            `;
+            
+            pList.innerHTML = pHtml;
 
             // Countdown
             startBdayCountdown(birthDate);
