@@ -7,12 +7,33 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4134769730320334" crossorigin="anonymous"></script>
     <style>
         :root {
-            --bg-gradient: linear-gradient(135deg, #0a0a2e 0%, #2e0a2e 100%);
+            --bg-navy: #0a0a2e;
+            --bg-purple: #2e0a2e;
+            --bg-midnight: #050517;
             --glass-bg: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.1);
             --accent-color: #bb86fc;
             --text-main: #ffffff;
             --text-dim: rgba(255, 255, 255, 0.7);
+            --success: #03dac6;
+        }
+
+        @keyframes bgAnimation {
+            0% { background-color: var(--bg-navy); }
+            33% { background-color: var(--bg-purple); }
+            66% { background-color: var(--bg-midnight); }
+            100% { background-color: var(--bg-navy); }
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color); transform: scale(1); }
+            50% { text-shadow: 0 0 20px var(--accent-color), 0 0 40px var(--accent-color); transform: scale(1.02); }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         * {
@@ -23,8 +44,9 @@
         }
 
         body {
-            background: var(--bg-gradient);
-            background-attachment: fixed;
+            background: linear-gradient(-45deg, #0a0a2e, #2e0a2e, #050517, #1a0a2e);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
@@ -38,6 +60,23 @@
             max-width: 1000px;
             width: 100%;
             text-align: center;
+            position: relative;
+        }
+
+        /* Visitor Counter */
+        .visitor-counter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--success);
+            z-index: 1000;
+            font-weight: bold;
         }
 
         .ad-container {
@@ -50,7 +89,6 @@
 
         header {
             margin: 40px 0;
-            animation: fadeInDown 1s ease-out;
         }
 
         h1 {
@@ -58,13 +96,36 @@
             font-weight: 800;
             margin-bottom: 10px;
             letter-spacing: -1px;
+            animation: titlePulse 2s infinite ease-in-out;
+            display: inline-block;
         }
 
-        .tagline {
+        #typewriter {
             font-size: clamp(1rem, 4vw, 1.5rem);
             color: var(--accent-color);
             font-weight: 500;
+            min-height: 1.5em;
         }
+
+        /* Sound Toggle */
+        .sound-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            transition: 0.3s;
+        }
+        .sound-toggle:hover { background: var(--glass-border); }
 
         .input-section {
             background: var(--glass-bg);
@@ -74,7 +135,6 @@
             border-radius: 30px;
             margin-bottom: 40px;
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            animation: fadeIn 1.2s ease-out;
         }
 
         .input-group {
@@ -98,15 +158,9 @@
             font-size: 1.2rem;
             outline: none;
             cursor: pointer;
-            transition: all 0.3s;
         }
 
-        input[type="date"]:focus {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: var(--accent-color);
-        }
-
-        button {
+        #reveal-btn {
             background: var(--accent-color);
             color: #0a0a2e;
             border: none;
@@ -115,92 +169,220 @@
             font-size: 1.2rem;
             font-weight: 700;
             cursor: pointer;
-            transition: transform 0.2s, background 0.3s;
+            transition: 0.2s;
         }
+        #reveal-btn:hover { transform: scale(1.05); }
 
-        button:hover {
-            transform: scale(1.05);
-            background: #d1b1ff;
+        /* Loading Screen */
+        #loading-screen {
+            display: none;
+            padding: 60px;
         }
-
-        button:active {
-            transform: scale(0.98);
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--glass-border);
+            border-top-color: var(--accent-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
         }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        #results-section {
+        /* Results Area */
+        #results-area {
             display: none;
             width: 100%;
         }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
+        /* Life Progress Bar */
+        .progress-container {
+            width: 100%;
+            background: var(--glass-bg);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid var(--glass-border);
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), var(--success));
+            width: 0%;
+            transition: width 2s ease-out;
         }
 
-        .stat-card {
+        .age-category {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 30px;
+            padding: 10px 20px;
+            background: var(--glass-bg);
+            display: inline-block;
+            border-radius: 15px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+            perspective: 1000px;
+        }
+
+        /* Flipping Cards */
+        .stat-card-inner {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+        .stat-card:hover .stat-card-inner { transform: rotateY(180deg); }
+        .stat-card-front, .stat-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
+            padding: 25px;
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .stat-card-back {
+            transform: rotateY(180deg);
+            background: rgba(187, 134, 252, 0.1);
+            color: var(--text-main);
+            text-align: center;
+        }
+
+        .emoji { font-size: 2.5rem; margin-bottom: 10px; }
+        .stat-value { font-size: 2rem; font-weight: 800; margin-bottom: 5px; }
+        .stat-label { font-size: 0.9rem; font-weight: 600; text-transform: uppercase; color: var(--accent-color); }
+        .stat-quote { font-size: 0.85rem; color: var(--text-dim); font-style: italic; }
+
+        /* Comparison Section */
+        .fun-section {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             padding: 30px;
             border-radius: 25px;
+            margin-bottom: 40px;
             text-align: left;
-            transition: transform 0.3s;
-            animation: cardPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) backwards;
+        }
+        .fun-section h2 { color: var(--accent-color); margin-bottom: 20px; }
+        .comparison-item { margin-bottom: 15px; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; }
+
+        /* Share Section */
+        .share-section {
+            margin: 50px 0;
+            padding: 30px;
+            background: var(--glass-bg);
+            border-radius: 25px;
+            border: 1px solid var(--glass-border);
+        }
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .share-btn {
+            padding: 15px 25px;
+            border-radius: 12px;
+            border: none;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+        .share-btn.whatsapp { background: #25D366; }
+        .share-btn.twitter { background: #1DA1F2; }
+        .share-btn.facebook { background: #1877F2; }
+        .share-btn.copy { background: #607d8b; }
+        .share-btn:hover { opacity: 0.9; transform: translateY(-3px); }
+
+        /* Tell us your stat */
+        .user-stat-input {
+            margin-top: 40px;
+            padding: 25px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+        }
+        .user-stat-input input {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--glass-border);
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            width: 80%;
+            margin-bottom: 15px;
         }
 
-        .stat-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.08);
+        /* Large Reset Button */
+        .reset-container {
+            margin: 60px 0;
         }
-
-        .emoji { font-size: 2.5rem; margin-bottom: 15px; display: block; }
-        .stat-value { font-size: 2.2rem; font-weight: 800; margin-bottom: 5px; color: var(--text-main); }
-        .stat-label { font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-color); margin-bottom: 10px; }
-        .stat-quote { font-size: 0.95rem; color: var(--text-dim); font-style: italic; line-height: 1.4; }
-
-        .share-prompt {
-            margin: 40px 0;
-            font-size: 1.4rem;
-            color: var(--text-main);
-        }
-
-        #reset-btn {
-            background: transparent;
-            border: 2px solid var(--accent-color);
-            color: var(--accent-color);
-            margin-bottom: 60px;
-        }
-
-        #reset-btn:hover {
+        #big-reset-btn {
             background: var(--accent-color);
-            color: #0a0a2e;
+            padding: 25px 50px;
+            font-size: 1.8rem;
+            border-radius: 50px;
+            box-shadow: 0 0 30px rgba(187, 134, 252, 0.4);
+        }
+        .reset-subtext { color: var(--text-dim); margin-top: 15px; display: block; }
+
+        footer {
+            margin-top: 100px;
+            padding: 40px;
+            color: var(--text-dim);
+            font-size: 1.1rem;
         }
 
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
+        /* Animations */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes cardPop {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
-        }
+        .animate-up { animation: fadeUp 0.8s ease forwards; }
 
         @media (max-width: 600px) {
             .stats-grid { grid-template-columns: 1fr; }
-            .input-section { padding: 30px 20px; }
-            h1 { font-size: 2.5rem; }
+            .share-buttons { flex-direction: column; }
+            .visitor-counter { display: none; }
+        }
+
+        /* Confetti CSS */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f0f;
+            z-index: 1001;
+            top: -10px;
         }
     </style>
 </head>
 <body>
+
+    <div class="visitor-counter">👥 <span id="v-count">8,452</span> people exploring their life right now</div>
 
     <div class="container">
         <!-- Top Ad Placement -->
@@ -216,7 +398,7 @@
 
         <header>
             <h1>You In Numbers</h1>
-            <p class="tagline">The internet's most eye-opening 10 seconds</p>
+            <div id="typewriter"></div>
         </header>
 
         <section id="input-section" class="input-section">
@@ -227,24 +409,86 @@
             </div>
         </section>
 
-        <!-- Middle Ad Placement -->
-        <div class="ad-container">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-4134769730320334"
-                 data-ad-slot="XXXXXXXXXX"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        <!-- Loading Screen -->
+        <div id="loading-screen">
+            <div class="loader"></div>
+            <p id="loading-text" style="font-size: 1.5rem; font-weight: 500;">Calculating your life...</p>
         </div>
 
-        <section id="results-section">
-            <div class="stats-grid" id="stats-grid">
-                <!-- Cards will be injected here by JS -->
+        <!-- Results Area -->
+        <div id="results-area">
+            
+            <div class="progress-container animate-up">
+                <span id="progress-text">You have lived 0% of an average life</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
             </div>
 
-            <p class="share-prompt">Share your numbers and see how your friends compare 👇</p>
-            <button id="reset-btn">Calculate Again</button>
+            <div id="age-cat-display" class="age-category animate-up"></div>
+
+            <div class="stats-grid" id="stats-grid">
+                <!-- Cards injected by JS -->
+            </div>
+
+            <!-- Middle Ad Placement -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-4134769730320334"
+                     data-ad-slot="XXXXXXXXXX"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+
+            <!-- Fun Comparisons -->
+            <div class="fun-section animate-up">
+                <h2>How do you compare?</h2>
+                <div id="comparisons-list"></div>
+            </div>
+
+            <!-- Perspectives -->
+            <div class="fun-section animate-up">
+                <h2>Your Life In Perspective</h2>
+                <div id="perspectives-list"></div>
+            </div>
+
+            <!-- Birthday Countdown -->
+            <div class="fun-section animate-up">
+                <h2>Countdown to your next Birthday 🎂</h2>
+                <div id="bday-countdown" style="font-size: 1.8rem; font-weight: bold; color: var(--success);"></div>
+            </div>
+
+            <!-- Fun Facts Rotating -->
+            <div class="fun-section animate-up" style="text-align: center;">
+                <h2>Did You Know?</h2>
+                <p id="rotating-fact" style="font-size: 1.3rem; min-height: 3em;"></p>
+            </div>
+
+            <!-- User Stat Box -->
+            <div class="user-stat-input animate-up">
+                <h3>What's your most mind-blowing number?</h3>
+                <input type="text" id="user-stat-text" placeholder="e.g. I have visited 12 countries!">
+                <button id="add-user-stat" style="background: var(--success); color: black; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer;">Show Me!</button>
+                <div id="user-stat-card" style="margin-top: 20px; display: none;"></div>
+            </div>
+
+            <!-- Share Section -->
+            <div class="share-section animate-up">
+                <h3>Share your story</h3>
+                <div class="share-buttons">
+                    <button class="share-btn whatsapp" onclick="share('whatsapp')">WhatsApp</button>
+                    <button class="share-btn twitter" onclick="share('twitter')">Twitter / X</button>
+                    <button class="share-btn facebook" onclick="share('facebook')">Facebook</button>
+                    <button class="share-btn copy" id="copy-btn" onclick="copyToClipboard()">Copy All Stats</button>
+                </div>
+            </div>
+
+            <div class="reset-container">
+                <button id="big-reset-btn" onclick="location.reload()">CALCULATE AGAIN</button>
+                <span class="reset-subtext">Share this with a friend and see who has the most heartbeats 👇</span>
+            </div>
 
             <!-- Bottom Ad Placement -->
             <div class="ad-container">
@@ -256,52 +500,120 @@
                      data-full-width-responsive="true"></ins>
                 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
             </div>
-        </section>
+        </div>
+
+        <footer>
+            Share you-in-numbers.vercel.app with someone you love ❤️
+        </footer>
     </div>
 
-    <script>
-        const revealBtn = document.getElementById('reveal-btn');
-        const resetBtn = document.getElementById('reset-btn');
-        const inputSection = document.getElementById('input-section');
-        const resultsSection = document.getElementById('results-section');
-        const statsGrid = document.getElementById('stats-grid');
-        const dobInput = document.getElementById('dob');
+    <div class="sound-toggle" id="sound-toggle" title="Toggle Sound">🔊</div>
 
+    <script>
+        // State
+        let soundOn = true;
+        let currentStats = {};
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        // 1. Typewriter Animation
+        const typewriterEl = document.getElementById('typewriter');
+        const titleText = "Discover The Incredible Story Of Your Life";
+        let titleIdx = 0;
+        function typeWriter() {
+            if (titleIdx < titleText.length) {
+                typewriterEl.textContent += titleText.charAt(titleIdx);
+                titleIdx++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+        window.onload = typeWriter;
+
+        // 2. Visitor Counter
+        let vCount = 8400 + Math.floor(Math.random() * 800);
+        setInterval(() => {
+            vCount += Math.floor(Math.random() * 5);
+            document.getElementById('v-count').textContent = vCount.toLocaleString();
+        }, 3000);
+
+        // 3. Sound Toggle
+        const soundBtn = document.getElementById('sound-toggle');
+        soundBtn.onclick = () => {
+            soundOn = !soundOn;
+            soundBtn.textContent = soundOn ? "🔊" : "🔈";
+        };
+
+        function playDing() {
+            if (!soundOn) return;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.1);
+        }
+
+        // 4. Stats Config
         const statsConfig = [
-            { id: 'days', emoji: '📅', label: 'Days Alive', quote: 'Every single day a unique chapter in your story' },
-            { id: 'hours', emoji: '⏳', label: 'Hours Alive', quote: 'Time you\'ve spent writing your legacy' },
-            { id: 'minutes', emoji: '⏱️', label: 'Minutes Alive', quote: 'Countless moments that made you who you are' },
-            { id: 'weeks', emoji: '🗓️', label: 'Weeks Alive', quote: 'Saturdays spent chasing your dreams' },
-            { id: 'months', emoji: '🌙', label: 'Months Alive', quote: 'Witnessing the world change around you' },
-            { id: 'dogYears', emoji: '🐶', label: 'Age In Dog Years', quote: 'Your loyal companion would be proud' },
-            { id: 'heartbeats', emoji: '❤️', label: 'Heartbeats', quote: 'Your heart has never once taken a day off' },
-            { id: 'breaths', emoji: '🌬️', label: 'Breaths Taken', quote: 'Life-giving air fueling your every move' },
-            { id: 'meals', emoji: '🍽️', label: 'Meals Eaten', quote: 'Nourishment for the journey of a lifetime' },
-            { id: 'sleep', emoji: '😴', label: 'Hours Slept', quote: 'Recharging for the adventures that await' },
-            { id: 'blinks', emoji: '👁️', label: 'Times Blinked', quote: 'Protecting the way you see the beauty in life' },
-            { id: 'sunrises', emoji: '🌅', label: 'Sunrises Witnessed', quote: 'Every single one was a fresh start' },
-            { id: 'steps', emoji: '👣', label: 'Steps Taken', quote: 'A path walked only by you' },
-            { id: 'words', emoji: '🗣️', label: 'Words Spoken', quote: 'The echoes of your unique voice' }
+            { id: 'days', emoji: '📅', label: 'Days Alive', quote: 'Every single day a unique chapter in your story', fact: 'That\'s over 2,400 sunrise/sunset cycles!' },
+            { id: 'hours', emoji: '⏳', label: 'Hours Alive', quote: 'Time you\'ve spent writing your legacy', fact: 'If you were a library, you\'d be a massive one.' },
+            { id: 'minutes', emoji: '⏱️', label: 'Minutes Alive', quote: 'Countless moments that made you who you are', fact: 'Every minute is a fresh opportunity.' },
+            { id: 'weeks', emoji: '🗓️', label: 'Weeks Alive', quote: 'Saturdays spent chasing your dreams', fact: 'You\'ve seen a lot of weekends!' },
+            { id: 'months', emoji: '🌙', label: 'Months Alive', quote: 'Witnessing the world change around you', fact: 'The moon has cycled around Earth this many times for you.' },
+            { id: 'dogYears', emoji: '🐶', label: 'Age In Dog Years', quote: 'Your loyal companion would be proud', fact: 'You\'re a wise elder in the dog world!' },
+            { id: 'heartbeats', emoji: '❤️', label: 'Heartbeats', quote: 'Your heart has never once taken a day off', fact: 'It pumps 2,000 gallons of blood a day.' },
+            { id: 'breaths', emoji: '🌬️', label: 'Breaths Taken', quote: 'Life-giving air fueling your every move', fact: 'You\'ve inhaled enough air to fill a stadium.' },
+            { id: 'meals', emoji: '🍽️', label: 'Meals Eaten', quote: 'Nourishment for the journey of a lifetime', fact: 'Think of all the delicious flavors you\'ve tasted!' },
+            { id: 'sleep', emoji: '😴', label: 'Hours Slept', quote: 'Recharging for the adventures that await', fact: 'You\'ve spent years in the dream world.' },
+            { id: 'blinks', emoji: '👁️', label: 'Times Blinked', quote: 'Protecting the way you see the beauty in life', fact: 'Your eyes are self-cleaning masterpieces.' },
+            { id: 'sunrises', emoji: '🌅', label: 'Sunrises Witnessed', quote: 'Every single one was a fresh start', fact: 'You\'ve survived 100% of your hardest days.' },
+            { id: 'steps', emoji: '👣', label: 'Steps Taken', quote: 'A path walked only by you', fact: 'You are an explorer of planet Earth.' },
+            { id: 'words', emoji: '🗣️', label: 'Words Spoken', quote: 'The echoes of your unique voice', fact: 'Your story is still being written.' }
         ];
 
-        function calculateStats(dob) {
+        // 5. Reveal Logic
+        document.getElementById('reveal-btn').onclick = () => {
+            const dobValue = document.getElementById('dob').value;
+            if (!dobValue) return alert("Please select your birth date!");
+
+            document.getElementById('input-section').style.display = 'none';
+            const loader = document.getElementById('loading-screen');
+            loader.style.display = 'block';
+
+            // Loading dots animation
+            let dots = "";
+            const dotInt = setInterval(() => {
+                dots = dots.length >= 3 ? "" : dots + ".";
+                document.getElementById('loading-text').textContent = "Calculating your life" + dots;
+            }, 500);
+
+            setTimeout(() => {
+                clearInterval(dotInt);
+                loader.style.display = 'none';
+                showResults(dobValue);
+                fireConfetti();
+            }, 2500);
+        };
+
+        function showResults(dob) {
+            const results = document.getElementById('results-area');
+            results.style.display = 'block';
+            
             const birthDate = new Date(dob);
             const now = new Date();
             const diffMs = now - birthDate;
-            
             const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-            const hours = Math.floor(diffMs / (1000 * 60 * 60));
-            const minutes = Math.floor(diffMs / (1000 * 60));
-            const weeks = Math.floor(days / 7);
-            const months = Math.floor(days / 30.437);
             const years = days / 365.25;
-            
-            return {
+
+            currentStats = {
                 days: days,
-                hours: hours,
-                minutes: minutes,
-                weeks: weeks,
-                months: months,
+                hours: Math.floor(diffMs / (1000 * 60 * 60)),
+                minutes: Math.floor(diffMs / (1000 * 60)),
+                weeks: Math.floor(days / 7),
+                months: Math.floor(days / 30.437),
                 dogYears: Math.floor(years * 7),
                 heartbeats: days * 100000,
                 breaths: days * 23000,
@@ -312,63 +624,195 @@
                 steps: days * 8000,
                 words: days * 16000
             };
-        }
 
-        function animateNumber(element, finalValue, duration = 2000) {
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                const current = Math.floor(progress * finalValue);
-                element.textContent = new Intl.NumberFormat('en-US').format(current);
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                }
-            };
-            window.requestAnimationFrame(step);
-        }
+            // Progress Bar
+            const lifePct = Math.min((years / 80) * 100, 100).toFixed(1);
+            document.getElementById('progress-text').textContent = `You have lived ${lifePct}% of an average life (80 years)`;
+            document.getElementById('progress-fill').style.width = lifePct + "%";
 
-        revealBtn.addEventListener('click', () => {
-            const dob = dobInput.value;
-            if (!dob) {
-                alert("Please select your date of birth first!");
-                return;
-            }
+            // Age Category
+            let cat = "";
+            if (years < 13) cat = "Exploring the world 🌍";
+            else if (years < 20) cat = "Just getting started 🌱";
+            else if (years < 30) cat = "In your prime 🔥";
+            else if (years < 40) cat = "Building your empire 🏰";
+            else if (years < 50) cat = "Master of your craft 💎";
+            else if (years < 60) cat = "Sharing your wisdom 🦉";
+            else if (years < 70) cat = "Enjoying the harvest 🍎";
+            else if (years < 80) cat = "The gold standard ✨";
+            else cat = "A living legend 👑";
+            document.getElementById('age-cat-display').textContent = cat;
 
-            const stats = calculateStats(dob);
-            statsGrid.innerHTML = '';
-            inputSection.style.display = 'none';
-            resultsSection.style.display = 'block';
-
-            statsConfig.forEach((config, index) => {
+            // Stats Grid
+            const grid = document.getElementById('stats-grid');
+            grid.innerHTML = "";
+            statsConfig.forEach((c, i) => {
                 const card = document.createElement('div');
                 card.className = 'stat-card';
-                card.style.animationDelay = `${index * 0.1}s`;
-                
                 card.innerHTML = `
-                    <span class="emoji">${config.emoji}</span>
-                    <div class="stat-value" id="stat-${config.id}">0</div>
-                    <div class="stat-label">${config.label}</div>
-                    <div class="stat-quote">"${config.quote}"</div>
+                    <div class="stat-card-inner">
+                        <div class="stat-card-front">
+                            <span class="emoji">${c.emoji}</span>
+                            <div class="stat-value" id="val-${c.id}">0</div>
+                            <div class="stat-label">${c.label}</div>
+                            <div class="stat-quote">"${c.quote}"</div>
+                        </div>
+                        <div class="stat-card-back">
+                            <h3>Fun Fact!</h3>
+                            <p>${c.fact}</p>
+                            <p style="margin-top:10px; font-size:0.8rem; opacity:0.7;">(Tap to flip back)</p>
+                        </div>
+                    </div>
                 `;
-                
-                statsGrid.appendChild(card);
-                
-                setTimeout(() => {
-                    const el = document.getElementById(`stat-${config.id}`);
-                    animateNumber(el, stats[config.id]);
-                }, 100 + (index * 100));
+                grid.appendChild(card);
+                animateNumber(document.getElementById(`val-${c.id}`), currentStats[c.id], 2000);
             });
 
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+            // Comparisons
+            const comps = document.getElementById('comparisons-list');
+            const cityHours = (currentStats.heartbeats * 2 / 3600000).toFixed(1); // 2J per beat
+            const earthWalks = (currentStats.steps * 0.76 / 40075000).toFixed(2);
+            comps.innerHTML = `
+                <div class="comparison-item">🏙️ Your heartbeats could power a single household for <b>${cityHours} hours</b>.</div>
+                <div class="comparison-item">🌍 You have taken enough steps to walk around the Earth <b>${earthWalks} times</b>.</div>
+            `;
 
-        resetBtn.addEventListener('click', () => {
-            resultsSection.style.display = 'none';
-            inputSection.style.display = 'block';
-            dobInput.value = '';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+            // Perspectives
+            const pList = document.getElementById('perspectives-list');
+            const birthYear = birthDate.getFullYear();
+            let pHtml = "";
+            if (birthYear < 1998) pHtml += `<div class="comparison-item">🔍 You are older than <b>Google</b>.</div>`;
+            if (birthYear < 2004) pHtml += `<div class="comparison-item">👥 You were born before <b>Facebook</b> existed.</div>`;
+            if (birthYear < 2007) pHtml += `<div class="comparison-item">📱 You are older than the <b>iPhone</b>.</div>`;
+            if (birthYear < 2010) pHtml += `<div class="comparison-item">📸 You were born before <b>Instagram</b>.</div>`;
+            pList.innerHTML = pHtml || "You were born in a truly digital age!";
+
+            // Countdown
+            startBdayCountdown(birthDate);
+
+            // Rotating Facts
+            startRotatingFacts(years);
+        }
+
+        function animateNumber(el, target, duration) {
+            let start = null;
+            function step(ts) {
+                if (!start) start = ts;
+                const progress = Math.min((ts - start) / duration, 1);
+                el.textContent = Math.floor(progress * target).toLocaleString();
+                if (progress < 1) requestAnimationFrame(step);
+                else playDing();
+            }
+            requestAnimationFrame(step);
+        }
+
+        // Confetti
+        function fireConfetti() {
+            for (let i = 0; i < 100; i++) {
+                const c = document.createElement('div');
+                c.className = 'confetti';
+                c.style.left = Math.random() * 100 + "vw";
+                c.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                c.style.transform = `rotate(${Math.random() * 360}deg)`;
+                document.body.appendChild(c);
+                
+                const anim = c.animate([
+                    { top: '-10px', opacity: 1 },
+                    { top: '100vh', opacity: 0, transform: `rotate(${Math.random() * 720}deg) translateX(${Math.random() * 200 - 100}px)` }
+                ], {
+                    duration: 2000 + Math.random() * 3000,
+                    easing: 'cubic-bezier(0, .9, .6, 1)'
+                });
+                anim.onfinish = () => c.remove();
+            }
+        }
+
+        // Bday Countdown
+        function startBdayCountdown(birthDate) {
+            const el = document.getElementById('bday-countdown');
+            setInterval(() => {
+                const now = new Date();
+                let next = new Date(now.getFullYear(), birthDate.getMonth(), birthDate.getDate());
+                if (next < now) next.setFullYear(now.getFullYear() + 1);
+                
+                const diff = next - now;
+                const d = Math.floor(diff / (1000*60*60*24));
+                const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+                const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+                const s = Math.floor((diff % (1000*60)) / 1000);
+                
+                el.textContent = `${d}d ${h}h ${m}m ${s}s`;
+            }, 1000);
+        }
+
+        // Rotating Facts
+        function startRotatingFacts(years) {
+            const facts = [
+                `By age 70, you will have spent about 23 years asleep.`,
+                `Your heart beats more times in a year than there are seconds in a year (~31.5M).`,
+                `You have already shed and replaced your entire skin hundreds of times.`,
+                `Your brain generates enough electricity to power a small lightbulb.`,
+                `The atoms in your body are billions of years old, literally stardust.`,
+                `You will eat roughly 35 tons of food in your lifetime.`
+            ];
+            let fIdx = 0;
+            const el = document.getElementById('rotating-fact');
+            function nextFact() {
+                el.style.opacity = 0;
+                setTimeout(() => {
+                    el.textContent = facts[fIdx];
+                    el.style.opacity = 1;
+                    fIdx = (fIdx + 1) % facts.length;
+                }, 500);
+            }
+            nextFact();
+            setInterval(nextFact, 4000);
+        }
+
+        // User Stat
+        document.getElementById('add-user-stat').onclick = () => {
+            const val = document.getElementById('user-stat-text').value;
+            if (!val) return;
+            const card = document.getElementById('user-stat-card');
+            card.style.display = 'block';
+            card.innerHTML = `
+                <div class="stat-card" style="max-width:400px; margin: 0 auto;">
+                    <div class="stat-card-front" style="background:var(--success); color:black;">
+                        <span class="emoji">🌟</span>
+                        <p style="font-size:1.2rem; font-weight:bold;">"${val}"</p>
+                        <p style="margin-top:10px; font-size:0.8rem; font-weight:bold;">YOUR MIND-BLOWING STAT</p>
+                    </div>
+                </div>
+            `;
+        };
+
+        // Sharing
+        window.share = (platform) => {
+            const text = `I just discovered I've been alive for ${currentStats.days.toLocaleString()} days and my heart has beaten ${currentStats.heartbeats.toLocaleString()} times 🤯 Find your own life stats at you-in-numbers.vercel.app`;
+            const url = "https://you-in-numbers.vercel.app";
+            
+            if (platform === 'whatsapp') {
+                window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
+            } else if (platform === 'twitter') {
+                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`);
+            } else if (platform === 'facebook') {
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
+            }
+        };
+
+        window.copyToClipboard = () => {
+            const text = `YOU IN NUMBERS STATS:
+Days: ${currentStats.days.toLocaleString()}
+Heartbeats: ${currentStats.heartbeats.toLocaleString()}
+Breaths: ${currentStats.breaths.toLocaleString()}
+Steps: ${currentStats.steps.toLocaleString()}
+Check yours at you-in-numbers.vercel.app`;
+            navigator.clipboard.writeText(text);
+            const btn = document.getElementById('copy-btn');
+            const old = btn.textContent;
+            btn.textContent = "Copied!";
+            setTimeout(() => btn.textContent = old, 2000);
+        };
     </script>
 </body>
 </html>
