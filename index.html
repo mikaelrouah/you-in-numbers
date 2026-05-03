@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>You In Numbers — Discover The Incredible Story Of Your Life</title>
+    <title>You In Numbers — Discover the Incredible Story of Your Life</title>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4134769730320334" crossorigin="anonymous"></script>
     <style>
         :root {
             --bg-navy: #0a0a2e;
             --bg-purple: #2e0a2e;
             --bg-midnight: #050517;
-            --glass-bg: rgba(255, 255, 255, 0.07);
-            --glass-border: rgba(255, 255, 255, 0.25);
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.2);
             --accent-color: #bb86fc;
             --text-main: #ffffff;
             --text-dim: rgba(255, 255, 255, 0.7);
@@ -41,7 +41,7 @@
 
         @keyframes pulseGently {
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(187, 134, 252, 0.4); }
-            50% { transform: scale(1.05); box-shadow: 0 0 10px 5px rgba(187, 134, 252, 0.2); }
+            50% { transform: scale(1.05); box-shadow: 0 0 15px 5px rgba(187, 134, 252, 0.2); }
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(187, 134, 252, 0); }
         }
 
@@ -77,57 +77,56 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            z-index: 2000;
+            z-index: 3000;
         }
 
         #lang-btn {
-            background: var(--glass-bg);
+            background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
-            padding: 10px 15px;
+            padding: 10px 20px;
             border-radius: 25px;
             color: white;
-            font-weight: bold;
+            font-weight: 800;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 8px;
             animation: pulseGently 3s infinite ease-in-out;
             transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         .lang-dropdown {
             position: absolute;
             top: calc(100% + 10px);
             right: 0;
-            background: rgba(10, 10, 46, 0.95);
-            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 46, 0.98);
+            backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
-            border-radius: 15px;
+            border-radius: 20px;
             display: none;
             flex-direction: column;
-            width: 160px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            width: 180px;
+            max-height: 400px;
+            overflow-y: auto;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            z-index: 3001;
         }
 
-        .lang-dropdown.show {
-            display: flex;
-        }
+        .lang-dropdown.show { display: flex; }
 
         .lang-option {
-            padding: 12px 20px;
+            padding: 14px 25px;
             color: white;
             text-align: left;
             cursor: pointer;
             transition: 0.2s;
-            font-size: 0.95rem;
+            font-size: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-
-        .lang-option:hover {
-            background: var(--accent-color);
-            color: var(--bg-navy);
-        }
+        .lang-option:last-child { border-bottom: none; }
+        .lang-option:hover { background: var(--accent-color); color: var(--bg-navy); font-weight: bold; }
 
         /* Visitor Counter */
         .visitor-counter {
@@ -137,12 +136,13 @@
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
-            padding: 8px 15px;
-            border-radius: 20px;
+            padding: 10px 20px;
+            border-radius: 25px;
             font-size: 0.9rem;
             color: var(--success);
             z-index: 1000;
             font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         .ad-container {
@@ -153,24 +153,23 @@
             justify-content: center;
         }
 
-        header {
-            margin: 40px 0;
-        }
+        header { margin: 60px 0; }
 
         h1 {
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            font-weight: 800;
-            margin-bottom: 10px;
-            letter-spacing: -1px;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 900;
+            margin-bottom: 15px;
+            letter-spacing: -2px;
             animation: titlePulse 2s infinite ease-in-out;
             display: inline-block;
         }
 
         #typewriter {
-            font-size: clamp(1rem, 4vw, 1.5rem);
+            font-size: clamp(1.1rem, 4vw, 1.8rem);
             color: var(--accent-color);
-            font-weight: 500;
+            font-weight: 600;
             min-height: 1.5em;
+            text-shadow: 0 0 10px rgba(187, 134, 252, 0.3);
         }
 
         /* Sound Toggle */
@@ -181,8 +180,8 @@
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -190,402 +189,429 @@
             cursor: pointer;
             z-index: 1000;
             transition: 0.3s;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
-        .sound-toggle:hover { background: var(--glass-border); }
+        .sound-toggle:hover { transform: scale(1.1); background: rgba(255,255,255,0.15); }
 
         .input-section {
             background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
-            padding: 40px;
-            border-radius: 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--glass-border);
+            padding: 50px;
+            border-radius: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
         }
 
         .input-group {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
+            gap: 25px;
         }
 
-        label {
-            font-size: 1.2rem;
-            color: var(--text-dim);
-        }
+        label { font-size: 1.3rem; color: var(--text-dim); font-weight: 500; }
 
         input[type="date"] {
             background: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--glass-border);
+            border: 2px solid var(--glass-border);
             color: white;
-            padding: 15px 25px;
-            border-radius: 15px;
-            font-size: 1.2rem;
+            padding: 18px 30px;
+            border-radius: 20px;
+            font-size: 1.3rem;
             outline: none;
             cursor: pointer;
+            transition: 0.3s;
         }
+        input[type="date"]:focus { border-color: var(--accent-color); background: rgba(255,255,255,0.2); }
 
         #reveal-btn {
             background: var(--accent-color);
             color: #0a0a2e;
             border: none;
-            padding: 18px 35px;
-            border-radius: 15px;
-            font-size: 1.2rem;
-            font-weight: 700;
+            padding: 20px 45px;
+            border-radius: 20px;
+            font-size: 1.4rem;
+            font-weight: 800;
             cursor: pointer;
-            transition: 0.2s;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(187, 134, 252, 0.4);
         }
-        #reveal-btn:hover { transform: scale(1.05); }
+        #reveal-btn:hover { transform: scale(1.08) translateY(-5px); filter: brightness(1.1); }
 
         /* Loading Screen */
-        #loading-screen {
-            display: none;
-            padding: 60px;
-        }
+        #loading-screen { display: none; padding: 100px 20px; }
         .loader {
-            width: 50px;
-            height: 50px;
-            border: 5px solid var(--glass-border);
+            width: 70px;
+            height: 70px;
+            border: 8px solid var(--glass-border);
             border-top-color: var(--accent-color);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+            margin: 0 auto 30px;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
 
         /* Results Area */
-        #results-area {
-            display: none;
-            width: 100%;
-        }
+        #results-area { display: none; width: 100%; }
 
         /* Life Progress Bar */
         .progress-container {
             width: 100%;
             background: var(--glass-bg);
-            border-radius: 20px;
-            margin-bottom: 40px;
-            padding: 20px;
+            border-radius: 30px;
+            margin-bottom: 50px;
+            padding: 30px;
             border: 2px solid var(--glass-border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         .progress-bar {
             width: 100%;
-            height: 20px;
+            height: 25px;
             background: rgba(255,255,255,0.1);
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            margin-top: 10px;
+            margin-top: 15px;
         }
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--accent-color), var(--success));
+            background: linear-gradient(90deg, var(--vivid-pink), var(--accent-color), var(--success));
             width: 0%;
-            transition: width 2s ease-out;
+            transition: width 2.5s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: 0 0 20px rgba(3, 218, 198, 0.4);
         }
 
         .age-category {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--accent-color);
-            margin-bottom: 30px;
-            padding: 10px 20px;
-            background: var(--glass-bg);
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--vivid-yellow);
+            margin-bottom: 40px;
+            padding: 15px 35px;
+            background: rgba(255, 255, 255, 0.1);
             display: inline-block;
-            border-radius: 15px;
-            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            border: 2px solid var(--vivid-yellow);
+            box-shadow: 0 0 20px rgba(249, 255, 0, 0.2);
         }
 
         .stats-grid, .perspective-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
-            perspective: 1200px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+            perspective: 1500px;
         }
 
         /* Flipping Cards */
         .stat-card {
-            height: 240px;
+            height: 260px;
             width: 100%;
-            position: relative;
-            perspective: 1200px;
+            perspective: 1000px;
             cursor: pointer;
+        }
+        .stat-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .stat-card.flipped .stat-card-inner {
+            transform: rotateY(180deg);
         }
         .stat-card-front, .stat-card-back {
             position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
+            -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             background: var(--glass-bg);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(15px);
             border: 2px solid var(--glass-border);
-            padding: 25px;
-            border-radius: 25px;
+            padding: 35px;
+            border-radius: 30px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transform-style: preserve-3d;
-        }
-        .stat-card-front {
-            transform: rotateY(0deg);
-            z-index: 2;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         .stat-card-back {
             transform: rotateY(180deg);
-            background: rgba(187, 134, 252, 0.15);
+            background: rgba(187, 134, 252, 0.2);
             color: var(--text-main);
-            text-align: center;
             border-color: var(--accent-color);
-        }
-        .stat-card.flipped .stat-card-front {
-            transform: rotateY(180deg);
-        }
-        .stat-card.flipped .stat-card-back {
-            transform: rotateY(0deg);
         }
 
         /* Perspective Cards */
         .perspective-card {
             background: var(--glass-bg);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(15px);
             border: 2px solid var(--glass-border);
-            padding: 30px;
-            border-radius: 25px;
+            padding: 40px;
+            border-radius: 35px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
         }
         .perspective-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-color);
-            box-shadow: 0 15px 35px rgba(187, 134, 252, 0.2);
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--vivid-blue);
+            box-shadow: 0 20px 50px rgba(0, 229, 255, 0.2);
         }
-        .perspective-card .emoji { font-size: 3.5rem; margin-bottom: 15px; }
-        .perspective-card h3 { font-size: 1.5rem; font-weight: 800; color: var(--vivid-blue); margin-bottom: 10px; line-height: 1.2; }
-        .perspective-card p { font-size: 0.95rem; color: var(--text-dim); line-height: 1.4; }
+        .perspective-card .emoji { font-size: 4rem; margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.3)); }
+        .perspective-card h3 { font-size: 1.8rem; font-weight: 900; color: var(--vivid-blue); margin-bottom: 15px; line-height: 1.1; }
+        .perspective-card p { font-size: 1.1rem; color: var(--text-dim); line-height: 1.5; }
 
-        .emoji { font-size: 2.8rem; margin-bottom: 12px; }
-        .stat-value { font-size: 2.2rem; font-weight: 800; margin-bottom: 6px; color: var(--vivid-blue); }
-        .stat-label { font-size: 1rem; font-weight: 700; text-transform: uppercase; color: var(--accent-color); }
-        .stat-quote { font-size: 0.9rem; color: var(--text-dim); font-style: italic; }
+        .emoji { font-size: 3.2rem; margin-bottom: 15px; }
+        .stat-value { font-size: 2.5rem; font-weight: 900; margin-bottom: 8px; color: var(--vivid-blue); text-shadow: 0 0 15px rgba(0, 229, 255, 0.3); }
+        .stat-label { font-size: 1.1rem; font-weight: 700; text-transform: uppercase; color: var(--accent-color); letter-spacing: 1px; }
 
         /* Comparison Section */
         .fun-section {
             background: var(--glass-bg);
             border: 2px solid var(--glass-border);
-            padding: 35px;
-            border-radius: 30px;
-            margin-bottom: 45px;
+            padding: 45px;
+            border-radius: 40px;
+            margin-bottom: 50px;
             text-align: left;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
         }
-        .fun-section h2 { color: var(--vivid-pink); font-size: 2.2rem; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
-        .fun-section.perspective h2 { color: var(--vivid-blue); text-align: center; }
-        .fun-section.bday h2 { color: var(--vivid-yellow); text-align: center; }
-        .fun-section.rotating h2 { color: var(--success); text-align: center; }
+        .fun-section h2 { color: var(--vivid-pink); font-size: 2.5rem; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; text-align: center; }
+        .fun-section.perspective h2 { color: var(--vivid-blue); }
+        .fun-section.bday h2 { color: var(--vivid-yellow); }
+        .fun-section.rotating h2 { color: var(--success); }
 
-        .comparison-item { margin-bottom: 18px; font-size: 1.2rem; display: flex; align-items: center; gap: 12px; line-height: 1.5; }
-        .comparison-item b { color: var(--accent-color); }
+        .comparison-item { 
+            margin-bottom: 22px; 
+            font-size: 1.3rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            line-height: 1.6; 
+            padding: 15px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 15px;
+        }
+        .comparison-item b { color: var(--accent-color); font-weight: 800; }
 
         /* Share Section */
         .share-section {
-            margin: 50px 0;
-            padding: 35px;
+            margin: 60px 0;
+            padding: 45px;
             background: var(--glass-bg);
-            border-radius: 30px;
+            border-radius: 40px;
             border: 2px solid var(--glass-border);
         }
-        .share-section h3 { font-size: 1.8rem; color: var(--accent-color); margin-bottom: 20px; }
+        .share-section h3 { font-size: 2.2rem; color: var(--accent-color); margin-bottom: 25px; font-weight: 900; }
         .share-buttons {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
             flex-wrap: wrap;
-            margin-top: 20px;
+            margin-top: 30px;
         }
         .share-btn {
-            padding: 15px 30px;
-            border-radius: 15px;
+            padding: 18px 35px;
+            border-radius: 20px;
             border: none;
             color: white;
-            font-weight: bold;
-            font-size: 1.1rem;
+            font-weight: 900;
+            font-size: 1.2rem;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
         .share-btn.whatsapp { background: #25D366; }
         .share-btn.twitter { background: #1DA1F2; }
         .share-btn.facebook { background: #1877F2; }
         .share-btn.copy { background: #607d8b; }
-        .share-btn:hover { opacity: 0.9; transform: translateY(-5px) scale(1.05); }
+        .share-btn:hover { opacity: 0.95; transform: translateY(-8px) scale(1.05); }
 
-        /* Tell us your stat */
+        /* User Stat Box */
         .user-stat-input {
-            margin-top: 40px;
-            padding: 30px;
+            margin-top: 50px;
+            padding: 40px;
             background: rgba(255,255,255,0.03);
-            border-radius: 25px;
-            border: 1px dashed var(--glass-border);
+            border-radius: 35px;
+            border: 2px dashed var(--glass-border);
         }
-        .user-stat-input h3 { color: var(--vivid-blue); margin-bottom: 15px; }
+        .user-stat-input h3 { color: var(--vivid-blue); margin-bottom: 20px; font-size: 1.8rem; }
         .user-stat-input input {
             background: rgba(255,255,255,0.1);
             border: 2px solid var(--glass-border);
             color: white;
-            padding: 12px 20px;
-            border-radius: 15px;
-            width: 80%;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
+            padding: 15px 25px;
+            border-radius: 20px;
+            width: 70%;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
             outline: none;
         }
+        #add-user-stat {
+            background: var(--vivid-blue);
+            color: black;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 900;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+        #add-user-stat:hover { transform: scale(1.05); filter: brightness(1.1); }
 
         /* Large Reset Button */
-        .reset-container {
-            margin: 60px 0;
-        }
+        .reset-container { margin: 80px 0; }
         #big-reset-btn {
-            background: var(--accent-color);
-            padding: 25px 60px;
-            font-size: 2rem;
-            font-weight: 800;
-            border-radius: 60px;
+            background: linear-gradient(135deg, var(--accent-color), #7c4dff);
+            padding: 28px 70px;
+            font-size: 2.2rem;
+            font-weight: 900;
+            border-radius: 70px;
             border: none;
             color: #0a0a2e;
             cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 0 40px rgba(187, 134, 252, 0.5);
+            transition: 0.4s;
+            box-shadow: 0 15px 50px rgba(124, 77, 255, 0.4);
         }
-        #big-reset-btn:hover { transform: scale(1.1); filter: brightness(1.1); }
-        .reset-subtext { color: var(--text-dim); margin-top: 20px; display: block; font-size: 1.2rem; }
+        #big-reset-btn:hover { transform: scale(1.1); box-shadow: 0 20px 60px rgba(124, 77, 255, 0.6); }
+        .reset-subtext { color: var(--text-dim); margin-top: 25px; display: block; font-size: 1.3rem; font-weight: 500; }
 
         footer {
-            margin-top: 100px;
-            padding: 60px 40px;
+            margin-top: 120px;
+            padding: 80px 40px;
             color: var(--text-dim);
-            font-size: 1.2rem;
-            background: rgba(0,0,0,0.3);
+            font-size: 1.3rem;
+            background: rgba(0,0,0,0.4);
             width: 100%;
         }
 
         /* Birthday Countdown */
         #bday-countdown {
-            font-size: clamp(2rem, 10vw, 4.5rem);
+            font-size: clamp(2.5rem, 12vw, 5.5rem);
             font-weight: 900;
             color: var(--vivid-yellow);
-            text-shadow: 0 0 20px rgba(249, 255, 0, 0.4);
-            letter-spacing: -2px;
-            margin: 20px 0;
+            text-shadow: 0 0 30px rgba(249, 255, 0, 0.5);
+            letter-spacing: -3px;
+            margin: 30px 0;
+            text-align: center;
         }
 
         /* Rotating Fact Fade */
         #rotating-fact {
-            font-size: 1.5rem;
-            font-weight: 500;
-            min-height: 4em;
+            font-size: 1.8rem;
+            font-weight: 600;
+            min-height: 4.5em;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: opacity 1s ease-in-out;
-            line-height: 1.4;
+            line-height: 1.5;
             color: var(--text-main);
+            text-align: center;
+            padding: 0 20px;
         }
 
         /* Animations */
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .animate-up { animation: fadeUp 1s cubic-bezier(0.19, 1, 0.22, 1) forwards; }
+        .animate-up { animation: fadeUp 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards; }
 
-        @media (max-width: 600px) {
-            .stats-grid, .perspective-grid { grid-template-columns: 1fr; }
-            .share-buttons { flex-direction: column; }
-            .visitor-counter, .lang-selector { position: absolute; }
+        @media (max-width: 768px) {
+            .stats-grid, .perspective-grid { grid-template-columns: 1fr; gap: 20px; }
+            .share-buttons { flex-direction: column; width: 100%; }
+            .share-btn { width: 100%; justify-content: center; }
+            .visitor-counter { position: relative; bottom: auto; left: auto; margin: 20px auto; width: fit-content; border-radius: 20px; }
+            .lang-selector { position: relative; top: auto; right: auto; margin: 20px auto; display: flex; justify-content: center; }
             .user-stat-input input { width: 100%; }
-            h1 { font-size: 2.8rem; }
+            h1 { font-size: 2.5rem; margin-top: 20px; }
+            .input-section { padding: 30px 15px; border-radius: 25px; }
+            .stat-card { height: auto; min-height: 240px; }
+            .stat-card-front, .stat-card-back { padding: 25px; }
+            .challenge-section { padding: 30px 15px; }
+            .challenge-btn { font-size: 1.2rem; padding: 18px; }
+            #bday-countdown { font-size: 2.5rem; }
         }
 
-        /* Confetti CSS */
+        /* Confetti */
         .confetti {
             position: fixed;
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background-color: #f0f;
             z-index: 1001;
-            top: -10px;
+            top: -20px;
         }
 
         /* Challenge Section */
         @keyframes pulseSection {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(187, 134, 252, 0.4); }
-            50% { transform: scale(1.02); box-shadow: 0 0 30px 15px rgba(187, 134, 252, 0.3); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(187, 134, 252, 0); }
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 127, 0.3); }
+            50% { transform: scale(1.02); box-shadow: 0 0 40px 20px rgba(255, 0, 127, 0.2); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 127, 0); }
         }
 
         .challenge-section {
-            margin: 60px 0;
-            padding: 45px;
-            background: rgba(187, 134, 252, 0.12);
-            border-radius: 35px;
-            border: 3px solid var(--accent-color);
+            margin: 70px 0;
+            padding: 50px;
+            background: rgba(255, 0, 127, 0.08);
+            border-radius: 45px;
+            border: 3px solid var(--vivid-pink);
             animation: pulseSection 4s infinite ease-in-out;
         }
 
-        .challenge-section h2 { color: var(--vivid-pink); font-size: 2.5rem; margin-bottom: 12px; }
-        .challenge-section p { color: var(--text-main); font-size: 1.2rem; font-weight: 500; margin-bottom: 35px; }
+        .challenge-section h2 { color: var(--vivid-pink); font-size: 2.8rem; margin-bottom: 15px; font-weight: 900; }
+        .challenge-section p { color: var(--text-main); font-size: 1.4rem; font-weight: 600; margin-bottom: 40px; }
 
         .challenge-input-group {
             display: flex;
             flex-direction: column;
-            gap: 18px;
-            max-width: 500px;
-            margin: 0 auto 35px;
+            gap: 20px;
+            max-width: 550px;
+            margin: 0 auto 40px;
         }
 
         .challenge-input-group input {
             background: rgba(255, 255, 255, 0.15);
-            border: 2px solid var(--glass-border);
+            border: 2px solid rgba(255, 0, 127, 0.3);
             color: white;
-            padding: 18px;
-            border-radius: 15px;
-            font-size: 1.2rem;
+            padding: 20px;
+            border-radius: 20px;
+            font-size: 1.3rem;
             outline: none;
             transition: 0.3s;
         }
-        .challenge-input-group input:focus { border-color: var(--accent-color); background: rgba(255, 255, 255, 0.2); }
+        .challenge-input-group input:focus { border-color: var(--vivid-pink); background: rgba(255,255,255,0.25); }
 
         .challenge-btn {
             width: 100%;
-            max-width: 500px;
-            padding: 22px;
-            border-radius: 18px;
+            max-width: 550px;
+            padding: 24px;
+            border-radius: 22px;
             border: none;
             color: white;
-            font-size: 1.4rem;
-            font-weight: 800;
+            font-size: 1.5rem;
+            font-weight: 900;
             cursor: pointer;
             transition: 0.3s;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         }
 
-        .challenge-btn.whatsapp-challenge { background: #25D366; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4); }
-        .challenge-btn.twitter-challenge { background: #000000; border: 2px solid var(--glass-border); box-shadow: 0 5px 20px rgba(0,0,0,0.4); }
-        .challenge-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
+        .challenge-btn.whatsapp-challenge { background: #25D366; }
+        .challenge-btn.twitter-challenge { background: #000000; border: 2px solid var(--glass-border); }
+        .challenge-btn:hover { transform: scale(1.05); filter: brightness(1.1); box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
     </style>
 </head>
 <body>
@@ -608,7 +634,7 @@
         </div>
     </div>
 
-    <div class="visitor-counter"><span id="visitor-label">👥 people exploring their life right now:</span> <span id="v-count">8,452</span></div>
+    <div class="visitor-counter"><span id="visitor-label">👥 People exploring their lives right now:</span> <span id="v-count">8,452</span></div>
 
     <div class="container">
         <!-- Top Ad Placement -->
@@ -638,14 +664,14 @@
         <!-- Loading Screen -->
         <div id="loading-screen">
             <div class="loader"></div>
-            <p id="loading-text" style="font-size: 1.8rem; font-weight: 600;">Calculating your life...</p>
+            <p id="loading-text">Calculating your life...</p>
         </div>
 
         <!-- Results Area -->
         <div id="results-area">
             
             <div class="progress-container animate-up">
-                <span id="progress-text" style="font-size: 1.3rem; font-weight: 600;">You have lived 0% of an average life</span>
+                <span id="progress-text">You have lived 0% of an average life</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progress-fill"></div>
                 </div>
@@ -653,9 +679,7 @@
 
             <div id="age-cat-display" class="age-category animate-up"></div>
 
-            <div class="stats-grid" id="stats-grid">
-                <!-- Cards injected by JS -->
-            </div>
+            <div class="stats-grid" id="stats-grid"></div>
 
             <!-- Middle Ad Placement -->
             <div class="ad-container">
@@ -670,19 +694,19 @@
 
             <!-- Fun Comparisons -->
             <div class="fun-section animate-up">
-                <h2 id="scale-title">The Unbelievable Scale Of Your Existence ✨</h2>
+                <h2 id="scale-title">The Unbelievable Scale of Your Existence ✨</h2>
                 <div id="comparisons-list"></div>
             </div>
 
             <!-- Perspectives -->
             <div class="fun-section perspective animate-up">
-                <h2 id="perspective-title">Your Life In Perspective</h2>
+                <h2 id="perspective-title">Your Life in Perspective</h2>
                 <div class="perspective-grid" id="perspectives-list"></div>
             </div>
 
             <!-- Birthday Countdown -->
             <div class="fun-section bday animate-up">
-                <h2 id="bday-title">Countdown to your next Birthday 🎂</h2>
+                <h2 id="bday-title">Countdown to Your Next Birthday 🎂</h2>
                 <div id="bday-countdown"></div>
             </div>
 
@@ -695,7 +719,7 @@
             <!-- User Stat Box -->
             <div class="user-stat-input animate-up">
                 <h3 id="user-stat-title">What's your most mind-blowing number?</h3>
-                <input type="text" id="user-stat-text" placeholder="e.g. I have visited 12 countries!">
+                <input type="text" id="user-stat-text">
                 <button id="add-user-stat">Show Me!</button>
                 <div id="user-stat-card" style="margin-top: 30px; display: none;"></div>
             </div>
@@ -716,8 +740,8 @@
                 <h2 id="challenge-title">Challenge a Friend 🏆</h2>
                 <p id="challenge-sub">See if their stats can beat yours</p>
                 <div class="challenge-input-group">
-                    <input type="text" id="friend-name" placeholder="Friend's Name">
-                    <input type="text" id="friend-phone" placeholder="Friend's Phone (e.g. 447123456789)">
+                    <input type="text" id="friend-name">
+                    <input type="text" id="friend-phone">
                 </div>
                 <button class="challenge-btn whatsapp-challenge" id="send-challenge-btn" onclick="sendChallenge('whatsapp')">Send Challenge 🚀</button>
                 <button class="challenge-btn twitter-challenge" id="twitter-challenge-btn" onclick="sendChallenge('twitter')">Challenge on Twitter/X 🐦</button>
@@ -748,40 +772,89 @@
     <div class="sound-toggle" id="sound-toggle" title="Toggle Sound">🔊</div>
 
     <script>
-        // Translations
+        // Full Translations Object
         const translations = {
             en: {
                 title: "You In Numbers",
-                tagline: "Discover The Incredible Story Of Your Life",
+                tagline: "Discover the Incredible Story of Your Life",
                 dobLabel: "Enter your date of birth to reveal your story:",
                 revealBtn: "Reveal My Life Stats",
                 loading: "Calculating your life...",
                 progress: "You have lived [pct]% of an average life (80 years)",
-                scaleTitle: "The Unbelievable Scale Of Your Existence ✨",
-                perspectiveTitle: "Your Life In Perspective",
-                bdayTitle: "Countdown to your next Birthday 🎂",
+                scaleTitle: "The Unbelievable Scale of Your Existence ✨",
+                perspectiveTitle: "Your Life in Perspective",
+                bdayTitle: "Countdown to Your Next Birthday 🎂",
                 dykTitle: "Did You Know?",
                 userStatTitle: "What's your most mind-blowing number?",
                 userStatPlaceholder: "e.g. I have visited 12 countries!",
                 userStatBtn: "Show Me!",
                 userStatLabel: "YOUR MIND-BLOWING STAT",
-                shareTitle: "Share your story",
+                shareTitle: "Share Your Story",
                 copyBtn: "Copy All Stats",
                 copied: "Copied!",
                 challengeTitle: "Challenge a Friend 🏆",
                 challengeSub: "See if their stats can beat yours",
-                friendName: "Friend's Name",
-                friendPhone: "Friend's Phone (e.g. 447123456789)",
+                friendNamePlaceholder: "Friend's Name",
+                friendPhonePlaceholder: "Friend's Phone (e.g. 447123456789)",
                 sendChallenge: "Send Challenge 🚀",
                 twitterChallenge: "Challenge on Twitter/X 🐦",
                 resetBtn: "CALCULATE AGAIN",
                 resetSub: "Share this with a friend and see who has the most heartbeats 👇",
-                footer: "Share you-in-numbers.vercel.app with someone you love ❤️",
-                visitorLabel: "👥 people exploring their life right now:",
+                footer: "Share <b>you-in-numbers.vercel.app</b> with someone you love ❤️",
+                visitorLabel: "👥 People exploring their lives right now:",
                 shareMsg: "I just discovered I've been alive for [days] days and my heart has beaten [heartbeats] times 🤯 Find your own life stats at you-in-numbers.vercel.app",
                 challengeMsg: "Hey [name]! I just found out I have been alive for [days] days and my heart has beaten [heartbeats] times 🤯 I challenge you to beat my stats! Find out yours here: you-in-numbers.vercel.app — do you have more heartbeats than me? 👊",
                 tapFlip: "(Click to flip back)",
-                funFactLabel: "Fun Fact!"
+                funFactLabel: "Fun Fact!",
+                ageCats: {
+                    exploring: "Exploring the world 🌍",
+                    gettingStarted: "Just getting started 🌱",
+                    prime: "In your prime 🔥",
+                    building: "Building your empire 🏰",
+                    master: "Master of your craft 💎",
+                    wisdom: "Sharing your wisdom 🦉",
+                    harvest: "Enjoying the harvest 🍎",
+                    gold: "The gold standard ✨",
+                    legend: "A living legend 👑"
+                },
+                stats: {
+                    days: { label: "Days Alive", quote: "Every single day a unique chapter in your story.", fact: "That's over [val] sunrise/sunset cycles!" },
+                    hours: { label: "Hours Alive", quote: "Time you've spent writing your legacy.", fact: "You've spent years just being yourself." },
+                    minutes: { label: "Minutes Alive", quote: "Countless moments that made you who you are.", fact: "Every minute is a fresh opportunity." },
+                    weeks: { label: "Weeks Alive", quote: "Saturdays spent chasing your dreams.", fact: "You've seen thousands of weekends!" },
+                    months: { label: "Months Alive", quote: "Witnessing the world change around you.", fact: "The moon has cycled the Earth this many times for you." },
+                    dogYears: { label: "Age In Dog Years", quote: "Your loyal companion would be proud.", fact: "You're a wise elder in the dog world!" },
+                    heartbeats: { label: "Heartbeats", quote: "Your heart has never once taken a day off.", fact: "It pumps 2,000 gallons of blood every day." },
+                    breaths: { label: "Breaths Taken", quote: "Life-giving air fueling your every move.", fact: "You've inhaled enough air to fill a stadium." },
+                    meals: { label: "Meals Eaten", quote: "Nourishment for the journey of a lifetime.", fact: "Think of all the flavors you've tasted!" },
+                    sleep: { label: "Hours Slept", quote: "Recharging for the adventures that await.", fact: "You've spent years in the dream world." },
+                    blinks: { label: "Times Blinked", quote: "Protecting the way you see the beauty in life.", fact: "Your eyes are self-cleaning masterpieces." },
+                    sunrises: { label: "Sunrises Witnessed", quote: "Every single one was a fresh start.", fact: "You've survived 100% of your hardest days." },
+                    steps: { label: "Steps Taken", quote: "A path walked only by you.", fact: "You are a true explorer of planet Earth." },
+                    words: { label: "Words Spoken", quote: "The echoes of your unique voice.", fact: "Your story is still being written." }
+                },
+                scale: [
+                    "🌬️ Your breaths could fill <b>[val]</b> giant hot air balloons.",
+                    "💡 You've blinked <b>[val]</b> times—enough to flick a light switch for centuries.",
+                    "📚 Your spoken words would fill <b>[val]</b> complete novels.",
+                    "🗺️ Your steps equal walking from Cape Town to Cairo <b>[val]</b> times.",
+                    "🛁 Your breath volume would fill <b>[val]</b> standard bathtubs.",
+                    "⚡ Your heart energy could keep a lightbulb on for <b>[val]</b> hours."
+                ],
+                perspectives: [
+                    { title: "[val] Full Moons", sub: "Total lunar cycles you've witnessed since birth." },
+                    { title: "[val] Billion KM", sub: "How far the light from the sun on your birthday has traveled." },
+                    { title: "[val] Full Cycles", sub: "Approximately how many times every cell in your body has been replaced." },
+                    { title: "[val] Sunsets", sub: "Every single one was a fresh start and a beautiful ending." }
+                ],
+                dyk: [
+                    "Your heart beats about 100,000 times a day, every day.",
+                    "You produce enough saliva in your lifetime to fill two swimming pools.",
+                    "Your nose can remember 50,000 different scents.",
+                    "The human body has enough iron in it to make a metal nail 3 inches long.",
+                    "Your skin replaces itself entirely every 27 days.",
+                    "During an average lifetime, the human heart will pump 1.5 million barrels of blood."
+                ]
             },
             es: {
                 title: "Tú en Números",
@@ -789,7 +862,7 @@
                 dobLabel: "Introduce tu fecha de nacimiento para revelar tu historia:",
                 revealBtn: "Revelar mis estadísticas de vida",
                 loading: "Calculando tu vida...",
-                progress: "Has vivido el [pct]% de una vida media (80 años)",
+                progress: "Has vivido el [pct]% de una vida promedio (80 años)",
                 scaleTitle: "La increíble escala de tu existencia ✨",
                 perspectiveTitle: "Tu vida en perspectiva",
                 bdayTitle: "Cuenta atrás para tu próximo cumpleaños 🎂",
@@ -799,133 +872,906 @@
                 userStatBtn: "¡Muéstramelo!",
                 userStatLabel: "TU DATO ASOMBROSO",
                 shareTitle: "Comparte tu historia",
-                copyBtn: "Copiar todas las estadísticas",
+                copyBtn: "Copiar estadísticas",
                 copied: "¡Copiado!",
                 challengeTitle: "Desafía a un amigo 🏆",
                 challengeSub: "Mira si sus estadísticas pueden superar las tuyas",
-                friendName: "Nombre del amigo",
-                friendPhone: "Teléfono (ej. 34600000000)",
+                friendNamePlaceholder: "Nombre del amigo",
+                friendPhonePlaceholder: "Teléfono (ej. 34600000000)",
                 sendChallenge: "Enviar desafío 🚀",
                 twitterChallenge: "Desafío en Twitter/X 🐦",
                 resetBtn: "CALCULAR DE NUEVO",
                 resetSub: "Comparte esto con un amigo y mira quién tiene más latidos 👇",
-                footer: "Comparte you-in-numbers.vercel.app con alguien a quien quieras ❤️",
+                footer: "Comparte <b>you-in-numbers.vercel.app</b> con alguien a quien quieras ❤️",
                 visitorLabel: "👥 personas explorando su vida ahora mismo:",
                 shareMsg: "Acabo de descubrir que llevo vivo [days] días y mi corazón ha latido [heartbeats] veces 🤯 Encuentra tus propias estadísticas en you-in-numbers.vercel.app",
-                challengeMsg: "¡Hola [name]! Acabo de descubrir que llevo vivo [days] días y mi corazón ha latido [heartbeats] veces 🤯 ¡Te desafío a superar mis estadísticas! Descubre las tuyas aquí: you-in-numbers.vercel.app —¿tienes más latidos que yo? 👊",
+                challengeMsg: "¡Hola [name]! Acabo de descubrir que llevo vivo [days] días y mi corazón ha latido [heartbeats] veces 🤯 ¡Te desafío a superar mis estadísticas! Descubre las tuyas aquí: you-in-numbers.vercel.app",
                 tapFlip: "(Haz clic para voltear)",
-                funFactLabel: "¡Dato curioso!"
+                funFactLabel: "¡Dato curioso!",
+                ageCats: {
+                    exploring: "Explorando el mundo 🌍",
+                    gettingStarted: "Recién empezando 🌱",
+                    prime: "En tu mejor momento 🔥",
+                    building: "Construyendo tu imperio 🏰",
+                    master: "Maestro de tu oficio 💎",
+                    wisdom: "Compartiendo tu sabiduría 🦉",
+                    harvest: "Disfrutando de la cosecha 🍎",
+                    gold: "El estándar de oro ✨",
+                    legend: "Una leyenda viva 👑"
+                },
+                stats: {
+                    days: { label: "Días de vida", quote: "Cada día es un capítulo único en tu historia.", fact: "¡Eso son más de [val] ciclos de amanecer/atardecer!" },
+                    hours: { label: "Horas de vida", quote: "Tiempo que has pasado escribiendo tu legado.", fact: "Has pasado años siendo simplemente tú mismo." },
+                    minutes: { label: "Minutos de vida", quote: "Innumerables momentos que te hicieron quien eres.", fact: "Cada minuto es una nueva oportunidad." },
+                    weeks: { label: "Semanas de vida", quote: "Sábados dedicados a perseguir tus sueños.", fact: "¡Has visto miles de fines de semana!" },
+                    months: { label: "Meses de vida", quote: "Siendo testigo de cómo cambia el mundo a tu alrededor.", fact: "La luna ha orbitado la Tierra estas veces para ti." },
+                    dogYears: { label: "Edad en años perrunos", quote: "Tu fiel compañero estaría orgulloso.", fact: "¡Eres un sabio anciano en el mundo de los perros!" },
+                    heartbeats: { label: "Latidos", quote: "Tu corazón nunca se ha tomado un día libre.", fact: "Bombea 2,000 galones de sangre cada día." },
+                    breaths: { label: "Respiraciones", quote: "Aire vital que impulsa cada uno de tus movimientos.", fact: "Has inhalado suficiente aire para llenar un estadio." },
+                    meals: { label: "Comidas", quote: "Nutrición para el viaje de toda una vida.", fact: "¡Piensa en todos los sabores que has probado!" },
+                    sleep: { label: "Horas dormidas", quote: "Recargando para las aventuras que te esperan.", fact: "Has pasado años en el mundo de los sueños." },
+                    blinks: { label: "Parpadeos", quote: "Protegiendo la forma en que ves la belleza de la vida.", fact: "Tus ojos son obras maestras autolimpiables." },
+                    sunrises: { label: "Amaneceres", quote: "Cada uno fue un nuevo comienzo.", fact: "Has sobrevivido al 100% de tus días más difíciles." },
+                    steps: { label: "Pasos dados", quote: "Un camino recorrido solo por ti.", fact: "Eres un verdadero explorador del planeta Tierra." },
+                    words: { label: "Palabras habladas", quote: "Los ecos de tu voz única.", fact: "Tu historia aún se está escribiendo." }
+                },
+                scale: [
+                    "🌬️ Tus respiraciones podrían llenar <b>[val]</b> globos aerostáticos gigantes.",
+                    "💡 Has parpadeado <b>[val]</b> veces—suficiente para accionar un interruptor durante siglos.",
+                    "📚 Tus palabras habladas llenarían <b>[val]</b> novelas completas.",
+                    "🗺️ Tus pasos equivalen a caminar de Ciudad del Cabo a El Cairo <b>[val]</b> veces.",
+                    "🛁 El volumen de tu respiración llenaría <b>[val]</b> bañeras estándar.",
+                    "⚡ La energía de tu corazón podría mantener una bombilla encendida por <b>[val]</b> horas."
+                ],
+                perspectives: [
+                    { title: "[val] Lunas llenas", sub: "Ciclos lunares totales que has presenciado desde que naciste." },
+                    { title: "[val] Mil millones de KM", sub: "Qué tan lejos ha viajado la luz del sol desde tu cumpleaños." },
+                    { title: "[val] Ciclos completos", sub: "Aproximadamente cuántas veces se han reemplazado todas las células de tu cuerpo." },
+                    { title: "[val] Atardeceres", sub: "Cada uno fue un nuevo comienzo y un final hermoso." }
+                ],
+                dyk: [
+                    "Tu corazón late unas 100,000 veces al día, todos los días.",
+                    "Produces suficiente saliva en tu vida para llenar dos piscinas.",
+                    "Tu nariz puede recordar 50,000 aromas diferentes.",
+                    "El cuerpo humano tiene suficiente hierro para fabricar un clavo de metal de 7.5 cm.",
+                    "Tu piel se reemplaza por completo cada 27 días.",
+                    "Durante una vida promedio, el corazón humano bombeará 1.5 millones de баррелей de sangre."
+                ]
             },
             fr: {
-                title: "Vous En Chiffres",
-                tagline: "Découvrez l'histoire incroyable de votre vie",
+                title: "Vous en Chiffres",
+                tagline: "Découvrez l'incroyable histoire de votre vie",
                 dobLabel: "Entrez votre date de naissance pour révéler votre histoire :",
                 revealBtn: "Révéler mes stats de vie",
                 loading: "Calcul de votre vie...",
                 progress: "Vous avez vécu [pct]% d'une vie moyenne (80 ans)",
-                scaleTitle: "L'échelle incroyable de votre existence ✨",
+                scaleTitle: "L'incroyable échelle de votre existence ✨",
                 perspectiveTitle: "Votre vie en perspective",
                 bdayTitle: "Compte à rebours avant votre prochain anniversaire 🎂",
                 dykTitle: "Le saviez-vous ?",
-                userStatTitle: "Quel est votre chiffre le plus fou ?",
+                userStatTitle: "Quel est votre chiffre le plus époustouflant ?",
                 userStatPlaceholder: "ex: J'ai visité 12 pays !",
-                userStatBtn: "Montrez-moi !",
-                userStatLabel: "VOTRE STAT INCROYABLE",
+                userStatBtn: "Montre-moi !",
+                userStatLabel: "VOTRE STAT ÉPOUSTOUFLANTE",
                 shareTitle: "Partagez votre histoire",
                 copyBtn: "Copier toutes les stats",
                 copied: "Copié !",
                 challengeTitle: "Défier un ami 🏆",
                 challengeSub: "Voyez si ses stats peuvent battre les vôtres",
-                friendName: "Nom de l'ami",
-                friendPhone: "Téléphone (ex: 33600000000)",
+                friendNamePlaceholder: "Nom de l'ami",
+                friendPhonePlaceholder: "Téléphone (ex: 33612345678)",
                 sendChallenge: "Envoyer le défi 🚀",
-                twitterChallenge: "Défi sur Twitter/X 🐦",
-                resetBtn: "RECALCULER",
+                twitterChallenge: "Défier sur Twitter/X 🐦",
+                resetBtn: "CALCULER À NOUVEAU",
                 resetSub: "Partagez ceci avec un ami et voyez qui a le plus de battements de cœur 👇",
-                footer: "Partagez you-in-numbers.vercel.app avec quelqu'un que vous aimez ❤️",
-                visitorLabel: "👥 personnes explorent leur vie en ce moment :",
-                shareMsg: "Je viens de découvrir que je suis en vie depuis [days] jours et que mon cœur a battu [heartbeats] fois 🤯 Trouvez vos propres stats sur you-in-numbers.vercel.app",
-                challengeMsg: "Hé [name] ! Je viens de découvrir que je suis en vie depuis [days] jours et que mon cœur a battu [heartbeats] fois 🤯 Je te défie de battre mes stats ! Découvre les tiennes ici : you-in-numbers.vercel.app — as-tu plus de battements que moi ? 👊",
+                footer: "Partagez <b>you-in-numbers.vercel.app</b> avec quelqu'un que vous aimez ❤️",
+                visitorLabel: "👥 Personnes explorant leur vie en ce moment :",
+                shareMsg: "Je viens de découvrir que je suis en vie depuis [days] jours et que mon cœur a battu [heartbeats] fois 🤯 Découvrez vos propres stats sur you-in-numbers.vercel.app",
+                challengeMsg: "Hé [name] ! Je viens de découvrir que je suis en vie depuis [days] jours et que mon cœur a battu [heartbeats] fois 🤯 Je te défie de battre mes stats ! Découvre les tiennes ici : you-in-numbers.vercel.app",
                 tapFlip: "(Cliquez pour retourner)",
-                funFactLabel: "Le saviez-vous !"
+                funFactLabel: "Anecdote !",
+                ageCats: {
+                    exploring: "Exploration du monde 🌍",
+                    gettingStarted: "Tout juste commencé 🌱",
+                    prime: "Dans la force de l'âge 🔥",
+                    building: "Bâtir son empire 🏰",
+                    master: "Maître de son art 💎",
+                    wisdom: "Partager sa sagesse 🦉",
+                    harvest: "Profiter de la récolte 🍎",
+                    gold: "Le standard d'or ✨",
+                    legend: "Une légende vivante 👑"
+                },
+                stats: {
+                    days: { label: "Jours vécus", quote: "Chaque jour est un chapitre unique de votre histoire.", fact: "C'est plus de [val] cycles de lever/coucher du soleil !" },
+                    hours: { label: "Heures vécues", quote: "Le temps passé à écrire votre héritage.", fact: "Vous avez passé des années à être simplement vous-même." },
+                    minutes: { label: "Minutes vécues", quote: "D'innombrables moments qui ont fait de vous ce que vous êtes.", fact: "Chaque minute est une nouvelle opportunité." },
+                    weeks: { label: "Semaines vécues", quote: "Des samedis passés à poursuivre vos rêves.", fact: "Vous avez vu des milliers de week-ends !" },
+                    months: { label: "Mois vécus", quote: "Témoin du monde qui change autour de vous.", fact: "La lune a tourné autour de la Terre autant de fois pour vous." },
+                    dogYears: { label: "Âge en années de chien", quote: "Votre fidèle compagnon serait fier.", fact: "Vous êtes un sage aîné dans le monde canin !" },
+                    heartbeats: { label: "Battements de cœur", quote: "Votre cœur n'a jamais pris un jour de congé.", fact: "Il pompe 7 500 litres de sang chaque jour." },
+                    breaths: { label: "Respirations prises", quote: "L'air vital qui alimente chacun de vos mouvements.", fact: "Vous avez inhalé assez d'air pour remplir un stade." },
+                    meals: { label: "Repas mangés", quote: "De la nourriture pour le voyage d'une vie.", fact: "Pensez à toutes les saveurs que vous avez goûtées !" },
+                    sleep: { label: "Heures dormies", quote: "Recharger les batteries pour les aventures à venir.", fact: "Vous avez passé des années dans le monde des rêves." },
+                    blinks: { label: "Clignements d'yeux", quote: "Protéger votre façon de voir la beauté de la vie.", fact: "Vos yeux sont des chefs-d'œuvre autonettoyants." },
+                    sunrises: { label: "Levers de soleil vécus", quote: "Chaque lever était un nouveau départ.", fact: "Vous avez survécu à 100 % de vos jours les plus difficiles." },
+                    steps: { label: "Pas effectués", quote: "Un chemin parcouru par vous seul.", fact: "Vous êtes un véritable explorateur de la planète Terre." },
+                    words: { label: "Mots prononcés", quote: "Les échos de votre voix unique.", fact: "Votre histoire est encore en train de s'écrire." }
+                },
+                scale: [
+                    "🌬️ Vos respirations pourraient remplir <b>[val]</b> montgolfières géantes.",
+                    "💡 Vous avez cligné des yeux <b>[val]</b> fois—assez pour actionner un interrupteur pendant des siècles.",
+                    "📚 Vos mots prononcés rempliraient <b>[val]</b> romans complets.",
+                    "🗺️ Vos pas équivalent à marcher du Cap au Caire <b>[val]</b> fois.",
+                    "🛁 Le volume de votre respiration remplirait <b>[val]</b> baignoires standard.",
+                    "⚡ L'énergie de votre cœur pourrait maintenir une ampoule allumée pendant <b>[val]</b> heures."
+                ],
+                perspectives: [
+                    { title: "[val] Pleines lunes", sub: "Cycles lunaires totaux dont vous avez été témoin depuis votre naissance." },
+                    { title: "[val] Milliards de KM", sub: "Distance parcourue par la lumière du soleil depuis votre naissance." },
+                    { title: "[val] Cycles complets", sub: "Environ combien de fois chaque cellule de votre corps a été remplacée." },
+                    { title: "[val] Couchers de soleil", sub: "Chacun était un nouveau départ et une belle fin." }
+                ],
+                dyk: [
+                    "Votre cœur bat environ 100 000 fois par jour, chaque jour.",
+                    "Vous produisez assez de salive dans votre vie pour remplir deux piscines.",
+                    "Votre nez peut se souvenir de 50 000 odeurs différentes.",
+                    "Le corps humain contient assez de fer pour fabriquer un clou de 7,5 cm.",
+                    "Votre peau se remplace entièrement tous les 27 jours.",
+                    "Au cours d'une vie moyenne, le cœur humain pompera 1,5 million de barils de sang."
+                ]
             },
             de: {
-                title: "Du In Zahlen",
+                title: "Du in Zahlen",
                 tagline: "Entdecke die unglaubliche Geschichte deines Lebens",
                 dobLabel: "Gib dein Geburtsdatum ein, um deine Geschichte zu enthüllen:",
                 revealBtn: "Meine Lebensstatistiken enthüllen",
                 loading: "Dein Leben wird berechnet...",
                 progress: "Du hast [pct]% eines durchschnittlichen Lebens gelebt (80 Jahre)",
-                scaleTitle: "Die unglaubliche Skala deiner Existenz ✨",
-                perspectiveTitle: "Dein Leben in der Perspektive",
-                bdayTitle: "Countdown zu deinem nächsten Geburtstag 🎂",
+                scaleTitle: "Das unglaubliche Ausmaß deiner Existenz ✨",
+                perspectiveTitle: "Dein Leben im Überblick",
+                bdayTitle: "Countdown bis zu deinem nächsten Geburtstag 🎂",
                 dykTitle: "Wusstest du schon?",
                 userStatTitle: "Was ist deine verblüffendste Zahl?",
                 userStatPlaceholder: "z.B. Ich habe 12 Länder besucht!",
                 userStatBtn: "Zeig es mir!",
-                userStatLabel: "DEINE UNGLAUBLICHE STATISTIK",
+                userStatLabel: "DEINE VERBLÜFFENDE STATISTIK",
                 shareTitle: "Teile deine Geschichte",
                 copyBtn: "Alle Statistiken kopieren",
                 copied: "Kopiert!",
-                challengeTitle: "Einen Freund herausfordern 🏆",
-                challengeSub: "Schau, ob seine Statistiken deine schlagen können",
-                friendName: "Name des Freundes",
-                friendPhone: "Telefon (z.B. 491700000000)",
+                challengeTitle: "Fordere einen Freund heraus 🏆",
+                challengeSub: "Sieh nach, ob ihre Statistiken deine schlagen können",
+                friendNamePlaceholder: "Name des Freundes",
+                friendPhonePlaceholder: "Telefonnummer (z.B. 49123456789)",
                 sendChallenge: "Herausforderung senden 🚀",
-                twitterChallenge: "Herausforderung auf Twitter/X 🐦",
+                twitterChallenge: "Auf Twitter/X herausfordern 🐦",
                 resetBtn: "ERNEUT BERECHNEN",
                 resetSub: "Teile dies mit einem Freund und sieh, wer mehr Herzschläge hat 👇",
-                footer: "Teile you-in-numbers.vercel.app mit jemandem, den du liebst ❤️",
-                visitorLabel: "👥 Menschen erkunden gerade ihr Leben:",
-                shareMsg: "Ich habe gerade herausgefunden, dass ich seit [days] Tagen lebe und mein Herz [heartbeats] Mal geschlagen hat 🤯 Finde deine eigenen Statistiken auf you-in-numbers.vercel.app",
-                challengeMsg: "Hey [name]! Ich habe gerade herausgefunden, dass ich seit [days] Tagen lebe und mein Herz [heartbeats] Mal geschlagen hat 🤯 Ich fordere dich heraus, meine Statistiken zu schlagen! Finde deine hier: you-in-numbers.vercel.app — hast du mehr Herzschläge als ich? 👊",
-                tapFlip: "(Zum Umdrehen klicken)",
-                funFactLabel: "Fakt!"
+                footer: "Teile <b>you-in-numbers.vercel.app</b> mit jemandem, den du liebst ❤️",
+                visitorLabel: "👥 Personen, die gerade ihr Leben erkunden:",
+                shareMsg: "Ich habe gerade entdeckt, dass ich seit [days] Tagen lebe und mein Herz [heartbeats] Mal geschlagen hat 🤯 Finde deine eigenen Lebensstatistiken auf you-in-numbers.vercel.app",
+                challengeMsg: "Hallo [name]! Ich habe gerade herausgefunden, dass ich seit [days] Tagen lebe und mein Herz [heartbeats] Mal geschlagen hat 🤯 Ich fordere dich heraus, meine Statistiken zu schlagen! Finde deine hier: you-in-numbers.vercel.app",
+                tapFlip: "(Klicken zum Umdrehen)",
+                funFactLabel: "Interessanter Fakt!",
+                ageCats: {
+                    exploring: "Die Welt erkunden 🌍",
+                    gettingStarted: "Gerade erst angefangen 🌱",
+                    prime: "In deiner Blütezeit 🔥",
+                    building: "Dein Imperium aufbauen 🏰",
+                    master: "Meister deines Fachs 💎",
+                    wisdom: "Deine Weisheit teilen 🦉",
+                    harvest: "Die Ernte genießen 🍎",
+                    gold: "Der Goldstandard ✨",
+                    legend: "Eine lebende Legende 👑"
+                },
+                stats: {
+                    days: { label: "Tage gelebt", quote: "Jeder einzelne Tag ist ein einzigartiges Kapitel in deiner Geschichte.", fact: "Das sind über [val] Sonnenaufgangs-/Sonnenuntergangszyklen!" },
+                    hours: { label: "Stunden gelebt", quote: "Zeit, die du damit verbracht hast, dein Vermächtnis zu schreiben.", fact: "Du hast Jahre damit verbracht, einfach du selbst zu sein." },
+                    minutes: { label: "Minuten gelebt", quote: "Unzählige Momente, die dich zu dem gemacht haben, der du bist.", fact: "Jede Minute ist eine neue Chance." },
+                    weeks: { label: "Wochen gelebt", quote: "Samstage, an denen du deine Träume verfolgt hast.", fact: "Du hast tausende Wochenenden erlebt!" },
+                    months: { label: "Monate gelebt", quote: "Zeuge dessen, wie sich die Welt um dich herum verändert.", fact: "Der Mond hat die Erde so oft für dich umkreist." },
+                    dogYears: { label: "Alter in Hundejahren", quote: "Dein treuer Begleiter wäre stolz.", fact: "Du bist ein weiser Ältester in der Hundewelt!" },
+                    heartbeats: { label: "Herzschläge", quote: "Dein Herz hat sich nie einen Tag frei genommen.", fact: "Es pumpt jeden Tag 7.500 Liter Blut." },
+                    breaths: { label: "Atemzüge", quote: "Lebensspendende Luft, die jede deiner Bewegungen antreibt.", fact: "Du hast genug Luft eingeatmet, um ein Stadion zu füllen." },
+                    meals: { label: "Mahlzeiten", quote: "Nahrung für die Reise deines Lebens.", fact: "Denk an all die Aromen, die du probiert hast!" },
+                    sleep: { label: "Stunden geschlafen", quote: "Auftanken für die Abenteuer, die auf dich warten.", fact: "Du hast Jahre in der Welt der Träume verbracht." },
+                    blinks: { label: "Blinzler", quote: "Schutz für die Art und Weise, wie du die Schönheit des Lebens siehst.", fact: "Deine Augen sind selbstreinigende Meisterwerke." },
+                    sunrises: { label: "Sonnenaufgänge", quote: "Jeder einzelne war ein Neuanfang.", fact: "Du hast 100 % deiner schwersten Tage überstanden." },
+                    steps: { label: "Schritte gemacht", quote: "Ein Weg, den nur du gegangen bist.", fact: "Du bist ein wahrer Entdecker des Planeten Erde." },
+                    words: { label: "Gesprochene Wörter", quote: "Das Echo deiner einzigartigen Stimme.", fact: "Deine Geschichte wird immer noch geschrieben." }
+                },
+                scale: [
+                    "🌬️ Deine Atemzüge könnten <b>[val]</b> riesige Heißluftballons füllen.",
+                    "💡 Du hast <b>[val]</b> Mal geblinzelt—genug, um einen Lichtschalter jahrhundertelang zu betätigen.",
+                    "📚 Deine gesprochenen Wörter würden <b>[val]</b> komplette Romane füllen.",
+                    "🗺️ Deine Schritte entsprechen <b>[val]</b>-mal der Strecke von Kapstadt nach Kairo.",
+                    "🛁 Dein Atemvolumen würde <b>[val]</b> Standard-Badewannen füllen.",
+                    "⚡ Deine Herzenergie könnte eine Glühbirne für <b>[val]</b> Stunden leuchten lassen."
+                ],
+                perspectives: [
+                    { title: "[val] Vollmonde", sub: "Gesamte Mondzyklen, die du seit deiner Geburt erlebt hast." },
+                    { title: "[val] Milliarden KM", sub: "Wie weit das Licht der Sonne an deinem Geburtstag gereist ist." },
+                    { title: "[val] Vollständige Zyklen", sub: "Ungefähr wie oft jede Zelle in deinem Körper ersetzt wurde." },
+                    { title: "[val] Sonnenuntergänge", sub: "Jeder einzelne war ein Neuanfang und ein schönes Ende." }
+                ],
+                dyk: [
+                    "Dein Herz schlägt etwa 100.000 Mal am Tag, jeden Tag.",
+                    "Du produzierst in deinem Leben genug Speichel, um zwei Schwimmbecken zu füllen.",
+                    "Deine Nase kann sich an 50.000 verschiedene Düfte erinnern.",
+                    "Der menschliche Körper enthält genug Eisen, um einen 7,5 cm langen Nagel herzustellen.",
+                    "Deine Haut erneuert sich alle 27 Tage komplett.",
+                    "In einem durchschnittlichen Leben pumpt das menschliche Herz 1,5 Millionen Barrel Blut."
+                ]
             },
             pt: {
-                title: "Você Em Números",
+                title: "Você em Números",
                 tagline: "Descubra a incrível história da sua vida",
-                dobLabel: "Digite sua data de nascimento para revelar sua história:",
-                revealBtn: "Revelar Minhas Estatísticas",
+                dobLabel: "Insira sua data de nascimento para revelar sua história:",
+                revealBtn: "Revelar estatísticas da minha vida",
                 loading: "Calculando sua vida...",
                 progress: "Você viveu [pct]% de uma vida média (80 anos)",
-                scaleTitle: "A Escala Inacreditável da Sua Existência ✨",
-                perspectiveTitle: "Sua Vida Em Perspectiva",
-                bdayTitle: "Contagem regressiva para o seu aniversário 🎂",
-                dykTitle: "Você Sabia?",
+                scaleTitle: "A escala inacreditável da sua existência ✨",
+                perspectiveTitle: "Sua vida em perspectiva",
+                bdayTitle: "Contagem regressiva para o seu próximo aniversário 🎂",
+                dykTitle: "Você sabia?",
                 userStatTitle: "Qual é o seu número mais impressionante?",
-                userStatPlaceholder: "ex: Eu visitei 12 países!",
+                userStatPlaceholder: "ex: Já visitei 12 países!",
                 userStatBtn: "Mostrar!",
-                userStatLabel: "SUA ESTATÍSTICA INCRÍVEL",
+                userStatLabel: "SUA ESTATÍSTICA IMPRESSIONANTE",
                 shareTitle: "Compartilhe sua história",
-                copyBtn: "Copiar Todas as Estatísticas",
+                copyBtn: "Copiar estatísticas",
                 copied: "Copiado!",
-                challengeTitle: "Desafie um Amigo 🏆",
+                challengeTitle: "Desafie um amigo 🏆",
                 challengeSub: "Veja se as estatísticas dele superam as suas",
-                friendName: "Nome do Amigo",
-                friendPhone: "Telefone (ex: 5511900000000)",
-                sendChallenge: "Enviar Desafio 🚀",
+                friendNamePlaceholder: "Nome do amigo",
+                friendPhonePlaceholder: "Telefone (ex: 5511999999999)",
+                sendChallenge: "Enviar desafio 🚀",
                 twitterChallenge: "Desafiar no Twitter/X 🐦",
                 resetBtn: "CALCULAR NOVAMENTE",
-                resetSub: "Compartilhe com um amigo e veja quem tem mais batimentos 👇",
-                footer: "Compartilhe you-in-numbers.vercel.app com quem você ama ❤️",
-                visitorLabel: "👥 pessoas explorando suas vidas agora:",
-                shareMsg: "Acabei de descobrir que estou vivo há [days] dias e meu coração bateu [heartbeats] vezes 🤯 Descubra suas estatísticas em you-in-numbers.vercel.app",
-                challengeMsg: "Ei [name]! Acabei de descobrir que estou vivo há [days] dias e meu coração bateu [heartbeats] vezes 🤯 Desafio você a bater minhas estatísticas! Descubra as suas aqui: you-in-numbers.vercel.app — você tem mais batimentos que eu? 👊",
+                resetSub: "Compartilhe com um amigo e veja quem tem mais batimentos cardíacos 👇",
+                footer: "Compartilhe <b>you-in-numbers.vercel.app</b> com quem você ama ❤️",
+                visitorLabel: "👥 Pessoas explorando suas vidas agora:",
+                shareMsg: "Acabei de descobrir que estou vivo há [days] dias e meu coração bateu [heartbeats] vezes 🤯 Veja suas estatísticas em you-in-numbers.vercel.app",
+                challengeMsg: "Olá [name]! Acabei de descobrir que estou vivo há [days] dias e meu coração bateu [heartbeats] vezes 🤯 Desafio você a superar minhas estatísticas! Veja as suas aqui: you-in-numbers.vercel.app",
                 tapFlip: "(Clique para virar)",
-                funFactLabel: "Fato Curioso!"
+                funFactLabel: "Curiosidade!",
+                ageCats: {
+                    exploring: "Explorando o mundo 🌍",
+                    gettingStarted: "Apenas começando 🌱",
+                    prime: "No seu auge 🔥",
+                    building: "Construindo seu império 🏰",
+                    master: "Mestre no que faz 💎",
+                    wisdom: "Compartilhando sabedoria 🦉",
+                    harvest: "Colhendo os frutos 🍎",
+                    gold: "O padrão ouro ✨",
+                    legend: "Uma lenda viva 👑"
+                },
+                stats: {
+                    days: { label: "Dias de vida", quote: "Cada dia é un capítulo único na sua história.", fact: "São mais de [val] ciclos de nascer/pôr do sol!" },
+                    hours: { label: "Horas de vida", quote: "Tempo gasto escrevendo seu legado.", fact: "Você passou anos sendo apenas você mesmo." },
+                    minutes: { label: "Minutos de vida", quote: "Momentos incontáveis que fizeram de você quem você é.", fact: "Cada minuto é uma nova oportunidade." },
+                    weeks: { label: "Semanas de vida", quote: "Sábados correndo atrás dos seus sonhos.", fact: "Você já viu milhares de finais de semana!" },
+                    months: { label: "Meses de vida", quote: "Testemunhando o mundo mudar ao seu redor.", fact: "A lua orbitou a Terra todas essas vezes para você." },
+                    dogYears: { label: "Idade em anos caninos", quote: "Seu fiel companheiro ficaria orgulhoso.", fact: "Você é um sábio ancião no mundo dos cães!" },
+                    heartbeats: { label: "Batimentos", quote: "Seu coração nunca tirou um dia de folga.", fact: "Ele bombeia 7.500 litros de sangue todos os dias." },
+                    breaths: { label: "Respirações", quote: "Ar vital alimentando cada movimento seu.", fact: "Você inalou ar suficiente para encher um estádio." },
+                    meals: { label: "Refeições", quote: "Nutrição para a jornada de uma vida inteira.", fact: "Pense em todos os sabores que você já provou!" },
+                    sleep: { label: "Horas dormidas", quote: "Recarregando para as aventuras que virão.", fact: "Você passou anos no mundo dos sonhos." },
+                    blinks: { label: "Piscadas", quote: "Protegendo a forma como você vê a beleza da vida.", fact: "Seus olhos são obras-primas autolimpantes." },
+                    sunrises: { label: "Amanheceres", quote: "Cada um fue um novo começo.", fact: "Você sobreviveu a 100% dos seus dias mais difíceis." },
+                    steps: { label: "Passos dados", quote: "Um caminho percorrido apenas por você.", fact: "Você é um verdadeiro explorador do planeta Terra." },
+                    words: { label: "Palavras faladas", quote: "Os ecos da sua voz única.", fact: "Sua história ainda está sendo escrita." }
+                },
+                scale: [
+                    "🌬️ Suas respirações poderiam encher <b>[val]</b> balões de ar quente gigantes.",
+                    "💡 Você piscou <b>[val]</b> vezes—o suficiente para acionar um interruptor por séculos.",
+                    "📚 Suas palavras faladas encheriam <b>[val]</b> romances completos.",
+                    "🗺️ Seus passos equivalem a caminhar da Cidade do Cabo ao Cairo <b>[val]</b> vezes.",
+                    "🛁 O volume da sua respiração encheria <b>[val]</b> banheiras padrão.",
+                    "⚡ A energia do seu coração poderia manter uma lâmpada acesa por <b>[val]</b> horas."
+                ],
+                perspectives: [
+                    { title: "[val] Luas Cheias", sub: "Ciclos lunares totais que você presenciou desde o nascimento." },
+                    { title: "[val] Bilhões de KM", sub: "A distância que a luz do sol viajou no dia do seu aniversário." },
+                    { title: "[val] Ciclos Completos", sub: "Aproximadamente quantas vezes cada célula do seu corpo foi substituída." },
+                    { title: "[val] Pores do Sol", sub: "Cada um foi um novo começo e um belo final." }
+                ],
+                dyk: [
+                    "Seu coração bate cerca de 100.000 vezes por dia, todos os dias.",
+                    "Você produz saliva suficiente em sua vida para encher duas piscinas.",
+                    "Seu nariz pode lembrar 50.000 cheiros diferentes.",
+                    "O corpo humano tem ferro suficiente para fazer um prego de 7,5 cm.",
+                    "Sua pele se renova inteiramente a cada 27 dias.",
+                    "Durante uma vida média, o coração humano bombeará 1.5 milhão de barris de sangue."
+                ]
+            },
+            ar: {
+                title: "أنت بالأرقام",
+                tagline: "اكتشف قصة حياتك المذهلة",
+                dobLabel: "أدخل تاريخ ميلادك للكشف عن قصتك:",
+                revealBtn: "كشف إحصائيات حياتي",
+                loading: "جاري حساب حياتك...",
+                progress: "لقد عشت [pct]% من متوسط العمر (80 عامًا)",
+                scaleTitle: "المقياس المذهل لوجودك ✨",
+                perspectiveTitle: "حياتك من منظور آخر",
+                bdayTitle: "العد التنازلي لعيد ميلادك القادم 🎂",
+                dykTitle: "هل تعلم؟",
+                userStatTitle: "ما هو الرقم الأكثر إثارة للدهشة لديك؟",
+                userStatPlaceholder: "مثال: لقد زرت 12 دولة!",
+                userStatBtn: "أرني!",
+                userStatLabel: "إحصائيتك المذهلة",
+                shareTitle: "شارك قصتك",
+                copyBtn: "نسخ جميع الإحصائيات",
+                copied: "تم النسخ!",
+                challengeTitle: "تحدَّ صديقًا 🏆",
+                challengeSub: "اعرف ما إذا كانت إحصائياتهم يمكن أن تهزم إحصائياتك",
+                friendNamePlaceholder: "اسم الصديق",
+                friendPhonePlaceholder: "رقم الهاتف (مثال: 966500000000)",
+                sendChallenge: "إرسال التحدي 🚀",
+                twitterChallenge: "تحدَّ على تويتر/X 🐦",
+                resetBtn: "احسب مجددًا",
+                resetSub: "شارك هذا مع صديق وانظر من لديه عدد نبضات قلب أكثر 👇",
+                footer: "شارك <b>you-in-numbers.vercel.app</b> مع من تحب ❤️",
+                visitorLabel: "👥 أشخاص يكتشفون حياتهم الآن:",
+                shareMsg: "لقد اكتشفت للتو أنني عشت لمدة [days] يومًا ونبض قلبي [heartbeats] مرة 🤯 اكتشف إحصائيات حياتك الخاصة في you-in-numbers.vercel.app",
+                challengeMsg: "مرحبًا [name]! لقد اكتفشت للتو أنني عشت لمدة [days] يومًا ونبض قلبي [heartbeats] مرة 🤯 أتحداك أن تهزم أرقامي! اكتشف أرقامك هنا: you-in-numbers.vercel.app",
+                tapFlip: "(انقر للعودة)",
+                funFactLabel: "حقيقة ممتعة!",
+                ageCats: {
+                    exploring: "استكشاف العالم 🌍",
+                    gettingStarted: "مجرد البداية 🌱",
+                    prime: "في أوج عطائك 🔥",
+                    building: "بناء إمبراطوريتك 🏰",
+                    master: "سيد حرفتك 💎",
+                    wisdom: "مشاركة حكمتك 🦉",
+                    harvest: "الاستمتاع بالحصاد 🍎",
+                    gold: "المعيار الذهبي ✨",
+                    legend: "أسطورة حية 👑"
+                },
+                stats: {
+                    days: { label: "أيام العمر", fact: "هذا أكثر من [val] دورة شروق/غروب!", quote: "كل يوم هو فصل فريد في قصتك." },
+                    hours: { label: "ساعات العمر", fact: "لقد قضيت سنوات في كونك على طبيعتك فقط.", quote: "الوقت الذي قضيته في كتابة إرثك." },
+                    minutes: { label: "دقائق العمر", fact: "كل دقيقة هي فرصة جديدة.", quote: "لحظات لا تحصى جعلت منك ما أنت عليه." },
+                    weeks: { label: "أسابيع العمر", fact: "لقد عشت آلاف العطلات الأسبوعية!", quote: "أيام سبت قضيتها في مطاردة أحلامك." },
+                    months: { label: "أشهر العمر", fact: "لقد دار القمر حول الأرض كل هذه المرات من أجلك.", quote: "شاهدت العالم يتغير من حولك." },
+                    dogYears: { label: "العمر بسنوات الكلاب", fact: "أنت شيخ حكيم في عالم الكلاب!", quote: "رفيقك الوفي سيكون فخوراً بك." },
+                    heartbeats: { label: "نبضات القلب", fact: "يضخ 2000 جالون من الدم يوميًا.", quote: "لم يأخذ قلبك يوم إجازة واحد أبدًا." },
+                    breaths: { label: "الأنفاس", fact: "لقد استنشقت هواءً كافيًا لملء ملعب.", quote: "هواء يمنح الحياة يغذي كل حركاتك." },
+                    meals: { label: "الوجبات", fact: "فكر في كل النكهات التي تذوقتها!", quote: "غذاء لرحلة العمر." },
+                    sleep: { label: "ساعات النوم", fact: "لقد قضيت سنوات في عالم الأحلام.", quote: "شحن الطاقة للمغامرات التي تنتظرك." },
+                    blinks: { label: "رمشات العين", fact: "عيناك تحفة فنية ذاتية التنظيف.", quote: "حماية الطريقة التي ترى بها جمال الحياة." },
+                    sunrises: { label: "شروق الشمس", fact: "لقد نجوت من 100% من أصعب أيامك.", quote: "كل شروق كان بداية جديدة." },
+                    steps: { label: "الخطوات", fact: "أنت مستكشف حقيقي لكوكب الأرض.", quote: "مسار سلكته أنت وحدك." },
+                    words: { label: "الكلمات", fact: "قصتك لا تزال قيد الكتابة.", quote: "أصداء صوتك الفريد." }
+                },
+                scale: [
+                    "🌬️ أنفاسك يمكن أن تملأ <b>[val]</b> من مناطيد الهواء الساخن العملاقة.",
+                    "💡 لقد رمشت بعينك <b>[val]</b> مرة—وهو ما يكفي لتشغيل مفتاح الضوء لقرون.",
+                    "📚 كلماتك المنطوقة ستملأ <b>[val]</b> رواية كاملة.",
+                    "🗺️ خطواتك تعادل المشي من كيب تاون إلى القاهرة <b>[val]</b> مرة.",
+                    "🛁 حجم أنفاسك سيملأ <b>[val]</b> حوض استحمام قياسي.",
+                    "⚡ طاقة قلبك يمكن أن تبقي مصباحًا مضاءً لمدة <b>[val]</b> ساعة."
+                ],
+                perspectives: [
+                    { title: "[val] قمر كامل", sub: "إجمالي الدورات القمرية التي شهدتها منذ ولادتك." },
+                    { title: "[val] مليار كم", sub: "المسافة التي قطعها ضوء الشمس في يوم ميلادك." },
+                    { title: "[val] دورة كاملة", sub: "تقريبًا عدد المرات التي تم فيها استبدال كل خلية في جسمك." },
+                    { title: "[val] غروب شمس", sub: "كل واحد كان بداية جديدة ونهاية جميلة." }
+                ],
+                dyk: [
+                    "ينبض قلبك حوالي 100,000 مرة في اليوم، كل يوم.",
+                    "تنتج لعابًا كافيًا في حياتك لملء حمامي سباحة.",
+                    "يمكن لأنفك تذكر 50,000 رائحة مختلفة.",
+                    "يحتوي جسم الإنسان على حديد كافٍ لصنع مسمار معدني بطول 3 بوصات.",
+                    "جلدك يستبدل نفسه تمامًا كل 27 يومًا.",
+                    "خلال متوسط العمر، سيضخ قلب الإنسان 1.5 مليون برميل من الدم."
+                ]
+            },
+            hi: {
+                title: "आप आँकड़ों में",
+                tagline: "अपने जीवन की अविश्वसनीय कहानी खोजें",
+                dobLabel: "अपनी कहानी जानने के लिए अपनी जन्मतिथि दर्ज करें:",
+                revealBtn: "मेरे जीवन के आँकड़े दिखाएं",
+                loading: "आपके जीवन की गणना की जा रही है...",
+                progress: "आपने एक औसत जीवन (80 वर्ष) का [pct]% जी लिया है",
+                scaleTitle: "आपके अस्तित्व का अविश्वसनीय पैमाना ✨",
+                perspectiveTitle: "आपका जीवन एक परिप्रेक्ष्य में",
+                bdayTitle: "आपके अगले जन्मदिन के लिए उलटी गिनती 🎂",
+                dykTitle: "क्या आप जानते हैं?",
+                userStatTitle: "आपका सबसे चौंकाने वाला नंबर क्या है?",
+                userStatPlaceholder: "जैसे: मैंने 12 देशों की यात्रा की है!",
+                userStatBtn: "मुझे दिखाओ!",
+                userStatLabel: "आपका चौंकाने वाला आँकड़ा",
+                shareTitle: "अपनी कहानी साझा करें",
+                copyBtn: "सभी आँकड़े कॉपी करें",
+                copied: "कॉपी किया गया!",
+                challengeTitle: "एक दोस्त को चुनौती दें 🏆",
+                challengeSub: "देखें कि क्या उनके आँकड़े आपको मात दे सकते हैं",
+                friendNamePlaceholder: "दोस्त का नाम",
+                friendPhonePlaceholder: "फ़ोन नंबर (जैसे: 919876543210)",
+                sendChallenge: "चुनौती भेजें 🚀",
+                twitterChallenge: "Twitter/X पर चुनौती दें 🐦",
+                resetBtn: "फिर से गणना करें",
+                resetSub: "इसे एक दोस्त के साथ साझा करें और देखें कि किसके दिल की धड़कनें सबसे अधिक हैं 👇",
+                footer: "<b>you-in-numbers.vercel.app</b> को अपने किसी प्रियजन के साथ साझा करें ❤️",
+                visitorLabel: "👥 लोग अभी अपने जीवन के बारे में जान रहे हैं:",
+                shareMsg: "मुझे अभी पता चला कि मैं [days] दिनों से जीवित हूँ और मेरा दिल [heartbeats] बार धड़क चुका है 🤯 अपने जीवन के आँकड़े you-in-numbers.vercel.app पर जानें",
+                challengeMsg: "नमस्ते [name]! मुझे अभी पता चला कि मैं [days] दिनों से जीवित हूँ और मेरा दिल [heartbeats] बार धड़क चुका है 🤯 मैं आपको मेरे आँकड़ों को मात देने की चुनौती देता हूँ! अपने आँकड़े यहाँ जानें: you-in-numbers.vercel.app",
+                tapFlip: "(वापस पलटने के लिए क्लिक करें)",
+                funFactLabel: "दिलचस्प तथ्य!",
+                ageCats: {
+                    exploring: "दुनिया की खोज 🌍",
+                    gettingStarted: "अभी तो शुरुआत है 🌱",
+                    prime: "अपने चरम पर 🔥",
+                    building: "अपना साम्राज्य बनाना 🏰",
+                    master: "अपने शिल्प के उस्ताद 💎",
+                    wisdom: "अपनी बुद्धिमत्ता साझा करना 🦉",
+                    harvest: "फसल का आनंद लेना 🍎",
+                    gold: "स्वर्ण मानक ✨",
+                    legend: "एक जीवित किंवदंती 👑"
+                },
+                stats: {
+                    days: { label: "जीवित दिन", fact: "यह [val] से अधिक सूर्योदय/सूर्यास्त चक्र है!", quote: "हर एक दिन आपकी कहानी का एक अनूठा अध्याय है।" },
+                    hours: { label: "जीवित घंटे", fact: "आपने वर्षों सिर्फ खुद बने रहने में बिताए हैं।", quote: "वह समय जो आपने अपनी विरासत लिखने में बिताया।" },
+                    minutes: { label: "जीवित मिनट", fact: "हर मिनट एक नया अवसर है।", quote: "अनगिनत क्षण जिन्होंने आपको वह बनाया जो आप हैं।" },
+                    weeks: { label: "जीवित सप्ताह", fact: "आपने हजारों सप्ताहांत देखे हैं!", quote: "सपनों का पीछा करते हुए बिताए गए शनिवार।" },
+                    months: { label: "जीवित महीने", fact: "चंद्रमा ने आपके लिए पृथ्वी के इतने चक्कर लगाए हैं।", quote: "अपने आसपास की दुनिया को बदलते हुए देखना।" },
+                    dogYears: { label: "कुत्ते के वर्षों में उम्र", fact: "आप कुत्तों की दुनिया में एक बुद्धिमान बुजुर्ग हैं!", quote: "आपका वफादार साथी गर्व करेगा।" },
+                    heartbeats: { label: "दिल की धड़कनें", fact: "यह हर दिन 2,000 गैलन रक्त पंप करता है।", quote: "आपके दिल ने कभी एक दिन की भी छुट्टी नहीं ली।" },
+                    breaths: { label: "ली गई सांसें", fact: "आपने एक स्टेडियम भरने के लिए पर्याप्त हवा ली है।", quote: "जीवन देने वाली हवा आपकी हर हरकत को ऊर्जा देती है।" },
+                    meals: { label: "खाया गया भोजन", fact: "उन सभी स्वादों के बारे में सोचें जो आपने चखे हैं!", quote: "जीवन भर की यात्रा के लिए पोषण।" },
+                    sleep: { label: "सोए हुए घंटे", fact: "आपने सपनों की दुनिया में वर्षों बिताए हैं।", quote: "आने वाले रोमांचों के लिए रिचार्ज होना।" },
+                    blinks: { label: "पलकें झपकाना", fact: "आपकी आँखें खुद को साफ करने वाली उत्कृष्ट कृतियाँ हैं।", quote: "जीवन की सुंदरता को देखने के तरीके की रक्षा करना।" },
+                    sunrises: { label: "देखे गए सूर्योदय", fact: "आप अपने सबसे कठिन दिनों में से 100% से बच गए हैं।", quote: "हर एक एक नई शुरुआत थी।" },
+                    steps: { label: "चले गए कदम", fact: "आप पृथ्वी ग्रह के एक सच्चे खोजकर्ता हैं।", quote: "एक ऐसा रास्ता जो केवल आपके द्वारा चला गया है।" },
+                    words: { label: "बोले गए शब्द", fact: "आपकी कहानी अभी भी लिखी जा रही है।", quote: "आपकी अनूठी आवाज की गूँज।" }
+                },
+                scale: [
+                    "🌬️ आपकी सांसें <b>[val]</b> विशाल गर्म हवा के गुब्बारों को भर सकती हैं।",
+                    "💡 आपने <b>[val]</b> बार पलकें झपकाई हैं—सदियों तक लाइट स्विच को झटकने के लिए पर्याप्त।",
+                    "📚 आपके बोले गए शब्द <b>[val]</b> पूर्ण उपन्यासों को भर देंगे।",
+                    "🗺️ आपके कदम केपटाउन से काहिरा तक <b>[val]</b> बार चलने के बराबर हैं।",
+                    "🛁 आपकी सांसों की मात्रा <b>[val]</b> मानक बाथटब भर देगी।",
+                    "⚡ आपकी हृदय ऊर्जा एक लाइटबल्ब को <b>[val]</b> घंटों तक चालू रख सकती है।"
+                ],
+                perspectives: [
+                    { title: "[val] पूर्णिमा", sub: "जन्म के बाद से आपने कुल कितने चंद्र चक्र देखे हैं।" },
+                    { title: "[val] अरब किलोमीटर", sub: "आपके जन्मदिन पर सूर्य का प्रकाश कितनी दूर तक पहुँचा है।" },
+                    { title: "[val] पूर्ण चक्र", sub: "लगभग कितनी बार आपके शरीर की हर कोशिका बदली जा चुकी है।" },
+                    { title: "[val] सूर्यास्त", sub: "हर एक एक नई शुरुआत और एक सुंदर अंत था।" }
+                ],
+                dyk: [
+                    "आपका दिल हर दिन लगभग 100,000 बार धड़कता है।",
+                    "आप अपने जीवनकाल में दो स्विमिंग पूल भरने के लिए पर्याप्त लार पैदा करते हैं।",
+                    "आपकी नाक 50,000 अलग-अलग सुगंधों को याद रख सकती है।",
+                    "मानव शरीर में 3 इंच लंबी लोहे की कील बनाने के लिए पर्याप्त लोहा होता है।",
+                    "आपकी त्वचा हर 27 दिनों में पूरी तरह से खुद को बदल लेती है।",
+                    "एक औसत जीवनकाल के दौरान, मानव हृदय 1.5 मिलियन बैरल रक्त पंप करेगा।"
+                ]
+            },
+            zh: {
+                title: "数字人生",
+                tagline: "探索你生命的精彩故事",
+                dobLabel: "输入你的出生日期以揭示你的故事：",
+                revealBtn: "揭示我的生命统计",
+                loading: "正在计算你的人生...",
+                progress: "你已经度过了平均寿命（80岁）的 [pct]%",
+                scaleTitle: "你存在的不可思议规模 ✨",
+                perspectiveTitle: "透视你的人生",
+                bdayTitle: "下一次生日倒计时 🎂",
+                dykTitle: "你知道吗？",
+                userStatTitle: "你最惊人的数字是什么？",
+                userStatPlaceholder: "例如：我访问过12个国家！",
+                userStatBtn: "展示给我看！",
+                userStatLabel: "你的惊人统计",
+                shareTitle: "分享你的故事",
+                copyBtn: "复制所有统计数据",
+                copied: "已复制！",
+                challengeTitle: "挑战朋友 🏆",
+                challengeSub: "看看他们的统计数据能否超过你",
+                friendNamePlaceholder: "朋友的名字",
+                friendPhonePlaceholder: "朋友的电话（例如：8613800138000）",
+                sendChallenge: "发送挑战 🚀",
+                twitterChallenge: "在 Twitter/X 上挑战 🐦",
+                resetBtn: "重新计算",
+                resetSub: "与朋友分享，看看谁的心跳次数更多 👇",
+                footer: "与你爱的人分享 <b>you-in-numbers.vercel.app</b> ❤️",
+                visitorLabel: "👥 正在探索人生的人数：",
+                shareMsg: "我刚刚发现我已经活了 [days] 天，我的心跳已经跳动了 [heartbeats] 次 🤯 在 you-in-numbers.vercel.app 找到你自己的生命统计数据",
+                challengeMsg: "嘿 [name]！我刚刚发现我已经活了 [days] 天，我的心跳已经跳动了 [heartbeats] 次 🤯 我挑战你超过我的统计数据！在这里查看你的：you-in-numbers.vercel.app",
+                tapFlip: "（点击翻回正面）",
+                funFactLabel: "趣闻！",
+                ageCats: {
+                    exploring: "探索世界 🌍",
+                    gettingStarted: "刚刚开始 🌱",
+                    prime: "黄金时期 🔥",
+                    building: "建立你的帝国 🏰",
+                    master: "行业大师 💎",
+                    wisdom: "分享智慧 🦉",
+                    harvest: "享受收获 🍎",
+                    gold: "黄金标准 ✨",
+                    legend: "活着的传奇 👑"
+                },
+                stats: {
+                    days: { label: "活过的天数", fact: "那已经超过了 [val] 个日出日落周期！", quote: "每一天都是你故事中独特的一章。" },
+                    hours: { label: "活过的小时", fact: "你已经花了数年时间做最真实的自己。", quote: "你用来书写传奇的时间。" },
+                    minutes: { label: "活过的分钟", fact: "每一分钟都是一个新的机会。", quote: "成就了今天的你的无数瞬间。" },
+                    weeks: { label: "活过的周数", fact: "你已经度过了数千个周末！", quote: "追逐梦想的每个星期六。" },
+                    months: { label: "活过的月数", fact: "月球已经为你绕地球转了这么多次。", quote: "见证周围世界的变化。" },
+                    dogYears: { label: "狗龄", fact: "你在狗狗世界里已经是一位智者了！", quote: "你忠诚的伙伴会为你感到骄傲。" },
+                    heartbeats: { label: "心跳次数", fact: "它每天泵送 2000 加仑的血液。", quote: "你的心脏从未休息过一天。" },
+                    breaths: { label: "呼吸次数", fact: "你吸入的空气足以填满一个体育场。", quote: "赋予生命的空气为你的每一个动作提供动力。" },
+                    meals: { label: "进餐次数", fact: "想想你品尝过的所有美食！", quote: "一生旅程的滋养。" },
+                    sleep: { label: "睡眠小时", fact: "你在梦境世界度过了数年。", quote: "为即将到来的冒险充电。" },
+                    blinks: { label: "眨眼次数", fact: "你的眼睛是自动清洁的杰作。", quote: "保护你观察生活美感的视野。" },
+                    sunrises: { label: "见证的日出", fact: "你度过了 100% 最艰难的日子。", quote: "每一个都是新的开始。" },
+                    steps: { label: "步数", fact: "你是地球星真正的探险家。", quote: "只有你走过的路。" },
+                    words: { label: "说过的单词", fact: "你的故事仍在书写中。", quote: "你独特声音的回响。" }
+                },
+                scale: [
+                    "🌬️ 你的呼吸可以填满 <b>[val]</b> 个巨型热气球。",
+                    "💡 你已经眨眼了 <b>[val]</b> 次——足以开关电灯几个世纪。",
+                    "📚 你说的话可以填满 <b>[val]</b> 本完整的小说。",
+                    "🗺️ 你的步数相当于从开普敦走到开罗 <b>[val]</b> 次。",
+                    "🛁 你的呼吸量可以填满 <b>[val]</b> 个标准浴缸。",
+                    "⚡ 你的心脏能量可以让一个灯泡持续点亮 <b>[val]</b> 小时。"
+                ],
+                perspectives: [
+                    { title: "[val] 次满月", sub: "自出生以来你见证的月亮周期总数。" },
+                    { title: "[val] 亿公里", sub: "你生日那天的阳光已经旅行了多远。" },
+                    { title: "[val] 次完整循环", sub: "你体内的每个细胞大约被替换了多少次。" },
+                    { title: "[val] 次日落", sub: "每一个都是新的开始和美丽的结束。" }
+                ],
+                dyk: [
+                    "你的心脏每天大约跳动 100,000 次。",
+                    "你一生中产生的唾液足以填满两个游泳池。",
+                    "你的鼻子可以记住 50,000 种不同的气味。",
+                    "人体内的铁含量足以制造一根 3 英寸长的金属钉。",
+                    "你的皮肤每 27 天就会完全更换一次。",
+                    "在平均寿命中，人类心脏将泵送 150 万桶血液。"
+                ]
+            },
+            ja: {
+                title: "数字で見るあなた",
+                tagline: "あなたの人生の素晴らしい物語を発見しましょう",
+                dobLabel: "誕生日を入力して物語を解き明かしましょう：",
+                revealBtn: "人生の統計を表示する",
+                loading: "計算中...",
+                progress: "あなたは平均的な人生（80年）の [pct]% を過ごしました",
+                scaleTitle: "あなたの存在の信じられない規模 ✨",
+                perspectiveTitle: "人生を別の視点から見る",
+                bdayTitle: "次の誕生日までのカウントダウン 🎂",
+                dykTitle: "ご存知でしたか？",
+                userStatTitle: "あなたにとって最も驚くべき数字は何ですか？",
+                userStatPlaceholder: "例：12カ国を訪れました！",
+                userStatBtn: "表示する！",
+                userStatLabel: "あなたの驚きの統計",
+                shareTitle: "あなたの物語を共有する",
+                copyBtn: "すべての統計をコピー",
+                copied: "コピーしました！",
+                challengeTitle: "友達に挑戦する 🏆",
+                challengeSub: "友達の統計があなたを超えられるか見てみましょう",
+                friendNamePlaceholder: "友達の名前",
+                friendPhonePlaceholder: "電話番号（例：819012345678）",
+                sendChallenge: "挑戦を送る 🚀",
+                twitterChallenge: "Twitter/Xで挑戦する 🐦",
+                resetBtn: "もう一度計算する",
+                resetSub: "友達と共有して、どちらの心拍数が多いか競いましょう 👇",
+                footer: "愛する人と <b>you-in-numbers.vercel.app</b> を共有しましょう ❤️",
+                visitorLabel: "👥 現在人生を探索中の人数：",
+                shareMsg: "私が生まれてから [days] 日が経ち、心臓が [heartbeats] 回も拍動したことを知りました 🤯 あなたの人生の統計も you-in-numbers.vercel.app で見つけてください",
+                challengeMsg: "やあ [name]！私が生まれてから [days] 日が経ち、心臓が [heartbeats] 回も拍動したことを知ったよ 🤯 僕の統計を超えられるかな？ ここで確かめてみて：you-in-numbers.vercel.app",
+                tapFlip: "（クリックして戻す）",
+                funFactLabel: "豆知識！",
+                ageCats: {
+                    exploring: "世界を探索中 🌍",
+                    gettingStarted: "始まったばかり 🌱",
+                    prime: "全盛期 🔥",
+                    building: "帝国を築く 🏰",
+                    master: "道の達人 💎",
+                    wisdom: "知恵を分かち合う 🦉",
+                    harvest: "収穫を楽しむ 🍎",
+                    gold: "ゴールドスタンダード ✨",
+                    legend: "生きる伝説 👑"
+                },
+                stats: {
+                    days: { label: "生きた日数", fact: "[val] 回以上の日の出と日の入りを経験しました！", quote: "毎日があなたの物語のユニークな一章です。" },
+                    hours: { label: "生きた時間", fact: "ありのままの自分でいるために何年も費やしてきました。", quote: "あなたがレガシーを刻んできた時間。" },
+                    minutes: { label: "生きた分", fact: "毎分が新しいチャンスです。", quote: "今のあなたを作り上げた数え切れない瞬間。" },
+                    weeks: { label: "生きた週数", fact: "何千もの週末を過ごしてきました！", quote: "夢を追いかけた土曜日。" },
+                    months: { label: "生きた月数", fact: "月はあなたの周りをこれほど何度も回りました。", quote: "世界が変わるのを見守ってきました。" },
+                    dogYears: { label: "犬年齢", fact: "犬の世界では、あなたは賢い長老です！", quote: "あなたの忠実な相棒も誇りに思うでしょう。" },
+                    heartbeats: { label: "心拍数", fact: "毎日約7,500リットルの血液を送り出しています。", quote: "あなたの心臓は一日も休んだことがありません。" },
+                    breaths: { label: "呼吸数", fact: "スタジアムを埋め尽くすほどの空気を吸い込んできました。", quote: "命を与える空気があなたのあらゆる動きを支えています。" },
+                    meals: { label: "食事回数", fact: "味わってきたすべての味を思い出してみてください！", quote: "一生の旅のための栄養。" },
+                    sleep: { label: "睡眠時間", fact: "夢の世界で何年も過ごしてきました。", quote: "これからの冒険のために充電する。" },
+                    blinks: { label: "まばたき回数", fact: "あなたの目は自動洗浄される傑作です。", quote: "人生の美しさを見つめる目を守る。" },
+                    sunrises: { label: "日の出の回数", fact: "あなたは最も困難な日の100%を乗り越えてきました。", quote: "一つ一つが新しい始まりでした。" },
+                    steps: { label: "歩数", fact: "あなたは地球という惑星の真の探検家です。", quote: "あなただけが歩んできた道。" },
+                    words: { label: "話した言葉", fact: "あなたの物語はまだ書き続けられています。", quote: "あなた独自の歌声の響き。" }
+                },
+                scale: [
+                    "🌬️ あなたの呼吸は <b>[val]</b> 個の巨大な熱気球を膨らませることができます。",
+                    "💡 あなたは <b>[val]</b> 回まばたきをしました。これは照明スイッチを何世紀も動かし続けるのに十分な回数です。",
+                    "📚 あなたが話した言葉は <b>[val]</b> 冊の完全な小説を満たします。",
+                    "🗺️ あなたの歩数はケープタウンからカイロまで <b>[val]</b> 回歩くのに匹敵します。",
+                    "🛁 あなたの呼吸量は <b>[val]</b> 個の標準的な浴槽を満たします。",
+                    "⚡ あなたの心臓のエネルギーは、電球を <b>[val]</b> 時間点灯させ続けることができます。"
+                ],
+                perspectives: [
+                    { title: "[val] 回の満月", sub: "誕生以来、あなたが目撃した月の満ち欠けの回数。" },
+                    { title: "[val] 億キロメートル", sub: "あなたの誕生日に太陽から出た光が移動した距離。" },
+                    { title: "[val] 回の完全なサイクル", sub: "体内のすべての細胞が入れ替わったおおよその回数。" },
+                    { title: "[val] 回の夕暮れ", sub: "一つ一つが新しい始まりであり、美しい終わりでした。" }
+                ],
+                dyk: [
+                    "あなたの心臓は毎日約10万回拍動しています。",
+                    "あなたは一生の間に、2つのスイミングプールを満たすのに十分な唾液を作ります。",
+                    "あなたの鼻は5万種類の異なる匂いを覚えることができます。",
+                    "人間の体には、長さ3インチの鉄釘を作るのに十分な鉄が含まれています。",
+                    "あなたの皮膚は27日ごとに完全に新しくなります。",
+                    "平均的な寿命の間に、人間の心臓は150万バレルの血液を送り出します。"
+                ]
+            },
+            ru: {
+                title: "Вы в цифрах",
+                tagline: "Откройте для себя невероятную историю вашей жизни",
+                dobLabel: "Введите дату вашего рождения, чтобы узнать вашу историю:",
+                revealBtn: "Раскрыть статистику моей жизни",
+                loading: "Вычисляем вашу жизнь...",
+                progress: "Вы прожили [pct]% от средней продолжительности жизни (80 лет)",
+                scaleTitle: "Невероятный масштаб вашего существования ✨",
+                perspectiveTitle: "Ваша жизнь в перспективе",
+                bdayTitle: "Обратный отсчет до вашего следующего дня рождения 🎂",
+                dykTitle: "А вы знали?",
+                userStatTitle: "Какое ваше самое поразительное число?",
+                userStatPlaceholder: "напр. Я посетил 12 стран!",
+                userStatBtn: "Показать!",
+                userStatLabel: "ВАША ПОРАЗИТЕЛЬНАЯ СТАТИСТИКА",
+                shareTitle: "Поделитесь своей историей",
+                copyBtn: "Копировать всю статистику",
+                copied: "Скопировано!",
+                challengeTitle: "Бросить вызов другу 🏆",
+                challengeSub: "Посмотрите, сможет ли его статистика побить вашу",
+                friendNamePlaceholder: "Имя друга",
+                friendPhonePlaceholder: "Телефон друга (напр. 79001234567)",
+                sendChallenge: "Отправить вызов 🚀",
+                twitterChallenge: "Вызов в Twitter/X 🐦",
+                resetBtn: "РАССЧИТАТЬ СНОВА",
+                resetSub: "Поделитесь этим с другом и посмотрите, у кого больше ударов сердца 👇",
+                footer: "Поделитесь <b>you-in-numbers.vercel.app</b> с тем, кого любите ❤️",
+                visitorLabel: "👥 Людей, изучающих свою жизнь прямо сейчас:",
+                shareMsg: "Я только что узнал, что живу уже [days] дней и мое сердце забилось [heartbeats] раз 🤯 Узнайте статистику вашей жизни на you-in-numbers.vercel.app",
+                challengeMsg: "Привет, [name]! Я только что узнал, что живу уже [days] дней и мое сердце забилось [heartbeats] раз 🤯 Бросаю тебе вызов побить мои показатели! Узнай свои здесь: you-in-numbers.vercel.app",
+                tapFlip: "(Нажмите, чтобы перевернуть)",
+                funFactLabel: "Интересный факт!",
+                ageCats: {
+                    exploring: "Изучение мира 🌍",
+                    gettingStarted: "Только начало 🌱",
+                    prime: "В расцвете сил 🔥",
+                    building: "Создание вашей империи 🏰",
+                    master: "Мастер своего дела 💎",
+                    wisdom: "Передача мудрости 🦉",
+                    harvest: "Сбор урожая 🍎",
+                    gold: "Золотой стандарт ✨",
+                    legend: "Живая легенда 👑"
+                },
+                stats: {
+                    days: { label: "Дней жизни", fact: "Это более [val] циклов восхода и заката!", quote: "Каждый божий день — уникальная глава в вашей истории." },
+                    hours: { label: "Часов жизни", fact: "Вы провели годы, просто будучи собой.", quote: "Время, которое вы потратили на создание своего наследия." },
+                    minutes: { label: "Минут жизни", fact: "Каждая минута — это новая возможность.", quote: "Бесчисленные моменты, сделавшие вас тем, кто вы есть." },
+                    weeks: { label: "Недель жизни", fact: "Вы видели тысячи выходных!", quote: "Субботы, проведенные в погоне за мечтами." },
+                    months: { label: "Месяцев жизни", fact: "Луна столько раз обогнула Землю ради вас.", quote: "Наблюдение за тем, как меняется мир вокруг вас." },
+                    dogYears: { label: "Возраст в собачьих годах", fact: "Вы мудрый старейшина в собачьем мире!", quote: "Ваш верный спутник гордился бы вами." },
+                    heartbeats: { label: "Ударов сердца", fact: "Оно перекачивает 7500 литров крови каждый день.", quote: "Ваше сердце ни разу не брало выходной." },
+                    breaths: { label: "Вдохов сделано", fact: "Вы вдохнули достаточно воздуха, чтобы заполнить стадион.", quote: "Животворный воздух, питающий каждое ваше движение." },
+                    meals: { label: "Съедено блюд", fact: "Подумайте о всех вкусах, которые вы попробовали!", quote: "Питание для путешествия длиною в жизнь." },
+                    sleep: { label: "Часов сна", fact: "Вы провели годы в мире грез.", quote: "Подзарядка для приключений, которые вас ждут." },
+                    blinks: { label: "Морганий", fact: "Ваши глаза — самоочищающиеся шедевры.", quote: "Защита того, как вы видите красоту жизни." },
+                    sunrises: { label: "Увиденных рассветов", fact: "Вы пережили 100% своих самых трудных дней.", quote: "Каждый из них был новым началом." },
+                    steps: { label: "Сделанных шагов", fact: "Вы настоящий исследователь планеты Земля.", quote: "Путь, пройденный только вами." },
+                    words: { label: "Сказанных слов", fact: "Ваша история все еще пишется.", quote: "Эхо вашего уникального голоса." }
+                },
+                scale: [
+                    "🌬️ Ваши вдохи могли бы наполнить <b>[val]</b> гигантских воздушных шаров.",
+                    "💡 Вы моргнули <b>[val]</b> раз — этого достаточно, чтобы щелкать выключателем веками.",
+                    "📚 Ваши сказанные слова заполнили бы <b>[val]</b> полных романов.",
+                    "🗺️ Ваши шаги равны пути от Кейптауна до Каира <b>[val]</b> раз.",
+                    "🛁 Объем вашего дыхания заполнил бы <b>[val]</b> стандартных ванн.",
+                    "⚡ Энергия вашего сердца могла бы питать лампочку в течение <b>[val]</b> часов."
+                ],
+                perspectives: [
+                    { title: "[val] Полнолуний", sub: "Всего лунных циклов, свидетелем которых вы стали с рождения." },
+                    { title: "[val] Миллиардов КМ", sub: "Как далеко улетел свет от солнца в день вашего рождения." },
+                    { title: "[val] Полных циклов", sub: "Примерно столько раз каждая клетка вашего тела была заменена." },
+                    { title: "[val] Закатов", sub: "Каждый из них был новым началом и прекрасным завершением." }
+                ],
+                dyk: [
+                    "Ваше сердце бьется около 100 000 раз в день, каждый день.",
+                    "За всю жизнь вы производите достаточно слюны, чтобы заполнить два бассейна.",
+                    "Ваш нос может помнить 50 000 различных запахов.",
+                    "В человеческом теле достаточно железа, чтобы сделать 7,5-сантиметровый гвоздь.",
+                    "Ваша кожа полностью обновляется каждые 27 дней.",
+                    "За среднюю жизнь человеческое сердце перекачивает 1,5 миллиона баррелей крови."
+                ]
+            },
+            sw: {
+                title: "Wewe katika Nambari",
+                tagline: "Gundua Hadithi ya Ajabu ya Maisha Yako",
+                dobLabel: "Ingiza tarehe yako ya kuzaliwa ili kufunua hadithi yako:",
+                revealBtn: "Funua Takwimu za Maisha Yangu",
+                loading: "Tunakokotoa maisha yako...",
+                progress: "Umeishi [pct]% ya maisha ya wastani (miaka 80)",
+                scaleTitle: "Kiwango cha Ajabu cha Kuwepo Kwako ✨",
+                perspectiveTitle: "Maisha Yako katika Mtazamo",
+                bdayTitle: "Siku Zilizosalia kwa Siku Yako ya Kuzaliwa Ijayo 🎂",
+                dykTitle: "Je, Wajua?",
+                userStatTitle: "Ni nambari gani inayostaajabisha zaidi kwako?",
+                userStatPlaceholder: "mfano. Nimetembelea nchi 12!",
+                userStatBtn: "Nionyeshe!",
+                userStatLabel: "TAKWIMU YAKO INAYOSTAAJABISHA",
+                shareTitle: "Shiriki Hadithi Yako",
+                copyBtn: "Nakili Takwimu Zote",
+                copied: "Imenakiliwa!",
+                challengeTitle: "Mpe Rafiki Changamoto 🏆",
+                challengeSub: "Ona kama takwimu zao zinaweza kushinda zako",
+                friendNamePlaceholder: "Jina la Rafiki",
+                friendPhonePlaceholder: "Simu ya Rafiki (mfano. 254712345678)",
+                sendChallenge: "Tuma Changamoto 🚀",
+                twitterChallenge: "Mpe Changamoto kwenye Twitter/X 🐦",
+                resetBtn: "KOKOTOA TENA",
+                resetSub: "Shiriki hii na rafiki na uone nani ana mapigo mengi ya moyo 👇",
+                footer: "Shiriki <b>you-in-numbers.vercel.app</b> na mtu unayempenda ❤️",
+                visitorLabel: "👥 Watu wanaochunguza maisha yao sasa hivi:",
+                shareMsg: "Nimegundua tu kuwa nimekuwa hai kwa siku [days] na moyo wangu umepiga mara [heartbeats] mara 🤯 Pata takwimu zako za maisha kwenye you-in-numbers.vercel.app",
+                challengeMsg: "Hujambo [name]! Nimegundua tu kuwa nimekuwa hai kwa siku [days] na moyo wangu umepiga mara [heartbeats] mara 🤯 Nakupa changamoto ya kushinda takwimu zangu! Pata zako hapa: you-in-numbers.vercel.app",
+                tapFlip: "(Bonyeza kugeuza nyuma)",
+                funFactLabel: "Ukweli wa Kufurahisha!",
+                ageCats: {
+                    exploring: "Kuchunguza ulimwengu 🌍",
+                    gettingStarted: "Ndiyo kwanza unaanza 🌱",
+                    prime: "Katika ubora wako 🔥",
+                    building: "Kujenga himaya yako 🏰",
+                    master: "Mtaalamu wa fani yako 💎",
+                    wisdom: "Kushiriki hekima yako 🦉",
+                    harvest: "Kufurahia mavuno 🍎",
+                    gold: "Kiwango cha dhahabu ✨",
+                    legend: "Hadithi inayoishi 👑"
+                },
+                stats: {
+                    days: { label: "Siku Ulizoishi", fact: "Hiyo ni zaidi ya mizunguko [val] ya jua kuchomoza/kuzama!", quote: "Kila siku ni sura ya kipekee katika hadithi yako." },
+                    hours: { label: "Saa Ulizoishi", fact: "Umetumia miaka kuwa wewe mwenyewe.", quote: "Muda uliotumia kuandika urithi wako." },
+                    minutes: { label: "Dakika Ulizoishi", fact: "Kila dakika ni fursa mpya.", quote: "Muda mwingi usioweza kuhesabika uliokufanya uwe jinsi ulivyo." },
+                    weeks: { label: "Wiki Ulizoishi", fact: "Umeona maelfu ya wikendi!", quote: "Jumapili zilizotumiwa kufuata ndoto zako." },
+                    months: { label: "Miezi Ulizoishi", fact: "Mwezi umezunguka Dunia mara hizi zote kwa ajili yako.", quote: "Kushuhudia ulimwengu ukibadilika karibu nawe." },
+                    dogYears: { label: "Umri katika Miaka ya Mbwa", fact: "Wewe ni mzee mwenye hekima katika ulimwengu wa mbwa!", quote: "Rafiki yako mwaminifu angejivunia." },
+                    heartbeats: { label: "Mapigo ya Moyo", fact: "Husukuma galoni 2,000 za damu kila siku.", quote: "Moyo wako haujawahi kupumzika hata siku moja." },
+                    breaths: { label: "Pumzi Ulizovuta", fact: "Umevuta hewa ya kutosha kujaza uwanja wa michezo.", quote: "Hewa inayotoa uhai inayochochea kila hatua yako." },
+                    meals: { label: "Milo Uliyokula", fact: "Fikiria ladha zote ulizoonja!", quote: "Lishe kwa ajili ya safari ya maisha yote." },
+                    sleep: { label: "Saa Ulizolala", fact: "Umetumia miaka katika ulimwengu wa ndoto.", quote: "Kujaza nguvu kwa ajili ya matukio yanayokuja." },
+                    blinks: { label: "Mara Ulizopepesa Macho", fact: "Macho yako ni kazi bora inayojiosha yenyewe.", quote: "Kulinda jinsi unavyoona uzuri wa maisha." },
+                    sunrises: { label: "Macheo Ulivyoshuhudia", fact: "Umenasurika 100% ya siku zako ngumu zaidi.", quote: "Kila jedna ilikuwa mwanzo mpya." },
+                    steps: { label: "Hatua Ulizopiga", fact: "Wewe ni mgunduzi wa kweli wa sayari Dunia.", quote: "Njia iliyotembelewa na wewe pekee." },
+                    words: { label: "Maneno Ulivyosema", fact: "Hadithi yako bado inaandikwa.", quote: "Mwangwi wa sauti yako ya kipekee." }
+                },
+                scale: [
+                    "🌬️ Pumzi zako zingeweza kujaza puto <b>[val]</b> kubwa za hewa ya moto.",
+                    "💡 Umepepesa macho mara <b>[val]</b>—ya kutosha kuwasha na kuzima swichi ya taa kwa karne nyingi.",
+                    "📚 Maneno uliyosema yangejaza riwaya <b>[val]</b> kamili.",
+                    "🗺️ Hatua zako ni sawa na kutembea kutoka Cape Town hadi Cairo mara <b>[val]</b>.",
+                    "🛁 Kiasi cha pumzi yako kingejaza mabafu <b>[val]</b> ya kawaida.",
+                    "⚡ Nishati ya moyo wako ingeweza kuwasha balbu kwa saa <b>[val]</b>."
+                ],
+                perspectives: [
+                    { title: "[val] Miezi Miviringo", sub: "Jumla ya mizunguko ya mwezi uliyoshuhudia tangu kuzaliwa." },
+                    { title: "Kilomita Bilioni [val]", sub: "Jinsi mwanga wa jua ulivyosafiri mbali siku ya kuzaliwa kwako." },
+                    { title: "Mizunguko [val] Kamili", sub: "Takriban ni mara ngapi kila seli katika mwili wako imebadilishwa." },
+                    { title: "Macheo [val]", sub: "Kila jedna ilikuwa mwanzo mpya na mwisho mzuri." }
+                ],
+                dyk: [
+                    "Moyo wako hupiga karibu mara 100,000 kwa siku, kila siku.",
+                    "Unatengeneza mate ya kutosha katika maisha yako kujaza mabwawa mawili ya kuogelea.",
+                    "Pua yako inaweza kukumbuka harufu 50,000 tofauti.",
+                    "Mwili wa binadamu una chuma cha kutosha kutengeneza msumari wa inchi 3.",
+                    "Ngozi yako hujibadilisha kabisa kila baada ya siku 27.",
+                    "Katika maisha ya wastani, moyo wa binadamu utasukuma mapipa milioni 1.5 ya damu."
+                ]
+            },
+            af: {
+                title: "Jy in Getalle",
+                tagline: "Ontdek die Ongelooflike Verhaal van Jou Lewe",
+                dobLabel: "Voer jou geboortedatum in om jou verhaal te onthul:",
+                revealBtn: "Onthul My Lewenstatistieke",
+                loading: "Bereken jou lewe...",
+                progress: "Jy het [pct]% van 'n gemiddelde lewe geleef (80 jaar)",
+                scaleTitle: "Die Ongelooflike Skaal van Jou Bestaan ✨",
+                perspectiveTitle: "Jou Lewe in Perspektief",
+                bdayTitle: "Aftelling na Jou Volgende Verjaarsdag 🎂",
+                dykTitle: "Het Jy Geweet?",
+                userStatTitle: "Wat is jou mees verstommende getal?",
+                userStatPlaceholder: "bv. Ek het 12 lande besoek!",
+                userStatBtn: "Wys My!",
+                userStatLabel: "JOU VERSTOMMENDE STATISTIEK",
+                shareTitle: "Deel Jou Verhaal",
+                copyBtn: "Kopieer Alle Statistieke",
+                copied: "Gekopieer!",
+                challengeTitle: "Daag 'n Vriend Uit 🏆",
+                challengeSub: "Kyk of hulle statistieke joune kan klop",
+                friendNamePlaceholder: "Vriend se Naam",
+                friendPhonePlaceholder: "Vriend se Foon (bv. 27821234567)",
+                sendChallenge: "Stuur Uitdaging 🚀",
+                twitterChallenge: "Daag uit op Twitter/X 🐦",
+                resetBtn: "BEREKEN WEER",
+                resetSub: "Deel dit met 'n vrient en kyk wie die meeste hartklop het 👇",
+                footer: "Deel <b>you-in-numbers.vercel.app</b> met iemand vir wie jy lief is ❤️",
+                visitorLabel: "👥 Mense wat nou hul lewens verken:",
+                shareMsg: "Ek het pas ontdek ek is al vir [days] dae lewendig und my hart het al [heartbeats] keer geklop 🤯 Vind jou eie lewenstatistieke by you-in-numbers.vercel.app",
+                challengeMsg: "Haai [name]! Ek het pas uitgevind ek is al vir [days] dae lewendig und my hart het al [heartbeats] keer geklop 🤯 Ek daag jou uit om my statistieke te klop! Vind joune hier: you-in-numbers.vercel.app",
+                tapFlip: "(Klik om terug te draai)",
+                funFactLabel: "Prettige Feit!",
+                ageCats: {
+                    exploring: "Verken die wêreld 🌍",
+                    gettingStarted: "Net besig om te begin 🌱",
+                    prime: "In jou fleur 🔥",
+                    building: "Bou jou ryk 🏰",
+                    master: "Meester van jou ambag 💎",
+                    wisdom: "Deel jou wysheid 🦉",
+                    harvest: "Geniet die oes 🍎",
+                    gold: "Die goue standaard ✨",
+                    legend: "'n Lewende legende 👑"
+                },
+                stats: {
+                    days: { label: "Dae Lewendig", fact: "Dit is meer as [val] sonsopkoms/sonsondergang-siklusse!", quote: "Elke enkele dag is 'n unieke hoofstuk in jou verhaal." },
+                    hours: { label: "Ure Lewendig", fact: "Jy het jare spandeer om net jouself te wees.", quote: "Tyd wat jy spandeer het om jou nalatenskap te skryf." },
+                    minutes: { label: "Minute Lewendig", fact: "Elke minuut is 'n noue geleentheid.", quote: "Ontelbare oomblikke wat gemaak het wie jy is." },
+                    weeks: { label: "Weke Lewendig", fact: "Jy het duisende naweke gesien!", quote: "Saterdae spandeer om jou drome na te jaag." },
+                    months: { label: "Maande Lewendig", fact: "Die maan het die Aarde al soveel keer vir jou omring.", quote: "Getuie van hoe die wêreld rondom jou verander." },
+                    dogYears: { label: "Ouderdom in Hond-jare", fact: "Jy is 'n wyse ouderling in die honde-wêreld!", quote: "Jou getroue metgesel sou trots wees." },
+                    heartbeats: { label: "Hartklop", fact: "Dit pomp 7 500 liter bloed elke dag.", quote: "Jou hart het nog nooit 'n dag afgeneem nie." },
+                    breaths: { label: "Asemhalings", fact: "Jy het genoeg lug ingeasem om 'n stadion te vul.", quote: "Lewegewende lug wat elke beweging van jou dryf." },
+                    meals: { label: "Maaltye Geëet", fact: "Dink aan al die smake wat jy al geproe het!", quote: "Voeding vir the reis van 'n leeftyd." },
+                    sleep: { label: "Ure Geslaap", fact: "Jy het jare in die droomwêreld spandeer.", quote: "Herlaai vir die avonture wat wag." },
+                    blinks: { label: "Keer Geknip", fact: "Jou oë is self-skoonmakende meesterstukke.", quote: "Beskerm die manier waarop jy die skoonheid in die lewe sien." },
+                    sunrises: { label: "Sonsopkomste Gesien", fact: "Jy het 100% van jou moeilikste dae oorleef.", quote: "Elke enkele een was 'n vars begin." },
+                    steps: { label: "Stappe Geneem", fact: "Jy is 'n ware ontdekkingsreisiger van planeet Aarde.", quote: "'n Pad wat net deur jou geloop is." },
+                    words: { label: "Woorde Gespreek", fact: "Jou verhaal word nog steeds geskryf.", quote: "Die eggo's van jou unieke stem." }
+                },
+                scale: [
+                    "🌬️ Jou asemhalings kan <b>[val]</b> reuse-warmloftballonne vul.",
+                    "💡 Jy het <b>[val]</b> keer geknip—genoeg om 'n ligskakelaar vir eeue lank te flik.",
+                    "📚 Jou gesproke woorde sal <b>[val]</b> volledige romans vul.",
+                    "🗺️ Jou stappe is gelyk aan stap van Kaapstad na Kaïro <b>[val]</b> keer.",
+                    "🛁 Jou asemhalingsvolume sal <b>[val]</b> standaard badkaaiens vul.",
+                    "⚡ Jou hartenergie kan 'n gloeilamp vir <b>[val]</b> uur aanhou."
+                ],
+                perspectives: [
+                    { title: "[val] Volmane", sub: "Totale maansiklusse wat jy sedert geboorte gesien het." },
+                    { title: "[val] Miljard KM", sub: "Hoe ver die lig van die son op jou verjaarsdag gereis het." },
+                    { title: "[val] Volledige Siklusse", sub: "Ongeveer hoeveel keer elke sel in jou liggaam vervang is." },
+                    { title: "[val] Sonsondergange", sub: "Elke enkele een was 'n vars begin und 'n pragtige einde." }
+                ],
+                dyk: [
+                    "Jou hart klop ongeveer 100 000 keer per dag, elke dag.",
+                    "Jy produseer genoeg speeksel in jou leeftyd om twee swembaddens te vul.",
+                    "Jou neus kan 50 000 verskillende geure onthou.",
+                    "Die menslike liggaam het genoeg yster in hom om 'n metaalspyker van 7,5 cm lank te maak.",
+                    "Jou vel vervang homself heeltemal elke 27 dae.",
+                    "Gedurende 'n gemiddelde leeftyd sal die menslike hart 1,5 miljoen vate bloed pomp."
+                ]
             }
         };
 
-        // Current Language
         let currentLang = 'en';
+        let currentStats = {};
+        let soundOn = true;
+        let dykInterval;
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
         function setLanguage(lang) {
             currentLang = lang;
             document.getElementById('lang-dropdown').classList.remove('show');
             const l = translations[lang] || translations['en'];
             
-            document.getElementById('current-lang-name').textContent = document.querySelector(`.lang-option[onclick="setLanguage('${lang}')"]`).textContent;
+            document.getElementById('current-lang-name').textContent = lang.toUpperCase();
             document.getElementById('main-title').textContent = l.title;
             document.getElementById('dob-label').textContent = l.dobLabel;
             document.getElementById('reveal-btn').textContent = l.revealBtn;
@@ -941,79 +1787,20 @@
             document.getElementById('copy-btn').textContent = l.copyBtn;
             document.getElementById('challenge-title').textContent = l.challengeTitle;
             document.getElementById('challenge-sub').textContent = l.challengeSub;
-            document.getElementById('friend-name').placeholder = l.friendName;
-            document.getElementById('friend-phone').placeholder = l.friendPhone;
+            document.getElementById('friend-name').placeholder = l.friendNamePlaceholder;
+            document.getElementById('friend-phone').placeholder = l.friendPhonePlaceholder;
             document.getElementById('send-challenge-btn').textContent = l.sendChallenge;
             document.getElementById('twitter-challenge-btn').textContent = l.twitterChallenge;
             document.getElementById('big-reset-btn').textContent = l.resetBtn;
             document.getElementById('reset-subtext').textContent = l.resetSub;
-            document.getElementById('footer-text').innerHTML = l.footer.replace('you-in-numbers.vercel.app', '<b>you-in-numbers.vercel.app</b>');
             document.getElementById('visitor-label').textContent = l.visitorLabel;
+            document.getElementById('footer-text').innerHTML = l.footer;
 
             if (Object.keys(currentStats).length > 0) {
-                const lifePct = Math.min((currentStats.days / (365.25 * 80)) * 100, 100).toFixed(1);
-                document.getElementById('progress-text').textContent = l.progress.replace('[pct]', lifePct);
                 updateStatsUI();
             }
         }
 
-        document.getElementById('lang-btn').onclick = (e) => {
-            e.stopPropagation();
-            document.getElementById('lang-dropdown').classList.toggle('show');
-        };
-
-        window.onclick = () => {
-            document.getElementById('lang-dropdown').classList.remove('show');
-        };
-
-        // State
-        let soundOn = true;
-        let currentStats = {};
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-        // 1. Typewriter Animation
-        const typewriterEl = document.getElementById('typewriter');
-        let titleIdx = 0;
-        function typeWriter() {
-            const l = translations[currentLang] || translations['en'];
-            const titleText = l.tagline;
-            if (titleIdx < titleText.length) {
-                typewriterEl.textContent += titleText.charAt(titleIdx);
-                titleIdx++;
-                setTimeout(typeWriter, 50);
-            }
-        }
-        window.onload = typeWriter;
-
-        // 2. Visitor Counter
-        let vCount = 8400 + Math.floor(Math.random() * 800);
-        setInterval(() => {
-            vCount += Math.floor(Math.random() * 5);
-            document.getElementById('v-count').textContent = vCount.toLocaleString();
-        }, 3000);
-
-        // 3. Sound Toggle
-        const soundBtn = document.getElementById('sound-toggle');
-        soundBtn.onclick = () => {
-            soundOn = !soundOn;
-            soundBtn.textContent = soundOn ? "🔊" : "🔈";
-        };
-
-        function playDing() {
-            if (!soundOn) return;
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(880, audioCtx.currentTime);
-            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
-            osc.start();
-            osc.stop(audioCtx.currentTime + 0.1);
-        }
-
-        // 4. Stats Config (Labels and quotes will be translated in updateStatsUI)
         const statsConfig = [
             { id: 'days', emoji: '📅' },
             { id: 'hours', emoji: '⏳' },
@@ -1031,40 +1818,15 @@
             { id: 'words', emoji: '🗣️' }
         ];
 
-        // 5. Reveal Logic
-        document.getElementById('reveal-btn').onclick = () => {
-            const dobValue = document.getElementById('dob').value;
-            if (!dobValue) return alert("Please select your birth date!");
-
-            document.getElementById('input-section').style.display = 'none';
-            const loader = document.getElementById('loading-screen');
-            loader.style.display = 'block';
-
-            let dots = "";
-            const dotInt = setInterval(() => {
-                dots = dots.length >= 3 ? "" : dots + ".";
-                const l = translations[currentLang] || translations['en'];
-                document.getElementById('loading-text').textContent = l.loading.replace('...', '') + dots;
-            }, 500);
-
-            setTimeout(() => {
-                clearInterval(dotInt);
-                loader.style.display = 'none';
-                showResults(dobValue);
-                fireConfetti();
-            }, 2500);
-        };
-
-        function showResults(dob) {
-            document.getElementById('results-area').style.display = 'block';
+        function calculateAll(dob) {
             const birthDate = new Date(dob);
             const now = new Date();
             const diffMs = now - birthDate;
             const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-            const years = days / 365.25;
+            const years = diffMs / (1000 * 60 * 60 * 24 * 365.25);
 
-            currentStats = {
-                days: days,
+            return {
+                days,
                 hours: Math.floor(diffMs / (1000 * 60 * 60)),
                 minutes: Math.floor(diffMs / (1000 * 60)),
                 weeks: Math.floor(days / 7),
@@ -1077,87 +1839,171 @@
                 blinks: days * 15000,
                 sunrises: days,
                 steps: days * 8000,
-                words: days * 16000
+                words: days * 16000,
+                years
             };
-
-            updateStatsUI();
-            startBdayCountdown(birthDate);
-            startRotatingFacts();
         }
 
         function updateStatsUI() {
             const l = translations[currentLang] || translations['en'];
+            const stats = currentStats;
+
+            const lifePct = Math.min((stats.years / 80) * 100, 100).toFixed(1);
+            document.getElementById('progress-text').textContent = l.progress.replace('[pct]', lifePct);
+            setTimeout(() => {
+                document.getElementById('progress-fill').style.width = lifePct + "%";
+            }, 500);
+
+            let cat = "";
+            const y = stats.years;
+            if (y < 13) cat = l.ageCats.exploring;
+            else if (y < 20) cat = l.ageCats.gettingStarted;
+            else if (y < 30) cat = l.ageCats.prime;
+            else if (y < 40) cat = l.ageCats.building;
+            else if (y < 50) cat = l.ageCats.master;
+            else if (y < 60) cat = l.ageCats.wisdom;
+            else if (y < 70) cat = l.ageCats.harvest;
+            else if (y < 80) cat = l.ageCats.gold;
+            else cat = l.ageCats.legend;
+            document.getElementById('age-cat-display').textContent = cat;
+
             const grid = document.getElementById('stats-grid');
             grid.innerHTML = "";
-            
             statsConfig.forEach((c) => {
+                const s = l.stats[c.id];
                 const card = document.createElement('div');
                 card.className = 'stat-card';
                 card.onclick = function() { this.classList.toggle('flipped'); };
-                
-                // Temporary simplified quotes/facts for multilingual
-                const label = c.id.toUpperCase();
-                const quote = "Discover the story of your life.";
-                const fact = "This is a unique moment in history.";
-
                 card.innerHTML = `
-                    <div class="stat-card-front">
-                        <span class="emoji">${c.emoji}</span>
-                        <div class="stat-value" id="val-${c.id}">${currentStats[c.id].toLocaleString()}</div>
-                        <div class="stat-label">${label}</div>
-                    </div>
-                    <div class="stat-card-back">
-                        <h3 style="color:var(--vivid-yellow); margin-bottom:15px;">${l.funFactLabel}</h3>
-                        <p style="font-size:1.1rem; line-height:1.4;">${fact}</p>
-                        <p style="margin-top:20px; font-size:0.85rem; opacity:0.7;">${l.tapFlip}</p>
+                    <div class="stat-card-inner">
+                        <div class="stat-card-front">
+                            <span class="emoji">${c.emoji}</span>
+                            <div class="stat-value" id="val-${c.id}">0</div>
+                            <div class="stat-label">${s.label}</div>
+                            <div class="stat-quote">"${s.quote}"</div>
+                        </div>
+                        <div class="stat-card-back">
+                            <h3 style="color:var(--vivid-yellow); margin-bottom:15px;">${l.funFactLabel}</h3>
+                            <p style="font-size:1.1rem; line-height:1.4;">${s.fact.replace('[val]', stats[c.id].toLocaleString())}</p>
+                            <p style="margin-top:20px; font-size:0.85rem; opacity:0.7;">${l.tapFlip}</p>
+                        </div>
                     </div>
                 `;
                 grid.appendChild(card);
+                animateNumber(document.getElementById(`val-${c.id}`), stats[c.id], 2000);
             });
 
-            // Perspective Grid (Clean individual cards)
+            const comps = document.getElementById('comparisons-list');
+            const balloonCount = (stats.breaths * 0.0005 / 3000).toFixed(1); 
+            const novels = (stats.words / 60000).toFixed(1);
+            const walkToCairo = (stats.steps * 0.76 / 10000000).toFixed(2);
+            const energyPower = (stats.heartbeats * 1.5 / 3600).toFixed(1);
+            const bathtubFill = (stats.breaths * 0.0005 / 0.15).toFixed(0);
+
+            const scaleData = [balloonCount, stats.blinks.toLocaleString(), novels, walkToCairo, bathtubFill, energyPower];
+            comps.innerHTML = "";
+            l.scale.forEach((item, i) => {
+                const div = document.createElement('div');
+                div.className = 'comparison-item';
+                div.innerHTML = item.replace('[val]', scaleData[i]);
+                comps.appendChild(div);
+            });
+
             const pList = document.getElementById('perspectives-list');
             pList.innerHTML = "";
-            
-            const days = currentStats.days;
-            const fullMoons = Math.floor(days / 29.53);
-            const pools = (days * 23000 * 0.5 / 2500000).toFixed(1);
-            const spaceKm = (days * 25.92).toFixed(1);
+            const fullMoons = Math.floor(stats.days / 29.53);
+            const spaceKm = (stats.days * 25.92 / 10).toFixed(1);
+            const cellCycles = (stats.years / 7).toFixed(1);
 
-            const pFacts = [
-                { emoji: '🌕', title: `${fullMoons} Full Moons`, sub: "Total lunar cycles you have lived through since birth." },
-                { emoji: '🏊', title: `${pools} Olympic Pools`, sub: "The total volume of air you have breathed in your life." },
-                { emoji: '🚀', title: `${spaceKm} Billion KM`, sub: "How far the light from the sun on your birthday has traveled." },
-                { emoji: '🌅', title: `${days.toLocaleString()} Sunsets`, sub: "Every single one was a fresh start and a beautiful ending." }
-            ];
-
-            pFacts.forEach(pf => {
+            const pValues = [fullMoons, spaceKm, cellCycles, stats.days.toLocaleString()];
+            l.perspectives.forEach((pf, i) => {
                 const pCard = document.createElement('div');
                 pCard.className = 'perspective-card';
-                pCard.innerHTML = `
-                    <div class="emoji">${pf.emoji}</div>
-                    <h3>${pf.title}</h3>
-                    <p>${pf.sub}</p>
-                `;
+                const emoji = ['🌕', '🚀', '🧬', '🌅'][i];
+                pCard.innerHTML = `<div class="emoji">${emoji}</div><h3>${pf.title.replace('[val]', pValues[i])}</h3><p>${pf.sub}</p>`;
                 pList.appendChild(pCard);
             });
+
+            if (dykInterval) clearInterval(dykInterval);
+            let dykIndex = 0;
+            const dykEl = document.getElementById('rotating-fact');
+            const updateDYK = () => {
+                dykEl.style.opacity = 0;
+                setTimeout(() => {
+                    dykEl.textContent = l.dyk[dykIndex];
+                    dykEl.style.opacity = 1;
+                    dykIndex = (dykIndex + 1) % l.dyk.length;
+                }, 1000);
+            };
+            updateDYK();
+            dykInterval = setInterval(updateDYK, 8000);
+        }
+
+        function animateNumber(el, target, duration) {
+            let start = null;
+            function step(ts) {
+                if (!start) start = ts;
+                const progress = Math.min((ts - start) / duration, 1);
+                el.textContent = Math.floor(progress * target).toLocaleString();
+                if (progress < 1) requestAnimationFrame(step);
+                else playDing();
+            }
+            requestAnimationFrame(step);
+        }
+
+        function playDing() {
+            if (!soundOn) return;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain); gain.connect(audioCtx.destination);
+            osc.type = 'sine'; osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+            osc.start(); osc.stop(audioCtx.currentTime + 0.1);
         }
 
         function fireConfetti() {
-            for (let i = 0; i < 100; i++) {
-                const c = document.createElement('div');
-                c.className = 'confetti';
-                c.style.left = Math.random() * 100 + "vw";
-                c.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-                document.body.appendChild(c);
-                const anim = c.animate([{ top: '-10px', opacity: 1 }, { top: '100vh', opacity: 0 }], { duration: 3000 });
-                anim.onfinish = () => c.remove();
-            }
+            const duration = 5 * 1000;
+            const animationEnd = Date.now() + duration;
+
+            function randomInRange(min, max) { return Math.random() * (max - min) + min; }
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+                if (timeLeft <= 0) return clearInterval(interval);
+                const colors = ['#bb86fc', '#03dac6', '#ff007f', '#00e5ff', '#f9ff00'];
+                
+                for(let i=0; i<5; i++) {
+                    const c = document.createElement('div');
+                    c.className = 'confetti';
+                    c.style.left = Math.random() * 100 + "vw";
+                    c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    document.body.appendChild(c);
+                    const anim = c.animate([{ top: '-20px', opacity: 1, transform: 'rotate(0deg)' }, { top: '120vh', opacity: 0, transform: `rotate(${randomInRange(0, 1000)}deg)` }], { duration: 2000 + Math.random() * 3000 });
+                    anim.onfinish = () => c.remove();
+                }
+            }, 250);
         }
+
+        document.getElementById('reveal-btn').onclick = () => {
+            const dob = document.getElementById('dob').value;
+            if (!dob) return alert("Please select your birth date!");
+            document.getElementById('input-section').style.display = 'none';
+            document.getElementById('loading-screen').style.display = 'block';
+            
+            setTimeout(() => {
+                document.getElementById('loading-screen').style.display = 'none';
+                document.getElementById('results-area').style.display = 'block';
+                currentStats = calculateAll(dob);
+                updateStatsUI();
+                fireConfetti();
+                startBdayCountdown(new Date(dob));
+            }, 2500);
+        };
 
         function startBdayCountdown(birthDate) {
             const el = document.getElementById('bday-countdown');
-            setInterval(() => {
+            const update = () => {
                 const now = new Date();
                 let next = new Date(now.getFullYear(), birthDate.getMonth(), birthDate.getDate());
                 if (next < now) next.setFullYear(now.getFullYear() + 1);
@@ -1167,61 +2013,97 @@
                 const m = Math.floor((diff % (1000*60*60)) / (1000*60));
                 const s = Math.floor((diff % (1000*60)) / 1000);
                 el.textContent = `${d}d ${h}h ${m}m ${s}s`;
-            }, 1000);
+                if (diff < 0) clearInterval(timer);
+            };
+            update();
+            const timer = setInterval(update, 1000);
         }
 
-        function startRotatingFacts() {
-            const facts = ["Your heart is the size of your fist.", "You are made of stardust.", "Your brain never sleeps."];
-            let fIdx = 0;
-            const el = document.getElementById('rotating-fact');
-            setInterval(() => {
-                el.style.opacity = 0;
-                setTimeout(() => {
-                    el.textContent = facts[fIdx];
-                    el.style.opacity = 1;
-                    fIdx = (fIdx + 1) % facts.length;
-                }, 1000);
-            }, 8000);
-        }
+        let vCount = 8400 + Math.floor(Math.random() * 800);
+        document.getElementById('v-count').textContent = vCount.toLocaleString();
+        setInterval(() => {
+            vCount += Math.floor(Math.random() * 3);
+            document.getElementById('v-count').textContent = vCount.toLocaleString();
+        }, 4000);
 
-        window.share = (platform) => {
+        document.getElementById('lang-btn').onclick = (e) => {
+            e.stopPropagation();
+            document.getElementById('lang-dropdown').classList.toggle('show');
+        };
+        window.onclick = () => document.getElementById('lang-dropdown').classList.remove('show');
+
+        const soundBtn = document.getElementById('sound-toggle');
+        soundBtn.onclick = () => {
+            soundOn = !soundOn;
+            soundBtn.textContent = soundOn ? "🔊" : "🔈";
+        };
+
+        window.share = (p) => {
             const l = translations[currentLang] || translations['en'];
             const text = l.shareMsg.replace('[days]', currentStats.days.toLocaleString()).replace('[heartbeats]', currentStats.heartbeats.toLocaleString());
             const url = "https://you-in-numbers.vercel.app";
-            if (platform === 'whatsapp') window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
-            else if (platform === 'twitter') window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`);
-            else if (platform === 'facebook') window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
+            if (p === 'whatsapp') window.open(`https://wa.me/?text=${encodeURIComponent(text + " " + url)}`);
+            else if (p === 'twitter') window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`);
+            else if (p === 'facebook') window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
         };
 
-        window.sendChallenge = (platform) => {
+        window.sendChallenge = (p) => {
             const l = translations[currentLang] || translations['en'];
-            const name = document.getElementById('friend-name').value || "friend";
+            const name = document.getElementById('friend-name').value || "Friend";
             const phone = document.getElementById('friend-phone').value.replace(/\D/g, '');
             const msg = l.challengeMsg.replace('[name]', name).replace('[days]', currentStats.days.toLocaleString()).replace('[heartbeats]', currentStats.heartbeats.toLocaleString());
-            if (platform === 'whatsapp') {
+            const url = "https://you-in-numbers.vercel.app";
+            if (p === 'whatsapp') {
                 if (!phone) return alert("Please enter a phone number!");
-                window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`);
-            } else if (platform === 'twitter') window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(msg)}`);
+                window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg + " " + url)}`);
+            } else if (p === 'twitter') window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(msg)}&url=${encodeURIComponent(url)}`);
         };
 
         window.copyToClipboard = () => {
-            const text = `Days: ${currentStats.days.toLocaleString()}\nHeartbeats: ${currentStats.heartbeats.toLocaleString()}`;
+            const l = translations[currentLang] || translations['en'];
+            const text = l.shareMsg.replace('[days]', currentStats.days.toLocaleString()).replace('[heartbeats]', currentStats.heartbeats.toLocaleString()) + " https://you-in-numbers.vercel.app";
             navigator.clipboard.writeText(text);
             const btn = document.getElementById('copy-btn');
-            const l = translations[currentLang] || translations['en'];
+            const old = btn.textContent;
             btn.textContent = l.copied;
-            setTimeout(() => btn.textContent = l.copyBtn, 2000);
+            setTimeout(() => btn.textContent = old, 2000);
         };
 
-        document.getElementById('big-reset-btn').onclick = () => location.reload();
         document.getElementById('add-user-stat').onclick = () => {
             const val = document.getElementById('user-stat-text').value;
             if (!val) return;
             const l = translations[currentLang] || translations['en'];
             const card = document.getElementById('user-stat-card');
             card.style.display = 'block';
-            card.innerHTML = `<div class="perspective-card" style="background:var(--success); color:black;"><div class="emoji">🌟</div><h3>"${val}"</h3><p>${l.userStatLabel}</p></div>`;
+            card.innerHTML = `
+                <div class="perspective-card" style="border-color: var(--success); background: rgba(3, 218, 198, 0.1);">
+                    <div class="emoji">⭐</div>
+                    <h3>${l.userStatLabel}</h3>
+                    <p style="font-size: 1.5rem; color: white; font-weight: 800;">${val}</p>
+                </div>
+            `;
+            document.getElementById('user-stat-text').value = "";
         };
+
+        document.getElementById('big-reset-btn').onclick = () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => location.reload(), 500);
+        };
+
+        const typeWriter = () => {
+            const typewriterEl = document.getElementById('typewriter');
+            const l = translations[currentLang] || translations['en'];
+            const text = l.tagline;
+            let i = 0;
+            typewriterEl.textContent = "";
+            const interval = setInterval(() => {
+                if (i < text.length) {
+                    typewriterEl.textContent += text.charAt(i);
+                    i++;
+                } else clearInterval(interval);
+            }, 50);
+        };
+        window.onload = typeWriter;
     </script>
 </body>
 </html>
