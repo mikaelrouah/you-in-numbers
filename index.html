@@ -63,7 +63,44 @@
             align-items: center;
             padding: 20px;
             overflow-x: hidden;
+            padding-top: 60px; /* Space for banner */
         }
+
+        /* Translate Banner */
+        .translate-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            z-index: 9999;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .close-banner {
+            background: none;
+            border: 1px solid white;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.7rem;
+            opacity: 0.8;
+            transition: 0.2s;
+        }
+        .close-banner:hover { opacity: 1; background: rgba(255,255,255,0.2); }
 
         .container {
             max-width: 1100px;
@@ -71,62 +108,6 @@
             text-align: center;
             position: relative;
         }
-
-        /* Language Selector */
-        .lang-selector {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 3000;
-        }
-
-        #lang-btn {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            padding: 10px 20px;
-            border-radius: 25px;
-            color: white;
-            font-weight: 800;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            animation: pulseGently 3s infinite ease-in-out;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-
-        .lang-dropdown {
-            position: absolute;
-            top: calc(100% + 10px);
-            right: 0;
-            background: rgba(10, 10, 46, 0.98);
-            backdrop-filter: blur(25px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            display: none;
-            flex-direction: column;
-            width: 180px;
-            max-height: 400px;
-            overflow-y: auto;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-            z-index: 3001;
-        }
-
-        .lang-dropdown.show { display: flex; }
-
-        .lang-option {
-            padding: 14px 25px;
-            color: white;
-            text-align: left;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .lang-option:last-child { border-bottom: none; }
-        .lang-option:hover { background: var(--accent-color); color: var(--bg-navy); font-weight: bold; }
 
         /* Visitor Counter */
         .visitor-counter {
@@ -533,7 +514,6 @@
             .share-buttons { flex-direction: column; width: 100%; }
             .share-btn { width: 100%; justify-content: center; }
             .visitor-counter { position: relative; bottom: auto; left: auto; margin: 20px auto; width: fit-content; border-radius: 20px; font-size: 0.8rem; }
-            .lang-selector { position: relative; top: auto; right: auto; margin: 20px auto; display: flex; justify-content: center; }
             .user-stat-input input { width: 100%; }
             h1 { font-size: clamp(2rem, 10vw, 3rem); margin-top: 20px; line-height: 1.1; }
             .input-section { padding: 30px 15px; border-radius: 25px; }
@@ -621,22 +601,9 @@
 </head>
 <body>
 
-    <div class="lang-selector">
-        <button id="lang-btn">🌍 <span id="current-lang-name">English</span></button>
-        <div class="lang-dropdown" id="lang-dropdown">
-            <div class="lang-option" onclick="setLanguage('en')">English</div>
-            <div class="lang-option" onclick="setLanguage('es')">Español</div>
-            <div class="lang-option" onclick="setLanguage('fr')">Français</div>
-            <div class="lang-option" onclick="setLanguage('de')">Deutsch</div>
-            <div class="lang-option" onclick="setLanguage('pt')">Português</div>
-            <div class="lang-option" onclick="setLanguage('ar')">العربية</div>
-            <div class="lang-option" onclick="setLanguage('hi')">हिन्दी</div>
-            <div class="lang-option" onclick="setLanguage('zh')">中文</div>
-            <div class="lang-option" onclick="setLanguage('ja')">日本語</div>
-            <div class="lang-option" onclick="setLanguage('ru')">Русский</div>
-            <div class="lang-option" onclick="setLanguage('sw')">Kiswahili</div>
-            <div class="lang-option" onclick="setLanguage('af')">Afrikaans</div>
-        </div>
+    <div class="translate-banner" id="translate-banner">
+        🌍 Not in English? Right-click this page and select Translate to read in your language
+        <button class="close-banner" onclick="document.getElementById('translate-banner').style.display='none'; document.body.style.paddingTop='20px';">✕</button>
     </div>
 
     <div class="visitor-counter"><span id="visitor-label">👥 People exploring their lives right now:</span> <span id="v-count">8,452</span></div>
@@ -2033,12 +2000,6 @@
             vCount += Math.floor(Math.random() * 3);
             document.getElementById('v-count').textContent = vCount.toLocaleString();
         }, 4000);
-
-        document.getElementById('lang-btn').onclick = (e) => {
-            e.stopPropagation();
-            document.getElementById('lang-dropdown').classList.toggle('show');
-        };
-        window.onclick = () => document.getElementById('lang-dropdown').classList.remove('show');
 
         const soundBtn = document.getElementById('sound-toggle');
         soundBtn.onclick = () => {
