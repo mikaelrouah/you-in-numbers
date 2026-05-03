@@ -436,17 +436,32 @@
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
         }
 
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 25px;
+        .input-section input[type="text"] {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--glass-border);
+            color: white;
+            padding: 18px 30px;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            width: 100%;
+            outline: none;
+            transition: 0.3s;
+            margin-bottom: 25px;
+        }
+        .input-section input[type="text"]:focus {
+            border-color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(187, 134, 252, 0.3);
         }
 
-        label { font-size: 1.3rem; color: var(--text-dim); font-weight: 500; }
+        .input-section input[type="text"]::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
+
+        label { font-size: 1.1rem; color: var(--text-dim); font-weight: 600; margin-bottom: 10px; display: block; text-align: left; width: 100%; max-width: 550px; }
 
         input[type="date"] {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             border: 2px solid var(--glass-border);
             color: white;
             padding: 18px 30px;
@@ -455,20 +470,30 @@
             outline: none;
             cursor: pointer;
             transition: 0.3s;
+            width: 100%;
+            margin-bottom: 30px;
         }
-        input[type="date"]:focus { border-color: var(--accent-color); background: rgba(255,255,255,0.2); }
+        input[type="date"]:focus {
+            border-color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(187, 134, 252, 0.3);
+        }
 
         #reveal-btn {
             background: var(--accent-color);
             color: #0a0a2e;
             border: none;
-            padding: 20px 45px;
-            border-radius: 20px;
-            font-size: 1.4rem;
-            font-weight: 800;
+            padding: 22px 50px;
+            border-radius: 22px;
+            font-size: 1.5rem;
+            font-weight: 900;
             cursor: pointer;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 25px rgba(187, 134, 252, 0.4);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(187, 134, 252, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+            max-width: 550px;
         }
         #reveal-btn:hover { transform: scale(1.08) translateY(-5px); filter: brightness(1.1); }
 
@@ -2460,6 +2485,32 @@
             bdayTimer = setInterval(update, 1000);
         }
 
+        document.getElementById('reveal-btn').onclick = () => {
+            const dob = document.getElementById('dob').value;
+            const name = document.getElementById('user-name').value;
+            if (!dob) return alert("Please select your birth date!");
+            document.getElementById('input-section').style.display = 'none';
+            document.getElementById('loading-screen').style.display = 'block';
+            
+            updateURL(dob, name);
+
+            setTimeout(() => {
+                document.getElementById('loading-screen').style.display = 'none';
+                document.getElementById('results-area').style.display = 'block';
+                currentStats = calculateAll(dob);
+                updateStatsUI();
+                fireConfetti();
+                startBdayCountdown(new Date(dob));
+            }, 2500);
+        };
+
+        // Add Enter key support
+        ['user-name', 'dob'].forEach(id => {
+            document.getElementById(id).addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') document.getElementById('reveal-btn').click();
+            });
+        });
+
         let vCount = 8400 + Math.floor(Math.random() * 800);
         document.getElementById('v-count').textContent = vCount.toLocaleString();
         setInterval(() => {
@@ -2538,7 +2589,6 @@
                 } else clearInterval(interval);
             }, 50);
         };
-        window.onload = typeWriter;
     </script>
 </body>
 </html>
