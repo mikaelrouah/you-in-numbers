@@ -81,47 +81,169 @@
             box-shadow: 0 0 50px rgba(255, 215, 0, 0.3);
             color: #fff;
         }
+        /* Movie Poster Redesign */
         .movie-poster {
-            padding: 40px 20px;
-            background: linear-gradient(to bottom, #000, #1a1a1a);
+            padding: 60px 40px;
+            background: radial-gradient(circle at center, #1a1a3a 0%, #050510 100%);
             text-align: center;
-            font-family: 'Cinzel', serif, 'Times New Roman';
-        }
-        .movie-poster h1 { font-size: 2.5rem; color: var(--gold); margin-bottom: 20px; text-transform: uppercase; }
-        .movie-poster .tagline { font-size: 1.2rem; font-style: italic; margin-bottom: 30px; letter-spacing: 2px; }
-        .movie-poster .credits { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 40px; color: #888; }
-        
-        .certificate {
-            padding: 40px;
-            background: #fff;
-            color: #000;
-            border: 15px double var(--gold);
-            text-align: center;
+            font-family: 'Cinzel', serif;
             position: relative;
+            overflow: hidden;
+            border: none;
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.8);
         }
-        .certificate h1 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 20px; }
-        .certificate .cert-body { font-size: 1.1rem; line-height: 1.6; }
-        .cert-gold-seal { width: 80px; height: 80px; background: var(--gold); border-radius: 50%; margin: 20px auto; position: relative; }
+        .movie-poster::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        .movie-poster h2#movie-name-top {
+            font-family: 'Cinzel', serif;
+            font-variant: all-small-caps;
+            letter-spacing: 6px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 40px;
+        }
+        .movie-poster h1#movie-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(187, 134, 252, 0.3);
+            margin: 40px 0;
+            line-height: 1.1;
+        }
+        .movie-poster .tagline {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.4rem;
+            color: var(--gold);
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+        }
+        .movie-poster .credits {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.5);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            line-height: 1.8;
+        }
 
-        /* Vs Mode */
-        .vs-section {
-            margin-top: 50px;
-            padding: 40px;
-            background: var(--glass-bg);
-            border-radius: 40px;
-            border: 2px solid var(--glass-border);
+        /* Certificate Redesign */
+        .certificate {
+            padding: 60px;
+            background: #0d0d0d;
+            color: #f4e4bc;
+            border: 2px solid #c5a059;
+            position: relative;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(0,0,0,0.5);
         }
-        .vs-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; }
-        .vs-input-group { text-align: left; }
-        .vs-input-group label { display: block; margin-bottom: 10px; font-weight: bold; color: var(--vivid-blue); }
-        .vs-input-group input { width: 100%; padding: 15px; border-radius: 15px; background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: white; }
-        .vs-results { display: none; margin-top: 30px; }
-        .vs-split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; position: relative; }
-        .vs-split::after { content: "VS"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 2rem; font-weight: 900; color: var(--vivid-pink); }
-        .vs-col { padding: 20px; border-radius: 20px; background: rgba(255,255,255,0.05); }
-        .vs-stat-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 1rem; }
-        .vs-winner { margin-top: 30px; font-size: 1.5rem; font-weight: 900; color: var(--vivid-yellow); text-align: center; }
-        .winner-highlight { color: var(--gold) !important; font-weight: 900; text-shadow: 0 0 10px var(--gold); }
+        .certificate::before {
+            content: '';
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid #c5a059;
+            pointer-events: none;
+        }
+        .cert-border-flourish {
+            position: absolute;
+            width: 50px; height: 50px;
+            border: 2px solid #c5a059;
+        }
+        .tl { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+        .tr { top: 20px; right: 20px; border-left: none; border-bottom: none; }
+        .bl { bottom: 20px; left: 20px; border-right: none; border-top: none; }
+        .br { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+
+        .certificate h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #c5a059;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        .certificate h2#cert-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: #fff;
+            margin: 25px 0;
+            text-decoration: underline;
+            text-decoration-color: #c5a059;
+        }
+        .certificate .cert-body {
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+        .cert-wax-seal {
+            width: 100px; height: 100px;
+            background: radial-gradient(circle at 30% 30%, #a51c1c, #7a0d0d);
+            border-radius: 50%;
+            margin: 30px auto;
+            position: relative;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.5), inset 0 0 15px rgba(0,0,0,0.3);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .cert-wax-seal::after {
+            content: 'YN';
+            color: rgba(255,215,0,0.6);
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            border: 2px solid rgba(255,215,0,0.4);
+            padding: 5px;
+            border-radius: 50%;
+        }
+
+        /* Layout Improvements */
+        .vs-section {
+            margin: 80px 0;
+            padding: 60px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 40px;
+            border: 1px solid var(--glass-border);
+        }
+        .vs-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+        .action-buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 50px 0;
+            flex-wrap: wrap;
+        }
+        .btn-action {
+            min-width: 250px;
+            padding: 22px 40px;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+        .fun-section { padding: 60px; margin-bottom: 80px; }
+        .stats-grid { gap: 40px; margin-bottom: 80px; }
+
+        @media (max-width: 768px) {
+            .vs-inputs { grid-template-columns: 1fr; gap: 20px; }
+            .action-buttons-container { flex-direction: column; align-items: center; }
+            .btn-action { width: 100%; max-width: 400px; }
+            .certificate { padding: 30px 15px; }
+            .certificate h2#cert-name { font-size: 2rem; }
+        }
 
         /* Timeline & Future Stats */
         .timeline { position: relative; padding: 20px 0; }
@@ -759,22 +881,28 @@
     </div>
 
     <div id="cert-modal" class="modal-overlay" onclick="closeModal('cert-modal')">
-        <div class="modal-content" style="max-width: 600px; border:none;" onclick="event.stopPropagation()">
+        <div class="modal-content" style="max-width: 650px; border:none;" onclick="event.stopPropagation()">
             <div class="certificate" id="cert-content">
+                <div class="cert-border-flourish tl"></div>
+                <div class="cert-border-flourish tr"></div>
+                <div class="cert-border-flourish bl"></div>
+                <div class="cert-border-flourish br"></div>
                 <h1>Certificate of an Extraordinary Life</h1>
-                <p>This is to certify that</p>
-                <h2 id="cert-name" style="font-size: 2.2rem; margin: 15px 0; font-family: 'serif';">YOUR NAME</h2>
+                <p style="letter-spacing: 2px;">This is to certify that</p>
+                <h2 id="cert-name">YOUR NAME</h2>
                 <div class="cert-body">
-                    Has successfully lived for <b id="cert-days">X</b> days,<br>
-                    with a heart that has beat <b id="cert-hearts">X</b> times,<br>
-                    and has breathed life <b id="cert-breaths">X</b> times.<br>
-                    An inspiration to all who follow.
+                    Has lived for <b id="cert-days" style="color:#fff;">X</b> days of wonder,<br>
+                    with a heart that has beat <b id="cert-hearts" style="color:#fff;">X</b> times in pursuit of dreams,<br>
+                    and has breathed life <b id="cert-breaths" style="color:#fff;">X</b> times under the sun.<br>
+                    A unique journey, documented and authenticated.
                 </div>
-                <div class="cert-gold-seal"></div>
-                <p style="font-style: italic; margin-top: 20px;">Authenticated by You In Numbers</p>
+                <div class="cert-wax-seal"></div>
+                <p style="font-style: italic; margin-top: 20px; font-size: 0.9rem; opacity: 0.6;">Given this day by the Chronicles of You In Numbers</p>
             </div>
-            <button class="btn-action" style="width:100%; background: var(--vivid-blue); color: #fff;" onclick="window.print()">PRINT / SAVE AS PDF</button>
-            <button class="btn-action" style="width:100%;" onclick="closeModal('cert-modal')">CLOSE</button>
+            <div style="background:#111; padding: 20px; display: flex; gap: 10px;">
+                <button class="btn-action" style="flex:1; background: var(--gold); color: #000;" onclick="window.print()">SAVE AS PDF / PRINT</button>
+                <button class="btn-action" style="flex:1; background: #333; color: #fff;" onclick="closeModal('cert-modal')">CLOSE</button>
+            </div>
         </div>
     </div>
 
@@ -797,8 +925,8 @@
 
         <section id="input-section" class="input-section">
             <div class="input-group">
-                <label for="user-name" style="display:block; margin-bottom:10px; font-weight:bold; color:var(--vivid-blue);">What is your name?</label>
-                <input type="text" id="user-name" placeholder="Enter your name" style="width:100%; padding:15px; border-radius:15px; background:rgba(255,255,255,0.1); border:2px solid var(--glass-border); color:white; font-size:1.1rem; margin-bottom:20px;">
+                <label for="user-name">What is your name?</label>
+                <input type="text" id="user-name" placeholder="Enter your name">
                 
                 <label for="dob" id="dob-label">Enter your date of birth to reveal your story:</label>
                 <input type="date" id="dob" required>
@@ -807,7 +935,7 @@
         </section>
 
         <div class="vs-section animate-up">
-            <h2 style="color:var(--vivid-pink); margin-bottom:20px;">🏆 VS MODE: Challenge a Friend</h2>
+            <h2 style="color:var(--vivid-pink); margin-bottom:30px;">🏆 VS MODE: Challenge a Friend</h2>
             <div class="vs-inputs">
                 <div class="vs-input-group">
                     <label>You</label>
@@ -853,7 +981,7 @@
 
         <!-- Results Area -->
         <div id="results-area">
-            <div class="action-buttons" style="display:flex; justify-content:center; flex-wrap:wrap; margin-bottom:30px;">
+            <div class="action-buttons-container">
                 <button class="btn-action btn-movie" onclick="showMovieModal()">🎬 My Life Movie</button>
                 <button class="btn-action btn-cert" onclick="showCertModal()">📜 Life Certificate</button>
             </div>
@@ -863,9 +991,8 @@
                 <div class="progress-bar">
                     <div class="progress-fill" id="progress-fill"></div>
                 </div>
+                <div class="age-category" id="age-cat-display" style="margin-top:25px;">Exploring the world 🌍</div>
             </div>
-
-            <div class="age-cat" id="age-cat-display" style="margin-top:10px; font-weight:bold; font-size:1.2rem;">Exploring the world 🌍</div>
 
             <div class="stats-grid" id="stats-grid"></div>
 
@@ -891,12 +1018,12 @@
 
             <div class="fun-section bday animate-up">
                 <h2 id="bday-title">Countdown To Your Next Birthday 🎂</h2>
-                <div id="bday-countdown" style="font-size: 3.5rem; font-weight: 900; color: white; text-align: center;"></div>
+                <div id="bday-countdown"></div>
             </div>
 
             <div class="fun-section rotating animate-up">
                 <h2 id="dyk-title">Did You Know?</h2>
-                <div id="rotating-fact" style="font-size: 1.5rem; text-align: center; height: 80px; transition: 1s; opacity: 1;"></div>
+                <div id="rotating-fact"></div>
             </div>
 
             <!-- Middle Ad Placement -->
@@ -908,30 +1035,6 @@
                      data-ad-format="auto"
                      data-full-width-responsive="true"></ins>
                 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-            </div>
-
-            <!-- Fun Comparisons -->
-            <div class="fun-section animate-up">
-                <h2 id="scale-title">The Unbelievable Scale of Your Existence ✨</h2>
-                <div id="comparisons-list"></div>
-            </div>
-
-            <!-- Perspectives -->
-            <div class="fun-section perspective animate-up">
-                <h2 id="perspective-title">Your Life in Perspective</h2>
-                <div class="perspective-grid" id="perspectives-list"></div>
-            </div>
-
-            <!-- Birthday Countdown -->
-            <div class="fun-section bday animate-up">
-                <h2 id="bday-title">Countdown to Your Next Birthday 🎂</h2>
-                <div id="bday-countdown"></div>
-            </div>
-
-            <!-- Fun Facts Rotating -->
-            <div class="fun-section rotating animate-up">
-                <h2 id="dyk-title">Did You Know?</h2>
-                <p id="rotating-fact"></p>
             </div>
 
             <!-- User Stat Box -->
@@ -2164,6 +2267,47 @@
             };
         }
 
+        const perspectivePool = [
+            { title: "[val] Full Moons", sub: "Total lunar cycles you've witnessed since birth." },
+            { title: "[val] Billion KM", sub: "How far the light from the sun on your birthday has traveled." },
+            { title: "[val] Full Cycles", sub: "Approximately how many times every cell in your body has been replaced." },
+            { title: "[val] Sunsets", sub: "Every single one was a fresh start and a beautiful ending." },
+            { title: "[val] Seasons", sub: "The full cycle of Spring, Summer, Autumn, and Winter." },
+            { title: "[val] Solar Eclipses", sub: "Rare celestial alignments that occurred somewhere on Earth." },
+            { title: "[val] Commits", sub: "Estimated micro-decisions you've made today alone." },
+            { title: "[val] Deep Dreams", sub: "Vivid journeys your mind took while your body rested." },
+            { title: "[val] Liters of Air", sub: "The sheer volume of life-giving oxygen you've processed." },
+            { title: "[val] Steps Up", sub: "The equivalent of climbing the world's tallest buildings." }
+        ];
+
+        const comparisonPool = [
+            { f: (s) => `🌬️ Your breaths could inflate <b>${(s.breaths * 0.0005 / 3000).toFixed(1)}</b> giant hot air balloons.` },
+            { f: (s) => `🗺️ Your steps equal walking to the moon <b>${(s.steps * 0.76 / 384400000).toFixed(4)}</b> times.` },
+            { f: (s) => `💡 Your blinks could power a lighthouse for <b>${(s.blinks / 15000 / 24).toFixed(1)}</b> days.` },
+            { f: (s) => `📚 Your spoken words would fill <b>${(s.words / 60000).toFixed(1)}</b> complete novels.` },
+            { f: (s) => `🩸 Your blood has traveled <b>${(s.heartbeats * 0.06 / 40075).toFixed(1)}</b> times around the Earth.` },
+            { f: (s) => `☕ You've generated enough body heat to boil <b>${(s.days * 2500 / 100).toFixed(0)}</b> kettles of water.` },
+            { f: (s) => `🧬 Your skin has completely replaced itself <b>${(s.days / 27).toFixed(0)}</b> times.` },
+            { f: (s) => `🛁 You have produced enough saliva to fill <b>${(s.days * 0.001 / 0.15).toFixed(0)}</b> standard bathtubs.` },
+            { f: (s) => `📸 Your eyes have processed approximately <b>${(s.minutes * 60 * 30).toLocaleString()}</b> images.` },
+            { f: (s) => `😂 You have laughed approximately <b>${(s.days * 15).toLocaleString()}</b> times.` },
+            { f: (s) => `💇 Your hair has grown <b>${(s.years * 0.15).toFixed(2)}</b> meters since birth.` },
+            { f: (s) => `🍂 You have shed <b>${(s.years * 0.7).toFixed(1)}</b> kilograms of skin cells.` },
+            { f: (s) => `😴 You have dreamed approximately <b>${(s.days * 5).toLocaleString()}</b> dreams.` },
+            { f: (s) => `⚡ Your heart energy could keep a lightbulb on for <b>${(s.heartbeats / 3600).toFixed(0)}</b> hours.` },
+            { f: (s) => `🏃 Your total distance walked is <b>${(s.steps * 0.76 / 1000).toFixed(0)}</b> kilometers.` },
+            { f: (s) => `🍔 You've consumed roughly <b>${(s.meals * 0.5 / 1000).toFixed(1)}</b> tonnes of food.` }
+        ];
+
+        const cardFacts = {
+            heartbeats: (s) => `Your heart has pumped enough blood to fill ${(s.heartbeats * 0.07 / 2500000).toFixed(2)} Olympic swimming pools!`,
+            steps: (s) => `You have walked the equivalent of ${(s.steps * 0.76 / 40075000).toFixed(2)} trips around the entire Earth!`,
+            meals: (s) => `You have consumed approximately ${(s.meals * 0.5 / 1000).toFixed(1)} tonnes of food in your lifetime!`,
+            breaths: (s) => `You've inhaled enough air to fill ${(s.breaths * 0.5 / 1000).toFixed(0)} large backyard swimming pools!`,
+            sleep: (s) => `You've spent approximately ${(s.sleep / 24 / 365).toFixed(1)} entire years in the world of dreams.`,
+            blinks: (s) => `Your eyes have self-cleaned and protected themselves ${(s.blinks).toLocaleString()} times!`
+        };
+
         function updateStatsUI() {
             const l = translations[currentLang] || translations['en'];
             const stats = currentStats;
@@ -2194,17 +2338,19 @@
                 const card = document.createElement('div');
                 card.className = 'stat-card';
                 card.onclick = function() { this.classList.toggle('flipped'); };
+                
+                const backFact = cardFacts[c.id] ? cardFacts[c.id](stats) : s.fact.replace('[val]', stats[c.id].toLocaleString());
+                
                 card.innerHTML = `
                     <div class="stat-card-inner">
                         <div class="stat-card-front">
                             <span class="emoji">${c.emoji}</span>
                             <div class="stat-value" id="val-${c.id}">0</div>
                             <div class="stat-label">${s.label}</div>
-                            <div class="stat-quote">"${s.quote}"</div>
                         </div>
                         <div class="stat-card-back">
                             <h3 style="color:var(--vivid-yellow); margin-bottom:15px;">${l.funFactLabel}</h3>
-                            <p style="font-size:1.1rem; line-height:1.4;">${s.fact.replace('[val]', stats[c.id].toLocaleString())}</p>
+                            <p style="font-size:1.1rem; line-height:1.4;">${backFact}</p>
                             <p style="margin-top:20px; font-size:0.85rem; opacity:0.7;">${l.tapFlip}</p>
                         </div>
                     </div>
@@ -2213,34 +2359,43 @@
                 animateNumber(document.getElementById(`val-${c.id}`), stats[c.id], 2000);
             });
 
+            // Randomized Comparisons
             const comps = document.getElementById('comparisons-list');
-            const balloonCount = (stats.breaths * 0.0005 / 3000).toFixed(1); 
-            const novels = (stats.words / 60000).toFixed(1);
-            const walkToCairo = (stats.steps * 0.76 / 10000000).toFixed(2);
-            const energyPower = (stats.heartbeats * 1.5 / 3600).toFixed(1);
-            const bathtubFill = (stats.breaths * 0.0005 / 0.15).toFixed(0);
-
-            const scaleData = [balloonCount, stats.blinks.toLocaleString(), novels, walkToCairo, bathtubFill, energyPower];
             comps.innerHTML = "";
-            l.scale.forEach((item, i) => {
+            const shuffledComps = [...comparisonPool].sort(() => 0.5 - Math.random()).slice(0, 6);
+            shuffledComps.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'comparison-item';
-                div.innerHTML = item.replace('[val]', scaleData[i]);
+                div.innerHTML = item.f(stats);
                 comps.appendChild(div);
             });
 
+            // Randomized Perspectives
             const pList = document.getElementById('perspectives-list');
             pList.innerHTML = "";
             const fullMoons = Math.floor(stats.days / 29.53);
             const spaceKm = (stats.days * 25.92 / 10).toFixed(1);
             const cellCycles = (stats.years / 7).toFixed(1);
+            const sunsets = stats.days;
+            const seasons = Math.floor(stats.years * 4);
+            const airLiters = (stats.breaths * 0.5).toFixed(0);
 
-            const pValues = [fullMoons, spaceKm, cellCycles, stats.days.toLocaleString()];
-            l.perspectives.forEach((pf, i) => {
+            const pMap = {
+                "[val] Full Moons": fullMoons.toLocaleString(),
+                "[val] Billion KM": spaceKm,
+                "[val] Full Cycles": cellCycles,
+                "[val] Sunsets": sunsets.toLocaleString(),
+                "[val] Seasons": seasons.toLocaleString(),
+                "[val] Liters of Air": airLiters.toLocaleString()
+            };
+
+            const shuffledPerspectives = [...perspectivePool].sort(() => 0.5 - Math.random()).slice(0, 6);
+            shuffledPerspectives.forEach((pf, i) => {
                 const pCard = document.createElement('div');
                 pCard.className = 'perspective-card';
-                const emoji = ['🌕', '🚀', '🧬', '🌅'][i];
-                pCard.innerHTML = `<div class="emoji">${emoji}</div><h3>${pf.title.replace('[val]', pValues[i])}</h3><p>${pf.sub}</p>`;
+                const emoji = ['🌕', '🚀', '🧬', '🌅', '🍂', '🌬️', '🌑', '✨', '⚡', '⛰️'][i % 10];
+                const displayTitle = pf.title.replace('[val]', pMap[pf.title] || Math.floor(Math.random()*100));
+                pCard.innerHTML = `<div class="emoji">${emoji}</div><h3>${displayTitle}</h3><p>${pf.sub}</p>`;
                 pList.appendChild(pCard);
             });
 
@@ -2286,72 +2441,9 @@
             dykInterval = setInterval(updateDYK, 8000);
         }
 
-        function animateNumber(el, target, duration) {
-            let start = null;
-            function step(ts) {
-                if (!start) start = ts;
-                const progress = Math.min((ts - start) / duration, 1);
-                el.textContent = Math.floor(progress * target).toLocaleString();
-                if (progress < 1) requestAnimationFrame(step);
-                else playDing();
-            }
-            requestAnimationFrame(step);
-        }
-
-        function playDing() {
-            if (!soundOn) return;
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.connect(gain); gain.connect(audioCtx.destination);
-            osc.type = 'sine'; osc.frequency.setValueAtTime(880, audioCtx.currentTime);
-            gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
-            osc.start(); osc.stop(audioCtx.currentTime + 0.1);
-        }
-
-        function fireConfetti() {
-            const duration = 5 * 1000;
-            const animationEnd = Date.now() + duration;
-
-            function randomInRange(min, max) { return Math.random() * (max - min) + min; }
-
-            const interval = setInterval(function() {
-                const timeLeft = animationEnd - Date.now();
-                if (timeLeft <= 0) return clearInterval(interval);
-                const colors = ['#bb86fc', '#03dac6', '#ff007f', '#00e5ff', '#f9ff00'];
-                
-                for(let i=0; i<5; i++) {
-                    const c = document.createElement('div');
-                    c.className = 'confetti';
-                    c.style.left = Math.random() * 100 + "vw";
-                    c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    document.body.appendChild(c);
-                    const anim = c.animate([{ top: '-20px', opacity: 1, transform: 'rotate(0deg)' }, { top: '120vh', opacity: 0, transform: `rotate(${randomInRange(0, 1000)}deg)` }], { duration: 2000 + Math.random() * 3000 });
-                    anim.onfinish = () => c.remove();
-                }
-            }, 250);
-        }
-
-        document.getElementById('reveal-btn').onclick = () => {
-            const dob = document.getElementById('dob').value;
-            const name = document.getElementById('user-name').value;
-            if (!dob) return alert("Please select your birth date!");
-            document.getElementById('input-section').style.display = 'none';
-            document.getElementById('loading-screen').style.display = 'block';
-            
-            updateURL(dob, name);
-
-            setTimeout(() => {
-                document.getElementById('loading-screen').style.display = 'none';
-                document.getElementById('results-area').style.display = 'block';
-                currentStats = calculateAll(dob);
-                updateStatsUI();
-                fireConfetti();
-                startBdayCountdown(new Date(dob));
-            }, 2500);
-        };
-
+        let bdayTimer;
         function startBdayCountdown(birthDate) {
+            if (bdayTimer) clearInterval(bdayTimer);
             const el = document.getElementById('bday-countdown');
             const update = () => {
                 const now = new Date();
@@ -2363,10 +2455,9 @@
                 const m = Math.floor((diff % (1000*60*60)) / (1000*60));
                 const s = Math.floor((diff % (1000*60)) / 1000);
                 el.textContent = `${d}d ${h}h ${m}m ${s}s`;
-                if (diff < 0) clearInterval(timer);
             };
             update();
-            const timer = setInterval(update, 1000);
+            bdayTimer = setInterval(update, 1000);
         }
 
         let vCount = 8400 + Math.floor(Math.random() * 800);
