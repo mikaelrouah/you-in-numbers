@@ -528,19 +528,24 @@
         .animate-up { animation: fadeUp 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards; }
 
         @media (max-width: 768px) {
+            .container { padding: 10px; }
             .stats-grid, .perspective-grid { grid-template-columns: 1fr; gap: 20px; }
             .share-buttons { flex-direction: column; width: 100%; }
             .share-btn { width: 100%; justify-content: center; }
-            .visitor-counter { position: relative; bottom: auto; left: auto; margin: 20px auto; width: fit-content; border-radius: 20px; }
+            .visitor-counter { position: relative; bottom: auto; left: auto; margin: 20px auto; width: fit-content; border-radius: 20px; font-size: 0.8rem; }
             .lang-selector { position: relative; top: auto; right: auto; margin: 20px auto; display: flex; justify-content: center; }
             .user-stat-input input { width: 100%; }
-            h1 { font-size: 2.5rem; margin-top: 20px; }
+            h1 { font-size: clamp(2rem, 10vw, 3rem); margin-top: 20px; line-height: 1.1; }
             .input-section { padding: 30px 15px; border-radius: 25px; }
             .stat-card { height: auto; min-height: 240px; }
             .stat-card-front, .stat-card-back { padding: 25px; }
             .challenge-section { padding: 30px 15px; }
-            .challenge-btn { font-size: 1.2rem; padding: 18px; }
-            #bday-countdown { font-size: 2.5rem; }
+            .challenge-btn { font-size: 1.1rem; padding: 18px; }
+            #bday-countdown { font-size: 2.2rem; }
+            .comparison-item { font-size: 1.1rem; padding: 12px; flex-direction: column; text-align: center; }
+            .stat-value { font-size: 2.2rem; }
+            .stat-label { font-size: 1rem; }
+            .perspective-card h3 { font-size: 1.5rem; }
         }
 
         /* Confetti */
@@ -860,7 +865,7 @@
                 title: "Tú en Números",
                 tagline: "Descubre la increíble historia de tu vida",
                 dobLabel: "Introduce tu fecha de nacimiento para revelar tu historia:",
-                revealBtn: "Revelar mis estadísticas de vida",
+                revealBtn: "Revelar mis estadísticas",
                 loading: "Calculando tu vida...",
                 progress: "Has vivido el [pct]% de una vida promedio (80 años)",
                 scaleTitle: "La increíble escala de tu existencia ✨",
@@ -875,7 +880,7 @@
                 copyBtn: "Copiar estadísticas",
                 copied: "¡Copiado!",
                 challengeTitle: "Desafía a un amigo 🏆",
-                challengeSub: "Mira si sus estadísticas pueden superar las tuyas",
+                challengeSub: "Mira si sus estadísticas superan las tuyas",
                 friendNamePlaceholder: "Nombre del amigo",
                 friendPhonePlaceholder: "Teléfono (ej. 34600000000)",
                 sendChallenge: "Enviar desafío 🚀",
@@ -884,9 +889,9 @@
                 resetSub: "Comparte esto con un amigo y mira quién tiene más latidos 👇",
                 footer: "Comparte <b>you-in-numbers.vercel.app</b> con alguien a quien quieras ❤️",
                 visitorLabel: "👥 personas explorando su vida ahora mismo:",
-                shareMsg: "Acabo de descubrir que llevo vivo [days] días y mi corazón ha latido [heartbeats] veces 🤯 Encuentra tus propias estadísticas en you-in-numbers.vercel.app",
-                challengeMsg: "¡Hola [name]! Acabo de descubrir que llevo vivo [days] días y mi corazón ha latido [heartbeats] veces 🤯 ¡Te desafío a superar mis estadísticas! Descubre las tuyas aquí: you-in-numbers.vercel.app",
-                tapFlip: "(Haz clic para voltear)",
+                shareMsg: "Acabo de descubrir que llevo vivo [days] días y mi corazón ha latido [heartbeats] veces 🤯 Encuentra tus estadísticas en you-in-numbers.vercel.app",
+                challengeMsg: "¡Hola [name]! Acabo de descubrir que llevo vivo [days] días y mi corazón ha latido [heartbeats] veces 🤯 ¡Te desafío a superar mis estadísticas! Descúbrelas aquí: you-in-numbers.vercel.app",
+                tapFlip: "(Haz clic para volver)",
                 funFactLabel: "¡Dato curioso!",
                 ageCats: {
                     exploring: "Explorando el mundo 🌍",
@@ -935,7 +940,7 @@
                     "Tu nariz puede recordar 50,000 aromas diferentes.",
                     "El cuerpo humano tiene suficiente hierro para fabricar un clavo de metal de 7.5 cm.",
                     "Tu piel se reemplaza por completo cada 27 días.",
-                    "Durante una vida promedio, el corazón humano bombeará 1.5 millones de баррелей de sangre."
+                    "Durante una vida promedio, el corazón humano bombeará 1.5 millones de barriles de sangre."
                 ]
             },
             fr: {
@@ -1649,7 +1654,7 @@
                     meals: { label: "Milo Uliyokula", fact: "Fikiria ladha zote ulizoonja!", quote: "Lishe kwa ajili ya safari ya maisha yote." },
                     sleep: { label: "Saa Ulizolala", fact: "Umetumia miaka katika ulimwengu wa ndoto.", quote: "Kujaza nguvu kwa ajili ya matukio yanayokuja." },
                     blinks: { label: "Mara Ulizopepesa Macho", fact: "Macho yako ni kazi bora inayojiosha yenyewe.", quote: "Kulinda jinsi unavyoona uzuri wa maisha." },
-                    sunrises: { label: "Macheo Ulivyoshuhudia", fact: "Umenasurika 100% ya siku zako ngumu zaidi.", quote: "Kila jedna ilikuwa mwanzo mpya." },
+                    sunrises: { label: "Macheo Ulivyoshuhudia", fact: "Umenasurika 100% ya siku zako ngumu zaidi.", quote: "Kila moja ilikuwa mwanzo mpya." },
                     steps: { label: "Hatua Ulizopiga", fact: "Wewe ni mgunduzi wa kweli wa sayari Dunia.", quote: "Njia iliyotembelewa na wewe pekee." },
                     words: { label: "Maneno Ulivyosema", fact: "Hadithi yako bado inaandikwa.", quote: "Mwangwi wa sauti yako ya kipekee." }
                 },
@@ -1665,7 +1670,7 @@
                     { title: "[val] Miezi Miviringo", sub: "Jumla ya mizunguko ya mwezi uliyoshuhudia tangu kuzaliwa." },
                     { title: "Kilomita Bilioni [val]", sub: "Jinsi mwanga wa jua ulivyosafiri mbali siku ya kuzaliwa kwako." },
                     { title: "Mizunguko [val] Kamili", sub: "Takriban ni mara ngapi kila seli katika mwili wako imebadilishwa." },
-                    { title: "Macheo [val]", sub: "Kila jedna ilikuwa mwanzo mpya na mwisho mzuri." }
+                    { title: "Macheo [val]", sub: "Kila moja ilikuwa mwanzo mpya na mwisho mzuri." }
                 ],
                 dyk: [
                     "Moyo wako hupiga karibu mara 100,000 kwa siku, kila siku.",
@@ -1701,11 +1706,11 @@
                 sendChallenge: "Stuur Uitdaging 🚀",
                 twitterChallenge: "Daag uit op Twitter/X 🐦",
                 resetBtn: "BEREKEN WEER",
-                resetSub: "Deel dit met 'n vrient en kyk wie die meeste hartklop het 👇",
+                resetSub: "Deel dit met 'n vriend en kyk wie die meeste hartklop het 👇",
                 footer: "Deel <b>you-in-numbers.vercel.app</b> met iemand vir wie jy lief is ❤️",
                 visitorLabel: "👥 Mense wat nou hul lewens verken:",
-                shareMsg: "Ek het pas ontdek ek is al vir [days] dae lewendig und my hart het al [heartbeats] keer geklop 🤯 Vind jou eie lewenstatistieke by you-in-numbers.vercel.app",
-                challengeMsg: "Haai [name]! Ek het pas uitgevind ek is al vir [days] dae lewendig und my hart het al [heartbeats] keer geklop 🤯 Ek daag jou uit om my statistieke te klop! Vind joune hier: you-in-numbers.vercel.app",
+                shareMsg: "Ek het pas ontdek ek is al vir [days] dae lewendig en my hart het al [heartbeats] keer geklop 🤯 Vind jou eie lewenstatistieke by you-in-numbers.vercel.app",
+                challengeMsg: "Haai [name]! Ek het pas uitgevind ek is al vir [days] dae lewendig en my hart het al [heartbeats] keer geklop 🤯 Ek daag jou uit om my statistieke te klop! Vind joune hier: you-in-numbers.vercel.app",
                 tapFlip: "(Klik om terug te draai)",
                 funFactLabel: "Prettige Feit!",
                 ageCats: {
@@ -1728,7 +1733,7 @@
                     dogYears: { label: "Ouderdom in Hond-jare", fact: "Jy is 'n wyse ouderling in die honde-wêreld!", quote: "Jou getroue metgesel sou trots wees." },
                     heartbeats: { label: "Hartklop", fact: "Dit pomp 7 500 liter bloed elke dag.", quote: "Jou hart het nog nooit 'n dag afgeneem nie." },
                     breaths: { label: "Asemhalings", fact: "Jy het genoeg lug ingeasem om 'n stadion te vul.", quote: "Lewegewende lug wat elke beweging van jou dryf." },
-                    meals: { label: "Maaltye Geëet", fact: "Dink aan al die smake wat jy al geproe het!", quote: "Voeding vir the reis van 'n leeftyd." },
+                    meals: { label: "Maaltye Geëet", fact: "Dink aan al die smake wat jy al geproe het!", quote: "Voeding vir die reis van 'n leeftyd." },
                     sleep: { label: "Ure Geslaap", fact: "Jy het jare in die droomwêreld spandeer.", quote: "Herlaai vir die avonture wat wag." },
                     blinks: { label: "Keer Geknip", fact: "Jou oë is self-skoonmakende meesterstukke.", quote: "Beskerm die manier waarop jy die skoonheid in die lewe sien." },
                     sunrises: { label: "Sonsopkomste Gesien", fact: "Jy het 100% van jou moeilikste dae oorleef.", quote: "Elke enkele een was 'n vars begin." },
@@ -1747,9 +1752,9 @@
                     { title: "[val] Volmane", sub: "Totale maansiklusse wat jy sedert geboorte gesien het." },
                     { title: "[val] Miljard KM", sub: "Hoe ver die lig van die son op jou verjaarsdag gereis het." },
                     { title: "[val] Volledige Siklusse", sub: "Ongeveer hoeveel keer elke sel in jou liggaam vervang is." },
-                    { title: "[val] Sonsondergange", sub: "Elke enkele een was 'n vars begin und 'n pragtige einde." }
-                ],
-                dyk: [
+                    { title: "[val] Sonsondergange", sub: "Elke enkele een was 'n vars begin en 'n pragtige einde." }
+                    ],
+                    dyk: [
                     "Jou hart klop ongeveer 100 000 keer per dag, elke dag.",
                     "Jy produseer genoeg speeksel in jou leeftyd om twee swembaddens te vul.",
                     "Jou neus kan 50 000 verskillende geure onthou.",
@@ -1795,6 +1800,9 @@
             document.getElementById('reset-subtext').textContent = l.resetSub;
             document.getElementById('visitor-label').textContent = l.visitorLabel;
             document.getElementById('footer-text').innerHTML = l.footer;
+
+            // Re-trigger typewriter
+            typeWriter();
 
             if (Object.keys(currentStats).length > 0) {
                 updateStatsUI();
@@ -2042,8 +2050,8 @@
             const l = translations[currentLang] || translations['en'];
             const text = l.shareMsg.replace('[days]', currentStats.days.toLocaleString()).replace('[heartbeats]', currentStats.heartbeats.toLocaleString());
             const url = "https://you-in-numbers.vercel.app";
-            if (p === 'whatsapp') window.open(`https://wa.me/?text=${encodeURIComponent(text + " " + url)}`);
-            else if (p === 'twitter') window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`);
+            if (p === 'whatsapp') window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
+            else if (p === 'twitter') window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`);
             else if (p === 'facebook') window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
         };
 
@@ -2055,13 +2063,13 @@
             const url = "https://you-in-numbers.vercel.app";
             if (p === 'whatsapp') {
                 if (!phone) return alert("Please enter a phone number!");
-                window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg + " " + url)}`);
-            } else if (p === 'twitter') window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(msg)}&url=${encodeURIComponent(url)}`);
+                window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`);
+            } else if (p === 'twitter') window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(msg)}`);
         };
 
         window.copyToClipboard = () => {
             const l = translations[currentLang] || translations['en'];
-            const text = l.shareMsg.replace('[days]', currentStats.days.toLocaleString()).replace('[heartbeats]', currentStats.heartbeats.toLocaleString()) + " https://you-in-numbers.vercel.app";
+            const text = l.shareMsg.replace('[days]', currentStats.days.toLocaleString()).replace('[heartbeats]', currentStats.heartbeats.toLocaleString());
             navigator.clipboard.writeText(text);
             const btn = document.getElementById('copy-btn');
             const old = btn.textContent;
